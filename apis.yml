@@ -1,0 +1,68 @@
+name: Microsoft Copilot
+description: Microsoft Copilot is an AI-powered assistant that helps users with productivity tasks, content generation, and information retrieval across Microsoft 365 applications and services.
+image: https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
+url: https://copilot.microsoft.com
+created: '2024-01-15'
+modified: '2024-01-15'
+specificationVersion: '0.18'
+tags:
+- artificial intelligence
+- AI assistant
+- productivity
+- Microsoft 365
+- chatbot
+- generative AI
+apis:
+- name: Microsoft Copilot API
+  description: API for integrating Microsoft Copilot capabilities into applications
+  image: https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
+  humanUrl: https://learn.microsoft.com/en-us/copilot/
+  baseUrl: https://api.copilot.microsoft.com
+  tags:
+  - AI
+  - chat
+  - completion
+  properties:
+  - type: documentation
+    url: https://learn.microsoft.com/en-us/copilot/overview
+  - type: openapi
+    url: https://api.copilot.microsoft.com/openapi.json
+  - type: authentication
+    url: https://learn.microsoft.com/en-us/copilot/authentication
+- name: Microsoft Graph API (Copilot Integration)
+  description: Microsoft Graph API endpoints for accessing Copilot features within Microsoft 365
+  humanUrl: https://learn.microsoft.com/en-us/graph/overview
+  baseUrl: https://graph.microsoft.com/v1.0
+  tags:
+  - Microsoft 365
+  - integration
+  - productivity
+  properties:
+  - type: documentation
+    url: https://learn.microsoft.com/en-us/graph/api/overview
+  - type: openapi
+    url: https://graph.microsoft.com/openapi.json
+  - type: swagger
+    url: https://graph.microsoft.com/swagger.json
+maintainers:
+- name: Microsoft
+  email: support@microsoft.com
+  url: https://www.microsoft.com
+common:
+- type: getting-started
+  url: https://learn.microsoft.com/en-us/copilot/get-started
+- type: authentication
+  url: https://learn.microsoft.com/en-us/azure/active-directory/develop/
+- type: terms-of-service
+  url: https://www.microsoft.com/en-us/legal/terms-of-use
+- type: privacy-policy
+  url: https://privacy.microsoft.com/en-us/privacystatement
+- type: pricing
+  url: https://www.microsoft.com/en-us/microsoft-copilot/pricing
+- type: support
+  url: https://support.microsoft.com/copilot
+- type: blog
+  url: https://blogs.microsoft.com/blog/tag/copilot/
+- type: status
+  url: https://status.microsoft.com
+include: []
