@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/api-search/microsoft-copilot/json-schema/microsoft-copilot-interaction-schema.json",
+  "title": "Microsoft 365 Copilot Interaction",
+  "description": "Schema representing an interaction between a user and Microsoft 365 Copilot, including prompts, responses, attachments, contexts, links, and mentions. Based on the microsoft.graph.aiInteraction resource type from the Microsoft Graph Copilot namespace.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the interaction message."
+    },
+    "appClass": {
+      "type": "string",
+      "description": "The data source for Copilot data. Indicates which Microsoft 365 application hosted the interaction. Examples include IPM.SkypeTeams.Message.Copilot.Excel, IPM.SkypeTeams.Message.Copilot.Loop, IPM.SkypeTeams.Message.Copilot.Word, IPM.SkypeTeams.Message.Copilot.PowerPoint, IPM.SkypeTeams.Message.Copilot.Teams.",
+      "examples": [
+        "IPM.SkypeTeams.Message.Copilot.Excel",
+        "IPM.SkypeTeams.Message.Copilot.Loop",
+        "IPM.SkypeTeams.Message.Copilot.Word",
+        "IPM.SkypeTeams.Message.Copilot.PowerPoint",
+        "IPM.SkypeTeams.Message.Copilot.Teams"
+      ]
+    },
+    "body": {
+      "$ref": "#/$defs/itemBody",
+      "description": "The body of the message, including the text content and its body type."
+    },
+    "interactionType": {
+      "type": "string",
+      "enum": [
+        "userPrompt",
+        "aiResponse",
+        "unknownFutureValue"
+      ],
+      "description": "Indicates whether the interaction is a user prompt or a Copilot response. userPrompt represents a user's input; aiResponse represents Copilot's reply."
+    },
+    "conversationType": {
+      "type": "string",
+      "description": "The type of the conversation. Common values include appchat (in-app Copilot interactions) and bizchat (Business Chat / Microsoft 365 Chat interactions).",
+      "examples": [
+        "appchat",
+        "bizchat"
+      ]
+    },
+    "requestId": {
+      "type": "string",
+      "description": "The identifier that groups a user prompt with its corresponding Copilot response. Both the prompt and response in a single exchange share the same requestId."
+    },
+    "sessionId": {
+      "type": "string",
+      "description": "The thread ID or conversation identifier that maps to all Copilot sessions for the user. Groups all interactions within a single conversation session."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The ISO 8601 date and time when the interaction was created."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The timestamp of when the interaction was last modified. Used for concurrency control."
+    },
+    "locale": {
+      "type": "string",
+      "description": "The locale of the sender, in BCP 47 language tag format.",
+      "examples": [
+        "en-US",
+        "fr-FR",
+        "de-DE"
+      ]
+    },
+    "from": {
+      "$ref": "#/$defs/identitySet",
+      "description": "The user, application, or device that is associated with this interaction."
+    },
+    "attachments": {
+      "type": "array",
+      "description": "The collection of documents attached to the interaction, such as cards and images.",
+      "items": {
+        "$ref": "#/$defs/aiInteractionAttachment"
+      }
+    },
+    "contexts": {
+      "type": "array",
+      "description": "The identifiers that map to all contexts associated with the interaction, such as the file or application in which the interaction occurred.",
+      "items": {
+        "$ref": "#/$defs/aiInteractionContext"
+      }
+    },
+    "links": {
+      "type": "array",
+      "description": "The collection of links that appear in the interaction, including citation links and reference links.",
+      "items": {
+        "$ref": "#/$defs/aiInteractionLink"
+      }
+    },
+    "mentions": {
+      "type": "array",
+      "description": "The collection of entities that were mentioned in the interaction, including users, bots, and other entities.",
+      "items": {
+        "$ref": "#/$defs/aiInteractionMention"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "interactionType",
+    "createdDateTime"
+  ],
+  "$defs": {
+    "itemBody": {
+      "type": "object",
+      "title": "Item Body",
+      "description": "The body of a message, including the text of the body and its content type.",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "enum": [
+            "text",
+            "html"
+          ],
+          "description": "The type of the content. Values include text for plain text content and html for HTML-formatted content."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the body. For userPrompt interactions, this contains the user's question or instruction. For aiResponse interactions, this contains Copilot's generated answer."
+        }
+      },
+      "required": [
+        "contentType",
+        "content"
+      ]
+    },
+    "identitySet": {
+      "type": "object",
+      "title": "Identity Set",
+      "description": "Represents the user, application, or device associated with the interaction. At least one identity property is typically present.",
+      "properties": {
+        "user": {
+          "$ref": "#/$defs/identity",
+          "description": "The user identity associated with the interaction."
+        },
+        "application": {
+          "$ref": "#/$defs/identity",
+          "description": "The application identity associated with the interaction."
+        },
+        "device": {
+          "$ref": "#/$defs/identity",
+          "description": "The device identity associated with the interaction."
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "title": "Identity",
+      "description": "Represents an identity of a user, application, or device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the identity."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the identity."
+        }
+      }
+    },
+    "aiInteractionAttachment": {
+      "type": "object",
+      "title": "AI Interaction Attachment",
+      "description": "Represents a message attachment such as cards, images, or file references within a Copilot interaction.",
+      "properties": {
+        "attachmentId": {
+          "type": "string",
+          "description": "The identifier for the attachment. This identifier is only unique within the message scope."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the attachment, which may be structured content such as an Adaptive Card JSON payload."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The type of the content. Common values include reference, file, and image types such as image/png.",
+          "examples": [
+            "reference",
+            "file",
+            "image/png",
+            "image/jpeg"
+          ]
+        },
+        "contentUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the content, pointing to the location of the attached resource."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the attachment."
+        }
+      }
+    },
+    "aiInteractionContext": {
+      "type": "object",
+      "title": "AI Interaction Context",
+      "description": "Represents a context associated with a Copilot interaction, identifying the file or resource where the interaction occurred.",
+      "properties": {
+        "contextReference": {
+          "type": "string",
+          "description": "The full file URL where the interaction happened."
+        },
+        "contextType": {
+          "type": "string",
+          "description": "The type of the file or resource providing context."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The human-readable name of the file or resource."
+        }
+      }
+    },
+    "aiInteractionLink": {
+      "type": "object",
+      "title": "AI Interaction Link",
+      "description": "Represents a link that appears in a Copilot interaction, such as citation links or reference links in responses.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the link."
+        },
+        "linkType": {
+          "type": "string",
+          "description": "The type of link, providing information about a link in an app chat or Business Chat (BizChat) interaction."
+        },
+        "linkUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the link."
+        }
+      }
+    },
+    "aiInteractionMention": {
+      "type": "object",
+      "title": "AI Interaction Mention",
+      "description": "Represents a mention of an entity (user, bot, or other entity) within a Copilot interaction.",
+      "properties": {
+        "mentioned": {
+          "$ref": "#/$defs/aiInteractionMentionedIdentitySet",
+          "description": "The entity mentioned in the message."
+        },
+        "mentionId": {
+          "type": "integer",
+          "description": "The numeric identifier for the mention within the interaction."
+        },
+        "mentionText": {
+          "type": "string",
+          "description": "The text representation of the mention as it appears in the message body."
+        }
+      }
+    },
+    "aiInteractionMentionedIdentitySet": {
+      "type": "object",
+      "title": "AI Interaction Mentioned Identity Set",
+      "description": "Represents the identity of an entity mentioned in a Copilot interaction.",
+      "properties": {
+        "user": {
+          "$ref": "#/$defs/identity",
+          "description": "A mentioned user identity."
+        },
+        "application": {
+          "$ref": "#/$defs/identity",
+          "description": "A mentioned application identity."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "id": "1234567890",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Word",
+      "body": {
+        "contentType": "html",
+        "content": "<p>Summarize this document for me.</p>"
+      },
+      "interactionType": "userPrompt",
+      "conversationType": "appchat",
+      "requestId": "req-abc-123",
+      "sessionId": "session-xyz-456",
+      "createdDateTime": "2025-03-15T10:30:00Z",
+      "etag": "1710502200000",
+      "locale": "en-US",
+      "from": {
+        "user": {
+          "id": "user-001",
+          "displayName": "Jane Doe"
+        }
+      },
+      "attachments": [],
+      "contexts": [
+        {
+          "contextReference": "https://contoso.sharepoint.com/sites/Sales/Shared Documents/Q4Report.docx",
+          "contextType": "docx",
+          "displayName": "Q4Report.docx"
+        }
+      ],
+      "links": [],
+      "mentions": []
+    },
+    {
+      "id": "1234567891",
+      "appClass": "IPM.SkypeTeams.Message.Copilot.Word",
+      "body": {
+        "contentType": "html",
+        "content": "<p>Here is a summary of the document: The Q4 report outlines revenue growth of 15% year-over-year, driven primarily by the enterprise segment. Key highlights include expansion into three new markets and a 20% increase in customer retention.</p>"
+      },
+      "interactionType": "aiResponse",
+      "conversationType": "appchat",
+      "requestId": "req-abc-123",
+      "sessionId": "session-xyz-456",
+      "createdDateTime": "2025-03-15T10:30:05Z",
+      "etag": "1710502205000",
+      "locale": "en-US",
+      "from": {
+        "application": {
+          "id": "copilot-app-001",
+          "displayName": "Microsoft 365 Copilot"
+        }
+      },
+      "attachments": [],
+      "contexts": [
+        {
+          "contextReference": "https://contoso.sharepoint.com/sites/Sales/Shared Documents/Q4Report.docx",
+          "contextType": "docx",
+          "displayName": "Q4Report.docx"
+        }
+      ],
+      "links": [
+        {
+          "displayName": "Q4Report.docx",
+          "linkType": "citation",
+          "linkUrl": "https://contoso.sharepoint.com/sites/Sales/Shared Documents/Q4Report.docx"
+        }
+      ],
+      "mentions": []
+    }
+  ]
+}

@@ -1,0 +1,1065 @@
+openapi: 3.1.0
+info:
+  title: Microsoft 365 Copilot APIs
+  description: >-
+    REST APIs under the Microsoft Graph /copilot/ namespace that enable secure
+    access to Microsoft 365 Copilot capabilities including retrieval, search,
+    chat, interaction export, and change notifications. These APIs provide
+    production-ready AI capabilities that work directly with Microsoft 365 data
+    while respecting existing permissions, sensitivity labels, compliance
+    controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
+servers:
+  - url: https://graph.microsoft.com/v1.0
+    description: Microsoft Graph v1.0 (production)
+  - url: https://graph.microsoft.com/beta
+    description: Microsoft Graph beta (preview)
+security:
+  - oauth2: []
+tags:
+  - name: Retrieval
+    description: >-
+      Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot
+      connectors content for Retrieval Augmented Generation (RAG) scenarios.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
+  - name: Search
+    description: >-
+      Perform hybrid search (semantic and lexical) across OneDrive for work or
+      school content using natural language queries. Preview API.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/overview
+  - name: Chat
+    description: >-
+      Programmatically start and continue conversations with Microsoft 365
+      Copilot using enterprise search and web search grounding. Preview API.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
+  - name: Interaction Export
+    description: >-
+      Export and archive user interactions with Copilot across Microsoft 365
+      applications for compliance and auditing.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoftteams/export-teams-content
+  - name: Change Notifications
+    description: >-
+      Subscribe to change notifications for Copilot interactions across
+      Microsoft 365.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
+paths:
+  /copilot/retrieval:
+    post:
+      operationId: copilot.retrieval
+      summary: Retrieve grounding data
+      description: >-
+        Retrieve relevant text extracts from SharePoint, OneDrive, and Copilot
+        connectors content that the calling user has access to, while respecting
+        defined access controls within the tenant. Use this endpoint to ground
+        generative AI solutions with Microsoft 365 data while optimizing for
+        context recall. Results include text snippets with relevance scores,
+        sensitivity labels, and optional resource metadata.
+      tags:
+        - Retrieval
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/copilotroot-retrieval
+      security:
+        - oauth2:
+            - Files.Read.All
+            - Sites.Read.All
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalRequest'
+            examples:
+              sharePointRetrieval:
+                summary: Retrieve from SharePoint with metadata
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: sharePoint
+                  resourceMetadata:
+                    - title
+                    - author
+                  maximumNumberOfResults: 10
+              filteredRetrieval:
+                summary: Retrieve from a specific SharePoint site
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: sharePoint
+                  filterExpression: 'path:"https://contoso.sharepoint.com/sites/HR1/"'
+                  resourceMetadata:
+                    - title
+                    - author
+                  maximumNumberOfResults: 4
+              connectorRetrieval:
+                summary: Retrieve from Copilot connectors
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: externalItem
+                  dataSourceConfiguration:
+                    externalItem:
+                      connections:
+                        - connectionId: ContosoITServiceNowKB
+                        - connectionId: ContosoHRServiceNowKB
+                  resourceMetadata:
+                    - title
+                    - author
+                  maximumNumberOfResults: 10
+      responses:
+        '200':
+          description: Retrieval results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+              examples:
+                sharePointResults:
+                  summary: SharePoint retrieval results
+                  value:
+                    retrievalHits:
+                      - webUrl: https://contoso.sharepoint.com/sites/HR/VPNAccess.docx
+                        extracts:
+                          - text: >-
+                              To configure the VPN, click the Wi-Fi icon on your
+                              corporate device and select the VPN option.
+                            relevanceScore: 0.8374363553387588
+                          - text: >-
+                              You will need to sign in with 2FA to access the
+                              corporate VPN.
+                            relevanceScore: 0.7465472642498679
+                        resourceType: listItem
+                        resourceMetadata:
+                          title: VPN Access
+                          author: John Doe
+                        sensitivityLabel:
+                          sensitivityLabelId: f71f1f74-bf1f-4e6b-b266-c777ea76e2s8
+                          displayName: Confidential\Any User (No Protection)
+                          priority: 4
+                          color: '#FF8C00'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /copilot/search:
+    post:
+      operationId: copilot.search
+      summary: Perform hybrid search
+      description: >-
+        Perform hybrid search (semantic and lexical) across OneDrive for work or
+        school content using natural language queries with contextual
+        understanding and intelligent results. Discover relevant documents and
+        files while respecting defined access controls within the organization.
+        This API is currently in preview.
+      tags:
+        - Search
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/copilotroot-search
+      security:
+        - oauth2:
+            - Files.Read.All
+            - Sites.Read.All
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              basicSearch:
+                summary: Basic search request
+                value:
+                  query: How to setup corporate VPN?
+              filteredSearch:
+                summary: Search with path filtering and metadata
+                value:
+                  query: quarterly budget analysis
+                  pageSize: 2
+                  dataSources:
+                    oneDrive:
+                      filterExpression: 'path:"https://contoso-my.sharepoint.com/personal/megan_contoso_com/Documents/Finance/"'
+                      resourceMetadataNames:
+                        - title
+                        - author
+      responses:
+        '200':
+          description: Search results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                basicResults:
+                  summary: Basic search results
+                  value:
+                    totalCount: 2
+                    searchHits:
+                      - webUrl: https://contoso.sharepoint.com/sites/IT/VPNAccess.docx
+                        preview: >-
+                          To configure the VPN, click the Wi-Fi icon on your
+                          corporate device and select the VPN option...
+                        resourceType: driveItem
+                      - webUrl: https://contoso.sharepoint.com/sites/IT/Corporate_VPN.docx
+                        preview: >-
+                          Once you have selected Corporate VPN under the VPN
+                          options, log in with your corporate credentials...
+                        resourceType: driveItem
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /copilot/chat/conversations:
+    post:
+      operationId: copilot.chat.startConversation
+      summary: Start a chat conversation
+      description: >-
+        Start a new multi-turn conversation with Microsoft 365 Copilot. The Chat
+        API allows you to programmatically engage in conversations using
+        enterprise search grounding and web search grounding. Responses are
+        grounded in Microsoft 365 data and web content while respecting all
+        existing permissions and compliance controls. This API is currently in
+        preview.
+      tags:
+        - Chat
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
+      security:
+        - oauth2:
+            - Chat.Read
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatConversationRequest'
+            examples:
+              startConversation:
+                summary: Start a new conversation
+                value:
+                  prompt: What are the key highlights from last quarter's financial report?
+              conversationWithOptions:
+                summary: Start conversation with web search disabled
+                value:
+                  prompt: Summarize the latest HR policy changes
+                  enableWebSearch: false
+      responses:
+        '200':
+          description: Conversation started and response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatConversationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /copilot/chat/conversations/{conversationId}/messages:
+    post:
+      operationId: copilot.chat.continueConversation
+      summary: Continue a chat conversation
+      description: >-
+        Send a follow-up message in an existing multi-turn conversation with
+        Microsoft 365 Copilot. Uses the conversation context from prior turns to
+        provide more relevant and contextual responses.
+      tags:
+        - Chat
+      security:
+        - oauth2:
+            - Chat.Read
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+        - name: conversationId
+          in: path
+          required: true
+          description: The unique identifier of the conversation to continue.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessageRequest'
+            examples:
+              followUp:
+                summary: Send a follow-up message
+                value:
+                  prompt: Can you provide more details on the revenue figures?
+      responses:
+        '200':
+          description: Message sent and response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessageResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /copilot/interactionHistory/getAllEnterpriseInteractions:
+    get:
+      operationId: copilot.interactionHistory.getAllEnterpriseInteractions
+      summary: List all enterprise Copilot interactions
+      description: >-
+        Retrieve all Copilot interactions across the organization for compliance
+        and auditing purposes. Returns aiInteraction objects representing
+        user prompts and Copilot responses across Microsoft 365 applications.
+        Requires compliance administrator permissions.
+      tags:
+        - Interaction Export
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoftteams/export-teams-content
+      security:
+        - oauth2:
+            - AIInteraction.Read.All
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+        - name: $filter
+          in: query
+          description: OData filter expression to filter interactions by date range, user, or application.
+          schema:
+            type: string
+          example: createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z
+        - name: $top
+          in: query
+          description: Maximum number of interactions to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 999
+            default: 50
+        - name: $skipToken
+          in: query
+          description: Pagination token for retrieving the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of Copilot interactions returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiInteractionCollectionResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /subscriptions:
+    post:
+      operationId: copilot.changeNotifications.createSubscription
+      summary: Create subscription for Copilot interaction notifications
+      description: >-
+        Create a change notification subscription to monitor Copilot interactions
+        across Microsoft 365 in real time. Enables proactive compliance checks,
+        anomaly detection, and auditing of AI interactions. The resource path
+        for Copilot interactions is
+        /copilot/interactionHistory/getAllEnterpriseInteractions.
+      tags:
+        - Change Notifications
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
+      security:
+        - oauth2:
+            - AIInteraction.Read.All
+      parameters:
+        - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+            examples:
+              copilotInteractionSubscription:
+                summary: Subscribe to Copilot interaction changes
+                value:
+                  changeType: created
+                  notificationUrl: https://contoso.azurewebsites.net/api/notifications
+                  resource: /copilot/interactionHistory/getAllEnterpriseInteractions
+                  expirationDateTime: '2025-04-01T11:00:00.0000000Z'
+                  clientState: secretClientState
+      responses:
+        '201':
+          description: Subscription created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 authorization using Microsoft identity platform (Azure AD).
+        Requires a Microsoft 365 Copilot license for each user accessing
+        Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  schemas:
+    RetrievalRequest:
+      type: object
+      required:
+        - queryString
+        - dataSource
+      properties:
+        queryString:
+          type: string
+          maxLength: 1500
+          description: >-
+            Natural language query string used to retrieve relevant text
+            extracts. Should be a single sentence. Avoid spelling errors in
+            context-rich keywords.
+        dataSource:
+          type: string
+          enum:
+            - sharePoint
+            - oneDriveBusiness
+            - externalItem
+          description: >-
+            Indicates whether extracts should be retrieved from SharePoint,
+            OneDrive, or Copilot connectors.
+        dataSourceConfiguration:
+          $ref: '#/components/schemas/DataSourceConfiguration'
+        filterExpression:
+          type: string
+          description: >-
+            Keyword Query Language (KQL) expression with queryable properties to
+            scope retrieval. Supports AND, OR, NOT, and inequality operators.
+            Supported SharePoint/OneDrive properties include Author,
+            FileExtension, Filename, FileType, InformationProtectionLabelId,
+            LastModifiedTime, ModifiedBy, Path, SiteID, and Title.
+        resourceMetadata:
+          type: array
+          items:
+            type: string
+          description: >-
+            List of metadata fields to return for each item. Only retrievable
+            metadata properties can be included. By default, no metadata is
+            returned.
+        maximumNumberOfResults:
+          type: integer
+          minimum: 1
+          maximum: 25
+          default: 25
+          description: >-
+            Number of results to return. Must be between 1 and 25. Defaults to
+            25.
+    DataSourceConfiguration:
+      type: object
+      description: Additional configuration for applicable data sources.
+      properties:
+        externalItem:
+          type: object
+          description: Configuration for Copilot connectors retrieval.
+          properties:
+            connections:
+              type: array
+              description: List of specific Copilot connector connections to retrieve from.
+              items:
+                type: object
+                properties:
+                  connectionId:
+                    type: string
+                    description: The identifier of the Copilot connector connection.
+    RetrievalResponse:
+      type: object
+      properties:
+        retrievalHits:
+          type: array
+          description: Collection of retrieval results with text extracts.
+          items:
+            $ref: '#/components/schemas/RetrievalHit'
+    RetrievalHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the source document.
+        extracts:
+          type: array
+          description: Collection of relevant text extracts from the document.
+          items:
+            $ref: '#/components/schemas/RetrievalExtract'
+        resourceType:
+          type: string
+          description: >-
+            The type of resource. Values include listItem (for SharePoint/OneDrive)
+            and externalItem (for Copilot connectors).
+          enum:
+            - listItem
+            - externalItem
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: >-
+            Metadata fields for the resource, as requested via the
+            resourceMetadata parameter. Keys and values depend on the requested
+            fields.
+        sensitivityLabel:
+          $ref: '#/components/schemas/SensitivityLabel'
+    RetrievalExtract:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The relevant text extract from the document.
+        relevanceScore:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: >-
+            Cosine similarity between the queryString and the extract, normalized
+            to the 0-1 range. May be absent for Copilot connectors results.
+    SensitivityLabel:
+      type: object
+      description: Information protection sensitivity label applied to the document.
+      properties:
+        sensitivityLabelId:
+          type: string
+          description: The unique identifier of the sensitivity label.
+        displayName:
+          type: string
+          description: The display name of the sensitivity label.
+        toolTip:
+          type: string
+          description: Tooltip text describing the sensitivity label.
+        priority:
+          type: integer
+          description: The priority of the sensitivity label.
+        color:
+          type: string
+          description: The color code associated with the sensitivity label.
+    SearchRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          maxLength: 1500
+          description: Natural language query to search for relevant files.
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+          description: Number of results to return per page (1-100). Default is 25.
+        dataSources:
+          $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
+    CopilotSearchDataSourcesConfiguration:
+      type: object
+      description: Configuration for data sources to include in the search.
+      properties:
+        oneDrive:
+          type: object
+          description: OneDrive data source configuration.
+          properties:
+            filterExpression:
+              type: string
+              description: >-
+                KQL expression to scope the search to specific OneDrive paths or
+                properties.
+            resourceMetadataNames:
+              type: array
+              items:
+                type: string
+              description: List of metadata field names to return for each search result.
+    SearchResponse:
+      type: object
+      properties:
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results, if available.
+        totalCount:
+          type: integer
+          description: Total number of matching results.
+        searchHits:
+          type: array
+          description: Collection of search result items.
+          items:
+            $ref: '#/components/schemas/SearchHit'
+    SearchHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the matching document.
+        preview:
+          type: string
+          description: A preview snippet of the matching content.
+        resourceType:
+          type: string
+          description: The type of resource (e.g., driveItem).
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, if requested.
+    ChatConversationRequest:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: >-
+            Natural language prompt to send to Microsoft 365 Copilot to start a
+            conversation.
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: >-
+            Whether to enable web search grounding for this message. Defaults to
+            true. Must be toggled off per message if not desired.
+        fileReferences:
+          type: array
+          description: >-
+            Optional OneDrive and SharePoint file references to provide as
+            additional context.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: The URL of the file to reference.
+    ChatConversationResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          description: The unique identifier for the conversation for multi-turn use.
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+    ChatMessageRequest:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to continue the conversation.
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message.
+    ChatMessageResponse:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the message.
+        body:
+          type: object
+          properties:
+            contentType:
+              type: string
+              description: The content type of the body (e.g., text, html).
+            content:
+              type: string
+              description: The text content of the Copilot response.
+        citations:
+          type: array
+          description: Sources referenced in the Copilot response.
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the cited source.
+              url:
+                type: string
+                format: uri
+                description: The URL of the cited source.
+              snippet:
+                type: string
+                description: A relevant snippet from the cited source.
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The timestamp when the message was created.
+    AiInteraction:
+      type: object
+      description: >-
+        Represents an interaction between a user and Copilot across Microsoft
+        365 applications.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the interaction message.
+        appClass:
+          type: string
+          description: >-
+            The data source for Copilot data. For example,
+            IPM.SkypeTeams.Message.Copilot.Excel or
+            IPM.SkypeTeams.Message.Copilot.Loop.
+        body:
+          $ref: '#/components/schemas/ItemBody'
+        interactionType:
+          type: string
+          enum:
+            - userPrompt
+            - aiResponse
+            - unknownFutureValue
+          description: >-
+            Indicates whether the interaction is a user prompt or a Copilot
+            response.
+        conversationType:
+          type: string
+          description: The type of the conversation (e.g., appchat, bizchat).
+        requestId:
+          type: string
+          description: >-
+            Identifier that groups a user prompt with its corresponding Copilot
+            response.
+        sessionId:
+          type: string
+          description: >-
+            Thread ID or conversation identifier that maps to all Copilot
+            sessions for the user.
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The time when the interaction was created.
+        etag:
+          type: string
+          description: Timestamp of when the interaction was last modified.
+        locale:
+          type: string
+          description: The locale of the sender.
+        from:
+          $ref: '#/components/schemas/IdentitySet'
+        attachments:
+          type: array
+          description: >-
+            Collection of documents attached to the interaction, such as cards
+            and images.
+          items:
+            $ref: '#/components/schemas/AiInteractionAttachment'
+        contexts:
+          type: array
+          description: >-
+            Identifiers that map to all contexts associated with the
+            interaction.
+          items:
+            $ref: '#/components/schemas/AiInteractionContext'
+        links:
+          type: array
+          description: Collection of links that appear in the interaction.
+          items:
+            $ref: '#/components/schemas/AiInteractionLink'
+        mentions:
+          type: array
+          description: >-
+            Collection of entities mentioned in the interaction, including users
+            and bots.
+          items:
+            $ref: '#/components/schemas/AiInteractionMention'
+    AiInteractionAttachment:
+      type: object
+      description: Represents a message attachment such as cards and images.
+      properties:
+        attachmentId:
+          type: string
+          description: >-
+            Identifier for the attachment, unique only within the message scope.
+        content:
+          type: string
+          description: The content of the attachment.
+        contentType:
+          type: string
+          description: >-
+            The type of the content (e.g., reference, file, image/imageType).
+        contentUrl:
+          type: string
+          format: uri
+          description: The URL of the content.
+        name:
+          type: string
+          description: The name of the attachment.
+    AiInteractionContext:
+      type: object
+      description: Represents context associated with an interaction.
+      properties:
+        contextReference:
+          type: string
+          description: The full file URL where the interaction happened.
+        contextType:
+          type: string
+          description: The type of the file.
+        displayName:
+          type: string
+          description: The name of the file.
+    AiInteractionLink:
+      type: object
+      description: Represents a link that appears in an AI interaction.
+      properties:
+        displayName:
+          type: string
+          description: The name of the link.
+        linkType:
+          type: string
+          description: >-
+            Information about a link in an app chat or Business Chat (BizChat)
+            interaction.
+        linkUrl:
+          type: string
+          format: uri
+          description: The URL of the link.
+    AiInteractionMention:
+      type: object
+      description: Represents a mention of an entity in an AI interaction.
+      properties:
+        mentioned:
+          type: object
+          description: The entity mentioned in the message.
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                displayName:
+                  type: string
+        mentionId:
+          type: integer
+          description: The identifier for the mention.
+        mentionText:
+          type: string
+          description: The text mentioned in the message.
+    AiInteractionCollectionResponse:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+          description: OData context URL.
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results.
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiInteraction'
+    ItemBody:
+      type: object
+      description: The body of a message.
+      properties:
+        contentType:
+          type: string
+          enum:
+            - text
+            - html
+          description: The type of the content.
+        content:
+          type: string
+          description: The content of the body.
+    IdentitySet:
+      type: object
+      description: >-
+        The user, application, or device associated with the interaction.
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the user.
+            displayName:
+              type: string
+              description: The display name of the user.
+        application:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the application.
+            displayName:
+              type: string
+              description: The display name of the application.
+        device:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the device.
+            displayName:
+              type: string
+              description: The display name of the device.
+    SubscriptionRequest:
+      type: object
+      required:
+        - changeType
+        - notificationUrl
+        - resource
+        - expirationDateTime
+      properties:
+        changeType:
+          type: string
+          description: The type of change to subscribe to.
+          enum:
+            - created
+            - updated
+            - deleted
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL to receive change notifications.
+        resource:
+          type: string
+          description: >-
+            The resource path to subscribe to. For Copilot interactions use
+            /copilot/interactionHistory/getAllEnterpriseInteractions.
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the subscription expires.
+        clientState:
+          type: string
+          description: >-
+            Optional client state value included in each notification for
+            validation.
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the subscription.
+        resource:
+          type: string
+          description: The resource being monitored.
+        changeType:
+          type: string
+          description: The type of change being monitored.
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL receiving notifications.
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: When the subscription expires.
+        clientState:
+          type: string
+          description: The client state value for validation.
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+  responses:
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: >-
+        Forbidden. The caller does not have the required permissions or the user
+        does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: >-
+        Too many requests. The Retrieval API supports up to 200 requests per
+        user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'

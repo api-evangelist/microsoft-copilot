@@ -1,0 +1,312 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "microsoft": "https://graph.microsoft.com/v1.0/",
+    "msgraph": "https://learn.microsoft.com/en-us/graph/api/resources/",
+    "copilot": "https://graph.microsoft.com/v1.0/copilot/",
+    "m365": "https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/",
+
+    "AiInteraction": {
+      "@id": "msgraph:aiinteraction",
+      "@context": {
+        "id": {
+          "@id": "msgraph:aiinteraction#id",
+          "@type": "xsd:string"
+        },
+        "appClass": {
+          "@id": "msgraph:aiinteraction#appClass",
+          "@type": "xsd:string"
+        },
+        "body": {
+          "@id": "msgraph:aiinteraction#body",
+          "@type": "@id"
+        },
+        "interactionType": {
+          "@id": "msgraph:aiinteraction#interactionType",
+          "@type": "xsd:string"
+        },
+        "conversationType": {
+          "@id": "msgraph:aiinteraction#conversationType",
+          "@type": "xsd:string"
+        },
+        "requestId": {
+          "@id": "msgraph:aiinteraction#requestId",
+          "@type": "xsd:string"
+        },
+        "sessionId": {
+          "@id": "msgraph:aiinteraction#sessionId",
+          "@type": "xsd:string"
+        },
+        "createdDateTime": {
+          "@id": "schema:dateCreated",
+          "@type": "xsd:dateTime"
+        },
+        "etag": {
+          "@id": "msgraph:aiinteraction#etag",
+          "@type": "xsd:string"
+        },
+        "locale": {
+          "@id": "schema:inLanguage",
+          "@type": "xsd:string"
+        },
+        "from": {
+          "@id": "msgraph:identityset",
+          "@type": "@id"
+        },
+        "attachments": {
+          "@id": "msgraph:aiinteractionattachment",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "contexts": {
+          "@id": "msgraph:aiinteractioncontext",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "links": {
+          "@id": "msgraph:aiinteractionlink",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "mentions": {
+          "@id": "msgraph:aiinteractionmention",
+          "@type": "@id",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "ItemBody": {
+      "@id": "msgraph:itembody",
+      "@context": {
+        "contentType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "content": {
+          "@id": "schema:text",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "IdentitySet": {
+      "@id": "msgraph:identityset",
+      "@context": {
+        "user": {
+          "@id": "msgraph:identity",
+          "@type": "@id"
+        },
+        "application": {
+          "@id": "msgraph:identity",
+          "@type": "@id"
+        },
+        "device": {
+          "@id": "msgraph:identity",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Identity": {
+      "@id": "msgraph:identity",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AiInteractionAttachment": {
+      "@id": "msgraph:aiinteractionattachment",
+      "@context": {
+        "attachmentId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "content": {
+          "@id": "schema:text",
+          "@type": "xsd:string"
+        },
+        "contentType": {
+          "@id": "schema:encodingFormat",
+          "@type": "xsd:string"
+        },
+        "contentUrl": {
+          "@id": "schema:contentUrl",
+          "@type": "@id"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AiInteractionContext": {
+      "@id": "msgraph:aiinteractioncontext",
+      "@context": {
+        "contextReference": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "contextType": {
+          "@id": "schema:fileFormat",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "AiInteractionLink": {
+      "@id": "msgraph:aiinteractionlink",
+      "@context": {
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "linkType": {
+          "@id": "msgraph:aiinteractionlink#linkType",
+          "@type": "xsd:string"
+        },
+        "linkUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "AiInteractionMention": {
+      "@id": "msgraph:aiinteractionmention",
+      "@context": {
+        "mentioned": {
+          "@id": "msgraph:aiinteractionmentionedidentityset",
+          "@type": "@id"
+        },
+        "mentionId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:integer"
+        },
+        "mentionText": {
+          "@id": "schema:text",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "RetrievalRequest": {
+      "@id": "copilot:retrieval",
+      "@context": {
+        "queryString": {
+          "@id": "schema:query",
+          "@type": "xsd:string"
+        },
+        "dataSource": {
+          "@id": "m365:api/ai-services/retrieval#dataSource",
+          "@type": "xsd:string"
+        },
+        "filterExpression": {
+          "@id": "m365:api/ai-services/retrieval#filterExpression",
+          "@type": "xsd:string"
+        },
+        "maximumNumberOfResults": {
+          "@id": "m365:api/ai-services/retrieval#maximumNumberOfResults",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "RetrievalHit": {
+      "@id": "m365:api/ai-services/retrieval/resources/retrievalhit",
+      "@context": {
+        "webUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "extracts": {
+          "@id": "m365:api/ai-services/retrieval#extracts",
+          "@type": "@id",
+          "@container": "@set"
+        },
+        "resourceType": {
+          "@id": "m365:api/ai-services/retrieval#resourceType",
+          "@type": "xsd:string"
+        },
+        "sensitivityLabel": {
+          "@id": "m365:api/ai-services/retrieval#sensitivityLabel",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "RetrievalExtract": {
+      "@id": "m365:api/ai-services/retrieval/resources/retrievalextract",
+      "@context": {
+        "text": {
+          "@id": "schema:text",
+          "@type": "xsd:string"
+        },
+        "relevanceScore": {
+          "@id": "m365:api/ai-services/retrieval#relevanceScore",
+          "@type": "xsd:double"
+        }
+      }
+    },
+
+    "SearchHit": {
+      "@id": "m365:api/ai-services/search/resources/searchhit",
+      "@context": {
+        "webUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "preview": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "resourceType": {
+          "@id": "m365:api/ai-services/search#resourceType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "SensitivityLabel": {
+      "@id": "msgraph:sensitivitylabel",
+      "@context": {
+        "sensitivityLabelId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "displayName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "toolTip": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "priority": {
+          "@id": "schema:position",
+          "@type": "xsd:integer"
+        },
+        "color": {
+          "@id": "schema:color",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/"
+  }
+}
