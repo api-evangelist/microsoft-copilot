@@ -3,7 +3,7 @@ description: Microsoft Copilot is an AI-powered assistant that helps users with 
 image: https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
 url: https://copilot.microsoft.com
 created: '2024-01-15'
-modified: '2026-03-03'
+modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
 - artificial intelligence
@@ -116,9 +116,8 @@ apis:
   - type: getting-started
     url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-connect-bot-to-custom-application
 maintainers:
-- name: Kin Lane
+- FN: Kin Lane
   email: kin@apievangelist.com
-  url: https://apievangelist.com
 common:
 - type: getting-started
   url: https://learn.microsoft.com/en-us/copilot/get-started
