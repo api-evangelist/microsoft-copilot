@@ -27,18 +27,12 @@ servers:
 security:
   - oauth2: []
 tags:
-  - name: Retrieval
+  - name: Change Notifications
     description: >-
-      Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot
-      connectors content for Retrieval Augmented Generation (RAG) scenarios.
+      Subscribe to change notifications for Copilot interactions across
+      Microsoft 365.
     externalDocs:
-      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
-  - name: Search
-    description: >-
-      Perform hybrid search (semantic and lexical) across OneDrive for work or
-      school content using natural language queries. Preview API.
-    externalDocs:
-      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/overview
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
   - name: Chat
     description: >-
       Programmatically start and continue conversations with Microsoft 365
@@ -51,12 +45,18 @@ tags:
       applications for compliance and auditing.
     externalDocs:
       url: https://learn.microsoft.com/en-us/microsoftteams/export-teams-content
-  - name: Change Notifications
+  - name: Retrieval
     description: >-
-      Subscribe to change notifications for Copilot interactions across
-      Microsoft 365.
+      Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot
+      connectors content for Retrieval Augmented Generation (RAG) scenarios.
     externalDocs:
-      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
+  - name: Search
+    description: >-
+      Perform hybrid search (semantic and lexical) across OneDrive for work or
+      school content using natural language queries. Preview API.
+    externalDocs:
+      url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/overview
 paths:
   /copilot/retrieval:
     post:

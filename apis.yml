@@ -1,35 +1,31 @@
 name: Microsoft Copilot
-description: Microsoft Copilot is an AI-powered assistant that helps users with 
-  productivity tasks, content generation, and information retrieval across 
-  Microsoft 365 applications and services.
-image: 
-  https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
+description: Microsoft Copilot is an AI-powered assistant that helps users with productivity tasks, content generation, and information retrieval across Microsoft 365 applications and services.
+image: https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
 url: https://copilot.microsoft.com
 created: '2024-01-15'
 modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
-  - artificial intelligence
-  - AI assistant
-  - productivity
+  - Agents
+  - AI Assistant
+  - Artificial Intelligence
+  - Chatbot
+  - Copilot
+  - Extensibility
+  - Generative AI
   - Microsoft 365
-  - chatbot
-  - generative AI
-  - copilot
-  - agents
-  - extensibility
+  - Productivity
 apis:
   - name: Microsoft Copilot API
     description: >-
       API for integrating Microsoft Copilot capabilities into applications.
-    image: 
-      https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
+    image: https://www.microsoft.com/en-us/microsoft-copilot/assets/images/copilot-icon.png
     humanUrl: https://learn.microsoft.com/en-us/copilot/
     baseUrl: https://api.copilot.microsoft.com
     tags:
       - AI
-      - chat
-      - completion
+      - Chat
+      - Completion
     properties:
       - type: documentation
         url: https://learn.microsoft.com/en-us/copilot/overview
@@ -40,16 +36,14 @@ apis:
       - type: getting-started
         url: https://learn.microsoft.com/en-us/copilot/get-started
   - name: Microsoft Graph API (Copilot Integration)
-    description: Microsoft Graph API endpoints for accessing Copilot features 
-      within Microsoft 365, including the Copilot namespace with retrieval, 
-      chat, search, and meeting insights capabilities.
+    description: Microsoft Graph API endpoints for accessing Copilot features within Microsoft 365, including the Copilot namespace with retrieval, chat, search, and meeting insights capabilities.
     humanUrl: https://learn.microsoft.com/en-us/graph/overview
     baseUrl: https://graph.microsoft.com/v1.0
     tags:
+      - Integration
       - Microsoft 365
-      - integration
-      - productivity
       - Microsoft Graph
+      - Productivity
     properties:
       - type: documentation
         url: https://learn.microsoft.com/en-us/graph/api/overview
@@ -60,32 +54,25 @@ apis:
       - type: getting-started
         url: https://learn.microsoft.com/en-us/graph/use-the-api
   - name: Microsoft 365 Copilot APIs
-    description: REST APIs under the Microsoft Graph /copilot/ namespace that 
-      enable secure access to Microsoft 365 Copilot capabilities including 
-      retrieval, chat, and search, for use in custom applications and agents.
-    humanUrl: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
+    description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, chat, and search, for use in custom applications and agents.
+    humanUrl: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
     baseUrl: https://graph.microsoft.com/v1.0/copilot
     tags:
-      - retrieval
-      - chat
-      - search
+      - AI
+      - Chat
       - Microsoft 365
       - RAG
-      - AI
+      - Retrieval
+      - Search
     properties:
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
       - type: sdks
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
       - type: openapi
         url: openapi/microsoft-copilot-openapi.yml
       - type: json-schema
@@ -93,54 +80,42 @@ apis:
       - type: json-ld-context
         url: json-ld/microsoft-copilot-context.jsonld
   - name: Microsoft 365 Copilot Connectors API
-    description: API for building custom connectors that bring external data 
-      into Microsoft Graph to enhance Microsoft 365 Copilot experiences 
-      including search and retrieval augmented generation.
-    humanUrl: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector
+    description: API for building custom connectors that bring external data into Microsoft Graph to enhance Microsoft 365 Copilot experiences including search and retrieval augmented generation.
+    humanUrl: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector
     baseUrl: https://graph.microsoft.com/v1.0
     tags:
-      - connectors
-      - external data
-      - indexing
+      - Connectors
+      - External Data
+      - Indexing
       - Microsoft Graph
     properties:
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview
+        url: https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/graph/api/resources/connectors-api-overview?view=graph-rest-1.0
+        url: https://learn.microsoft.com/en-us/graph/api/resources/connectors-api-overview?view=graph-rest-1.0
       - type: getting-started
-        url: 
-          https://learn.microsoft.com/en-us/graph/custom-connector-sdk-sample-overview
+        url: https://learn.microsoft.com/en-us/graph/custom-connector-sdk-sample-overview
       - type: sdks
-        url: 
-          https://learn.microsoft.com/en-us/graph/custom-connector-sdk-overview
+        url: https://learn.microsoft.com/en-us/graph/custom-connector-sdk-overview
   - name: Microsoft Copilot Studio API
-    description: APIs for building, publishing, and integrating custom agents 
-      and copilots using Microsoft Copilot Studio, including Direct Line API for
-      connecting web and custom applications.
+    description: APIs for building, publishing, and integrating custom agents and copilots using Microsoft Copilot Studio, including Direct Line API for connecting web and custom applications.
     humanUrl: https://learn.microsoft.com/en-us/microsoft-copilot-studio/
     baseUrl: https://directline.botframework.com
     tags:
-      - agents
-      - bots
-      - copilot studio
+      - Agents
+      - Bots
+      - Copilot Studio
       - Direct Line
-      - low-code
+      - Low-Code
     properties:
       - type: documentation
         url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/
       - type: documentation
-        url: 
-          https://learn.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-api-reference?view=azure-bot-service-4.0
+        url: https://learn.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-api-reference?view=azure-bot-service-4.0
       - type: authentication
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security
+        url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security
       - type: getting-started
-        url: 
-          https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-connect-bot-to-custom-application
+        url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-connect-bot-to-custom-application
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -164,30 +139,23 @@ common:
   - type: developer
     url: https://developer.microsoft.com/en-us/microsoft-365/copilot
   - type: sdks
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
   - type: samples
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/samples
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/samples
   - type: change-log
     url: https://learn.microsoft.com/en-us/copilot/microsoft-365/release-notes
   - type: whats-new
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/whats-new
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/whats-new
   - type: security
-    url: 
-      https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
+    url: https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy
   - type: plugins
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-api-plugins
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-api-plugins
   - type: agents
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-overview
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agents-overview
   - type: extensibility
     url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/
   - type: github-org
     url: https://github.com/microsoft/CopilotStudioSamples
   - type: licensing
-    url: 
-      https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing
+    url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/billing-licensing
 include: []
