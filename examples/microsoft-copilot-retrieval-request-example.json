@@ -1,0 +1,7 @@
+{
+  "queryString": "example_value",
+  "dataSource": "example_value",
+  "filterExpression": "example_value",
+  "resourceMetadata": [],
+  "maximumNumberOfResults": 10
+}

@@ -1,0 +1,12 @@
+name: microsoft-copilot API Vocabulary
+provider: microsoft-copilot
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 6
+schemas: 26
+tags:
+- Change Notifications
+- Chat
+- Interaction Export
+- Retrieval
+- Search

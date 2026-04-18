@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SensitivityLabel",
+  "type": "object",
+  "description": "Information protection sensitivity label applied to the document.",
+  "properties": {
+    "sensitivityLabelId": {
+      "type": "string",
+      "description": "The unique identifier of the sensitivity label."
+    },
+    "displayName": {
+      "type": "string",
+      "description": "The display name of the sensitivity label."
+    },
+    "toolTip": {
+      "type": "string",
+      "description": "Tooltip text describing the sensitivity label."
+    },
+    "priority": {
+      "type": "integer",
+      "description": "The priority of the sensitivity label."
+    },
+    "color": {
+      "type": "string",
+      "description": "The color code associated with the sensitivity label."
+    }
+  }
+}

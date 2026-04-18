@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SubscriptionRequest",
+  "type": "object",
+  "properties": {
+    "changeType": {
+      "type": "string"
+    },
+    "notificationUrl": {
+      "type": "string"
+    },
+    "resource": {
+      "type": "string"
+    },
+    "expirationDateTime": {
+      "type": "string"
+    },
+    "clientState": {
+      "type": "string"
+    }
+  }
+}

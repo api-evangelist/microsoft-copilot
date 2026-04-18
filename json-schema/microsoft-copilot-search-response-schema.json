@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchResponse",
+  "type": "object",
+  "properties": {
+    "@odata.nextLink": {
+      "type": "string",
+      "description": "URL to retrieve the next page of results, if available."
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of matching results."
+    },
+    "searchHits": {
+      "type": "array",
+      "description": "Collection of search result items."
+    }
+  }
+}

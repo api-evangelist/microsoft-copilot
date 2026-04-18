@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetrievalResponse",
+  "type": "object",
+  "properties": {
+    "retrievalHits": {
+      "type": "array",
+      "description": "Collection of retrieval results with text extracts."
+    }
+  }
+}

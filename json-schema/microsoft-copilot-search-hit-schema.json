@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchHit",
+  "type": "object",
+  "properties": {
+    "webUrl": {
+      "type": "string",
+      "description": "The URL of the matching document."
+    },
+    "preview": {
+      "type": "string",
+      "description": "A preview snippet of the matching content."
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "The type of resource (e.g., driveItem)."
+    },
+    "resourceMetadata": {
+      "type": "object",
+      "description": "Metadata fields for the resource, if requested."
+    }
+  }
+}

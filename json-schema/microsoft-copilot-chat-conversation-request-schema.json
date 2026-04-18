@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChatConversationRequest",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Natural language prompt to send to Microsoft 365 Copilot to start a conversation."
+    },
+    "enableWebSearch": {
+      "type": "boolean",
+      "description": "Whether to enable web search grounding for this message. Defaults to true. Must be toggled off per message if not desired."
+    },
+    "fileReferences": {
+      "type": "array",
+      "description": "Optional OneDrive and SharePoint file references to provide as additional context."
+    }
+  }
+}

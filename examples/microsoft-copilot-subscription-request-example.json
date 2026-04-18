@@ -1,0 +1,7 @@
+{
+  "changeType": "example_value",
+  "notificationUrl": "https://www.example.com",
+  "resource": "example_value",
+  "expirationDateTime": "example_value",
+  "clientState": "example_value"
+}

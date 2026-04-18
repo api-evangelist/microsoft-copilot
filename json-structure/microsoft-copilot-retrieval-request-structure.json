@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RetrievalRequest",
+  "type": "object",
+  "properties": {
+    "queryString": {
+      "type": "string"
+    },
+    "dataSource": {
+      "type": "string"
+    },
+    "filterExpression": {
+      "type": "string"
+    },
+    "resourceMetadata": {
+      "type": "array"
+    },
+    "maximumNumberOfResults": {
+      "type": "integer"
+    }
+  }
+}

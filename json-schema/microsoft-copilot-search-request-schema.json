@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchRequest",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Natural language query to search for relevant files."
+    },
+    "pageSize": {
+      "type": "integer",
+      "description": "Number of results to return per page (1-100). Default is 25."
+    }
+  }
+}

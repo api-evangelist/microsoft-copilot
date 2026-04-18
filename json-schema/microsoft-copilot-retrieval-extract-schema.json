@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetrievalExtract",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "The relevant text extract from the document."
+    },
+    "relevanceScore": {
+      "type": "number",
+      "description": "Cosine similarity between the queryString and the extract, normalized to the 0-1 range. May be absent for Copilot connectors results."
+    }
+  }
+}

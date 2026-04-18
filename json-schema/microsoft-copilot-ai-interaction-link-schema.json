@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AiInteractionLink",
+  "type": "object",
+  "description": "Represents a link that appears in an AI interaction.",
+  "properties": {
+    "displayName": {
+      "type": "string",
+      "description": "The name of the link."
+    },
+    "linkType": {
+      "type": "string",
+      "description": "Information about a link in an app chat or Business Chat (BizChat) interaction."
+    },
+    "linkUrl": {
+      "type": "string",
+      "description": "The URL of the link."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "abc123",
+  "appClass": "example_value",
+  "interactionType": "example_value",
+  "conversationType": "example_value",
+  "requestId": "500123",
+  "sessionId": "500123",
+  "createdDateTime": "example_value",
+  "etag": "example_value",
+  "locale": "example_value",
+  "attachments": [],
+  "contexts": [],
+  "links": [],
+  "mentions": []
+}

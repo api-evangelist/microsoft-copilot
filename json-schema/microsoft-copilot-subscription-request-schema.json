@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SubscriptionRequest",
+  "type": "object",
+  "properties": {
+    "changeType": {
+      "type": "string",
+      "description": "The type of change to subscribe to."
+    },
+    "notificationUrl": {
+      "type": "string",
+      "description": "The URL to receive change notifications."
+    },
+    "resource": {
+      "type": "string",
+      "description": "The resource path to subscribe to. For Copilot interactions use /copilot/interactionHistory/getAllEnterpriseInteractions."
+    },
+    "expirationDateTime": {
+      "type": "string",
+      "description": "The date and time when the subscription expires."
+    },
+    "clientState": {
+      "type": "string",
+      "description": "Optional client state value included in each notification for validation."
+    }
+  }
+}

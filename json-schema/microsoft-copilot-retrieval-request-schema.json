@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetrievalRequest",
+  "type": "object",
+  "properties": {
+    "queryString": {
+      "type": "string",
+      "description": "Natural language query string used to retrieve relevant text extracts. Should be a single sentence. Avoid spelling errors in context-rich keywords."
+    },
+    "dataSource": {
+      "type": "string",
+      "description": "Indicates whether extracts should be retrieved from SharePoint, OneDrive, or Copilot connectors."
+    },
+    "filterExpression": {
+      "type": "string",
+      "description": "Keyword Query Language (KQL) expression with queryable properties to scope retrieval. Supports AND, OR, NOT, and inequality operators. Supported SharePoint/OneDrive properties include Author, FileExtension, Filename, FileType, InformationProtectionLabelId, LastModifiedTime, ModifiedBy, Path, SiteID, and Title."
+    },
+    "resourceMetadata": {
+      "type": "array",
+      "description": "List of metadata fields to return for each item. Only retrievable metadata properties can be included. By default, no metadata is returned."
+    },
+    "maximumNumberOfResults": {
+      "type": "integer",
+      "description": "Number of results to return. Must be between 1 and 25. Defaults to 25."
+    }
+  }
+}

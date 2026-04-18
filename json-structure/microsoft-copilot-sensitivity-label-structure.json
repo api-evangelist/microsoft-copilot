@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "SensitivityLabel",
+  "type": "object",
+  "properties": {
+    "sensitivityLabelId": {
+      "type": "string"
+    },
+    "displayName": {
+      "type": "string"
+    },
+    "toolTip": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "color": {
+      "type": "string"
+    }
+  }
+}

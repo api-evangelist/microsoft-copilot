@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChatMessage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the message."
+    },
+    "body": {
+      "type": "object"
+    },
+    "citations": {
+      "type": "array",
+      "description": "Sources referenced in the Copilot response."
+    },
+    "createdDateTime": {
+      "type": "string",
+      "description": "The timestamp when the message was created."
+    }
+  }
+}

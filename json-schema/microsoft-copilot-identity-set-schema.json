@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IdentitySet",
+  "type": "object",
+  "description": "The user, application, or device associated with the interaction.",
+  "properties": {
+    "user": {
+      "type": "object"
+    },
+    "application": {
+      "type": "object"
+    },
+    "device": {
+      "type": "object"
+    }
+  }
+}

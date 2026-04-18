@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CopilotSearchDataSourcesConfiguration",
+  "type": "object",
+  "description": "Configuration for data sources to include in the search.",
+  "properties": {
+    "oneDrive": {
+      "type": "object",
+      "description": "OneDrive data source configuration."
+    }
+  }
+}

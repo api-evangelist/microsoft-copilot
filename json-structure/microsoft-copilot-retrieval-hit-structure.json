@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "RetrievalHit",
+  "type": "object",
+  "properties": {
+    "webUrl": {
+      "type": "string"
+    },
+    "extracts": {
+      "type": "array"
+    },
+    "resourceType": {
+      "type": "string"
+    },
+    "resourceMetadata": {
+      "type": "object"
+    }
+  }
+}

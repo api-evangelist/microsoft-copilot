@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RetrievalHit",
+  "type": "object",
+  "properties": {
+    "webUrl": {
+      "type": "string",
+      "description": "The URL of the source document."
+    },
+    "extracts": {
+      "type": "array",
+      "description": "Collection of relevant text extracts from the document."
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors)."
+    },
+    "resourceMetadata": {
+      "type": "object",
+      "description": "Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields."
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AiInteraction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "appClass": {
+      "type": "string"
+    },
+    "interactionType": {
+      "type": "string"
+    },
+    "conversationType": {
+      "type": "string"
+    },
+    "requestId": {
+      "type": "string"
+    },
+    "sessionId": {
+      "type": "string"
+    },
+    "createdDateTime": {
+      "type": "string"
+    },
+    "etag": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array"
+    },
+    "contexts": {
+      "type": "array"
+    },
+    "links": {
+      "type": "array"
+    },
+    "mentions": {
+      "type": "array"
+    }
+  }
+}

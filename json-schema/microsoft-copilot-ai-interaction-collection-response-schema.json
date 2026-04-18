@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AiInteractionCollectionResponse",
+  "type": "object",
+  "properties": {
+    "@odata.context": {
+      "type": "string",
+      "description": "OData context URL."
+    },
+    "@odata.nextLink": {
+      "type": "string",
+      "description": "URL to retrieve the next page of results."
+    },
+    "value": {
+      "type": "array"
+    }
+  }
+}
