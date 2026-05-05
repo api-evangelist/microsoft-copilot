@@ -1,0 +1,13 @@
+{
+  "repo": "microsoft-copilot",
+  "feeds": [
+    {
+      "source": "https://blogs.microsoft.com/blog/tag/copilot/",
+      "feed_url": "https://blogs.microsoft.com/feed/",
+      "saved": 10,
+      "title": "The Official Microsoft Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:31:38Z"
+}
