@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Copilot
 providerId: microsoft-copilot
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Agents
   - AI Assistant
@@ -13,101 +14,79 @@ tags:
   - Copilot
   - Extensibility
   - Generative AI
-  - Microsoft 365
-  - Productivity
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Microsoft Copilot API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+description: Microsoft Copilot rate limits depend on the surface. Microsoft 365 Copilot has
+  per-user fair-use throttling (not publicly published as per-second numbers; soft limits in
+  the high tens of requests per minute per user). Copilot APIs accessed through Microsoft
+  Graph apply Microsoft Graph throttling (per-app, per-tenant, and per-user). Copilot Studio
+  applies per-message metering (counts toward the purchased message pack). GitHub Copilot has
+  per-user request quotas and Copilot Chat conversation pacing. All surfaces use HTTP 429
+  with Retry-After.
+sources:
+  - https://learn.microsoft.com/en-us/graph/throttling
+  - https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management
+  - https://learn.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-licensing
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
   retryAfter: Retry-After
-  policy: RateLimit-Policy
+  rateLimitLimit: RateLimit-Limit
+  rateLimitRemaining: RateLimit-Remaining
+  rateLimitReset: RateLimit-Reset
+  requestId: request-id
+  clientRequestId: client-request-id
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
+  - name: Microsoft Graph — per-app per-tenant
+    scope: app/tenant
+    metric: requests_per_10s
+    limit: 130000
+    timeFrame: second
+    notes: 130,000 requests per 10 seconds per app per tenant for general Graph endpoints.
+      Many service-specific limits override (Outlook, OneDrive, etc.).
+  - name: Microsoft Graph — per-user
+    scope: user
+    metric: requests_per_10s
+    limit: 10000
+    timeFrame: second
+    notes: 10,000 requests per 10 seconds per user across all apps. Soft limit subject to
+      change.
+  - name: Microsoft 365 Copilot — fair-use per user
+    scope: user
     metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Microsoft Copilot API
-      - Microsoft Graph API (Copilot Integration)
-      - Microsoft 365 Copilot APIs
-      - Microsoft 365 Copilot Connectors API
-      - Microsoft Copilot Studio API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
+    limit: see vendor docs (soft fair-use)
+    notes: Per-user fair-use throttling on Copilot prompts; not publicly documented as per-second
+      numbers. Excessive prompting yields 429 with Retry-After.
+  - name: Copilot Studio — message metering
+    scope: tenant
+    metric: messages_per_month
+    limit: 25000
     timeFrame: month
-    applies:
-      - Microsoft Copilot API
-      - Microsoft Graph API (Copilot Integration)
-      - Microsoft 365 Copilot APIs
-      - Microsoft 365 Copilot Connectors API
-      - Microsoft Copilot Studio API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
+    notes: Standard message pack is 25,000 messages/month. Excess billed PAYG at $0.01/message.
+      Generative messages count as 2; classifier as 1.
+  - name: GitHub Copilot — chat requests
+    scope: user
     metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Microsoft Copilot API
-      - Microsoft Graph API (Copilot Integration)
-      - Microsoft 365 Copilot APIs
-      - Microsoft 365 Copilot Connectors API
-      - Microsoft Copilot Studio API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Microsoft Copilot API
-      - Microsoft Graph API (Copilot Integration)
-      - Microsoft 365 Copilot APIs
-      - Microsoft 365 Copilot Connectors API
-      - Microsoft Copilot Studio API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Microsoft Copilot API
-      - Microsoft Graph API (Copilot Integration)
-      - Microsoft 365 Copilot APIs
-      - Microsoft 365 Copilot Connectors API
-      - Microsoft Copilot Studio API
+    limit: see vendor docs
+    notes: Per-user throttling on Copilot Chat; specific numbers not published. Code completion
+      uses streaming and is tuned per-IDE.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Honor Retry-After
+    description: All Copilot surfaces return 429 with Retry-After. Implement exponential backoff
+      with jitter; SDKs auto-retry.
+  - name: Microsoft Graph backoff
+    description: Microsoft Graph documents service-specific throttling and recommends batching
+      via /v1.0/$batch (max 20 per batch) plus delta queries for large reads.
+  - name: Per-message accounting
+    description: Copilot Studio monthly message packs are not pooled across tenants. Unused
+      messages don't roll over. Excess goes to PAYG.
+  - name: Tenant fair-use
+    description: Sustained extreme load on Microsoft 365 Copilot can trigger tenant-level
+      throttling and slowdown across users. Rare but documented.
+  - name: Customer-managed key impact
+    description: Tenants using Customer Lockbox / CMK may see slightly lower throughput due to
+      additional cryptographic operations.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://www.microsoft.com/microsoft-365-copilot

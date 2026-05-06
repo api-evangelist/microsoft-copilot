@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,168 +9,118 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Microsoft Copilot
 providerId: microsoft-copilot
-publisherName: Microsoft Copilot
-serviceCategory: API
+publisherName: Microsoft Corporation
+serviceCategory: AI / Productivity
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Agents
   - AI Assistant
   - Artificial Intelligence
   - Chatbot
   - Copilot
-  - Extensibility
   - Generative AI
-  - Microsoft 365
-  - Productivity
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Microsoft Copilot API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: FOCUS-aligned FinOps for Microsoft Copilot — predominantly per-user-per-month
+  subscription pricing ($30 enterprise, $20 Pro, GitHub Copilot $10–$39) with a metered
+  message-based PAYG layer for Copilot Studio. Largest waste signal is paying for inactive
+  Copilot seats; secondary signal is Copilot Studio message overage. Visibility comes from
+  Microsoft 365 admin center usage reports and Azure Monitor for Copilot Studio.
+sources:
+  - https://www.microsoft.com/microsoft-365-copilot
+  - https://learn.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-licensing
+  - https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft365-copilot-usage
+  - https://focus.finops.org/focus-specification/v1-3/
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
+  pricingCategory: Subscription + Usage-Based (Copilot Studio messages)
+  billingFrequency: Monthly (annual commitment for enterprise SKU)
+  billingCurrency: USD (settlement varies)
   chargeCategories:
     - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
+    - Credit
   chargeFrequency: Recurring
 focusColumns:
-  ServiceName: Microsoft Copilot
-  ServiceCategory: Developer Tools / API
-  ProviderName: Microsoft Copilot
-  PublisherName: Microsoft Copilot
-  InvoiceIssuerName: Microsoft Copilot
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: Microsoft 365 Copilot
+  ServiceCategory: AI / Productivity
+  ProviderName: Microsoft Corporation
+  PublisherName: Microsoft Corporation
+  InvoiceIssuerName: Microsoft Corporation
+  PricingCategory: Subscription
+  PricingUnit: user-month
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: m365_copilot_seats
+    description: Microsoft 365 Copilot enterprise add-on seats ($30/user/month).
+    unit: user-month
+    aggregation: max
+    dimensions:
+      - tenant
+      - department
+      - cost_center
+  - name: copilot_pro_seats
+    description: Copilot Pro consumer seats ($20/user/month).
+    unit: user-month
+    aggregation: max
+    dimensions:
+      - billing_account
+  - name: copilot_studio_messages
+    description: Messages consumed by Copilot Studio agents.
+    unit: message
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
+      - agent_name
+      - environment
+      - generative_or_classifier
+  - name: copilot_studio_message_pack
+    description: Purchased monthly message-pack capacity.
+    unit: message-month
+    aggregation: max
+    dimensions:
+      - tenant
+      - pack_size
+  - name: github_copilot_seats
+    description: GitHub Copilot Individual / Business / Enterprise seats.
+    unit: user-month
+    aggregation: max
+    dimensions:
       - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+      - org
+  - name: copilot_active_users
+    description: Unique users with at least one Copilot interaction in the period (utilization
+      signal).
+    unit: user
+    aggregation: count
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Microsoft Copilot API
-    baseURL: https://api.copilot.microsoft.com
-    tags:
-      - AI
-      - Chat
-      - Completion
-    serviceName: Microsoft Copilot API
-    serviceCategory: API
-  - name: Microsoft Graph API (Copilot Integration)
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Integration
-      - Microsoft 365
-      - Microsoft Graph
-      - Productivity
-    serviceName: Microsoft Graph API (Copilot Integration)
-    serviceCategory: API
-  - name: Microsoft 365 Copilot APIs
-    baseURL: https://graph.microsoft.com/v1.0/copilot
-    tags:
-      - AI
-      - Chat
-      - Microsoft 365
-      - RAG
-      - Retrieval
-      - Search
-    serviceName: Microsoft 365 Copilot APIs
-    serviceCategory: API
-  - name: Microsoft 365 Copilot Connectors API
-    baseURL: https://graph.microsoft.com/v1.0
-    tags:
-      - Connectors
-      - External Data
-      - Indexing
-      - Microsoft Graph
-    serviceName: Microsoft 365 Copilot Connectors API
-    serviceCategory: API
-  - name: Microsoft Copilot Studio API
-    baseURL: https://directline.botframework.com
-    tags:
-      - Agents
-      - Bots
-      - Copilot Studio
-      - Direct Line
-      - Low-Code
-    serviceName: Microsoft Copilot Studio API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - app_used
+      - period
+principles:
+  - name: Visibility
+    description: Microsoft 365 admin center > Reports > Microsoft 365 Copilot usage shows
+      per-user per-app interactions over the last 180 days. GitHub Copilot org-level usage
+      reports show acceptance rate and active users. Copilot Studio analytics graph message
+      consumption per agent. Cost Management exposes seat line items.
+  - name: Allocation
+    description: Assign seats by Entra ID security group rules tied to department/cost-center.
+      For Copilot Studio, environments map to business units; messages aggregate per
+      environment. Tag GitHub orgs to drive chargeback.
+  - name: Optimization
+    description: Reclaim seats from users who haven't used Copilot in 30+ days. Right-size
+      Copilot Studio message packs based on actual consumption (don't over-buy headroom).
+      Use the smaller Copilot Business SKU instead of enterprise where capability matches.
+      Avoid duplicating Copilot Pro for users who already have M365 Copilot. Consolidate
+      GitHub Copilot under Business or Enterprise when org has 5+ developers.
+  - name: Accountability
+    description: License manager owns seat assignment and reconciliation. Quarterly review of
+      per-user adoption metrics with line-of-business sponsors. Set alerts on Copilot Studio
+      message consumption to avoid PAYG surprises. Track unit economics — cost per active
+      user, cost per task automated.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://www.microsoft.com/microsoft-365-copilot

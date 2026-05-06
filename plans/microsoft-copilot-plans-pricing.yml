@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Microsoft Copilot
 providerId: microsoft-copilot
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Agents
   - AI Assistant
@@ -13,173 +14,197 @@ tags:
   - Copilot
   - Extensibility
   - Generative AI
-  - Microsoft 365
-  - Productivity
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Microsoft Copilot is sold as a per-user-per-month add-on across multiple
+  Microsoft 365 plans, plus a free consumer/web tier (Copilot Chat) for any user with an
+  eligible Microsoft 365 subscription. Microsoft 365 Copilot is $30/user/month (annual
+  commitment), requires an underlying eligible base license (M365 E3/E5, Business
+  Basic/Standard/Premium, A3/A5 for education, GCC/GCC-H/DoD for US Gov), and includes Copilot
+  in Word, Excel, PowerPoint, Outlook, Teams, plus business chat with grounding on Microsoft
+  Graph. Microsoft 365 Copilot Business (a slimmer SMB SKU for Business Basic/Standard/Premium)
+  is also offered. Pay-as-you-go per-message billing exists for Copilot Studio and certain
+  agent SKUs.
+sources:
+  - https://www.microsoft.com/microsoft-365-copilot
+  - https://learn.microsoft.com/en-us/microsoft-365-copilot/microsoft-365-copilot-licensing
+  - https://www.microsoft.com/microsoft-copilot/copilot-pro
 plans:
-  - id: microsoft-copilot-free
-    name: Free
+  - id: microsoft-copilot-chat-free
+    name: Copilot Chat (Free, Web-Grounded)
     type: freemium
-    description: Free entry tier for the Microsoft Copilot API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Web-based chat experience automatically included with eligible Microsoft 365
+      subscriptions. Grounds on public web data; does not access tenant data.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Web chat
+        name: web_chat
         type: quota
-        metric: requests
-        limit: 1000
+        metric: user-month
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
         unit: 1
         price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
+        userMultiplied: true
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Microsoft Copilot API
-      - name: Microsoft Graph API (Copilot Integration)
-      - name: Microsoft 365 Copilot APIs
-      - name: Microsoft 365 Copilot Connectors API
-      - name: Microsoft Copilot Studio API
-  - id: microsoft-copilot-pro
-    name: Professional
-    type: paid
-    description: Production tier for Microsoft Copilot. Provides higher quotas, priority support, and
-      access to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Web grounding
+      - name: No tenant-data access
+      - name: Auto-included with eligible M365 plan
+  - id: microsoft-copilot-pro-consumer
+    name: Copilot Pro (Consumer)
+    type: subscription
+    description: Consumer subscription for individuals — priority access to GPT-class models
+      in Copilot, Copilot in Word/Excel/PowerPoint/Outlook for Microsoft 365 Personal/Family
+      subscribers, image generation boosts.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
+      - label: Per user per month
+        name: copilot_pro_seat
+        type: subscription
+        metric: user-month
+        limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
         unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
+        price: '$20 per user per month'
+        userMultiplied: true
+    elements:
+      - name: Priority model access
+      - name: Copilot in M365 desktop apps (with M365 Personal/Family)
+      - name: Image generation boosts
+  - id: microsoft-copilot-business
+    name: Microsoft 365 Copilot Business
+    type: subscription
+    description: SMB add-on for Microsoft 365 Business Basic / Standard / Premium / Apps for
+      Business. Tenant-grounded chat; lighter capability set than the enterprise Microsoft
+      365 Copilot SKU.
+    entries:
+      - label: Per user per month
+        name: m365_copilot_business_seat
+        type: subscription
+        metric: user-month
+        limit: -1
+        timeFrame: month
         geo: global
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
         unit: 1
-        price: '0.00'
+        price: see vendor — varies by program; typically lower than the $30 enterprise SKU
+        userMultiplied: true
+    elements:
+      - name: Tenant-grounded chat
+      - name: Copilot in Outlook / Teams / Office apps
+      - name: SMB-targeted
+  - id: microsoft-copilot-m365-enterprise
+    name: Microsoft 365 Copilot (Enterprise Add-On)
+    type: subscription
+    description: Per-user-per-month add-on for enterprise plans (M365 E3/E5, A3/A5, F1/F3,
+      G3/G5). Annual commitment. Grounding on Microsoft Graph; Copilot in all Office apps and
+      Teams; Business Chat (BizChat) for tenant-wide search/summarize/draft.
+    entries:
+      - label: Per user per month (annual commitment)
+        name: m365_copilot_enterprise_seat
+        type: subscription
+        metric: user-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$30 per user per month'
+        userMultiplied: true
+    elements:
+      - name: Copilot in Word / Excel / PowerPoint / Outlook / Teams / OneNote / Loop
+      - name: Business Chat (BizChat) grounded on Microsoft Graph
+      - name: Copilot Studio inclusion (limited credits)
+      - name: Microsoft Graph + SharePoint grounding
+      - name: EU Data Boundary support
+      - name: Available for GCC, GCC-High, DoD as add-on to G3/G5/F1
+  - id: microsoft-copilot-studio
+    name: Copilot Studio (Pay-As-You-Go Messages)
+    type: usage-based
+    description: Build and deploy custom copilots / agents. Billed per message — generative
+      messages cost 2 credits, classifier 1 credit, etc. Credit packs sold per month.
+    entries:
+      - label: Message pack — 25,000 messages/month
+        name: copilot_studio_25k_pack
+        type: subscription
+        metric: month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$200 per tenant per month for 25,000 messages'
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Pay-as-you-go per message
+        name: copilot_studio_payg
         type: metered
-        metric: requests
+        metric: message
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '$0.01 per message (PAYG)'
+        userMultiplied: false
+    elements:
+      - name: Build custom agents on Microsoft 365
+      - name: Connectors to enterprise data
+      - name: Telemetry via Azure Monitor
+  - id: microsoft-copilot-github
+    name: GitHub Copilot (Developer Coding)
+    type: subscription
+    description: Developer-focused AI pair programmer. Available as Individual ($10/mo or
+      $100/yr), Business ($19/seat/mo), and Enterprise ($39/seat/mo).
+    entries:
+      - label: GitHub Copilot Individual
+        name: gh_copilot_individual
+        type: subscription
+        metric: user-month
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Microsoft Copilot API
-      - name: Microsoft Graph API (Copilot Integration)
-      - name: Microsoft 365 Copilot APIs
-      - name: Microsoft 365 Copilot Connectors API
-      - name: Microsoft Copilot Studio API
-  - id: microsoft-copilot-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Microsoft Copilot. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+        unit: 1
+        price: '$10 per user per month or $100/year'
+        userMultiplied: true
+      - label: GitHub Copilot Business
+        name: gh_copilot_business
+        type: subscription
+        metric: user-month
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://api.copilot.microsoft.com
-          - https://graph.microsoft.com/v1.0
-          - https://graph.microsoft.com/v1.0/copilot
-          - https://directline.botframework.com
+        price: '$19 per user per month'
+        userMultiplied: true
+      - label: GitHub Copilot Enterprise
+        name: gh_copilot_enterprise
+        type: subscription
+        metric: user-month
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$39 per user per month'
+        userMultiplied: true
+    elements:
+      - name: Code completion in IDE
+      - name: Copilot Chat in IDE
+      - name: PR summaries (Enterprise)
+  - id: microsoft-copilot-enterprise-volume
+    name: Enterprise Agreement / Volume
+    type: enterprise
+    description: Negotiated rates via EA / MCA / CSP, often bundled with broader Microsoft 365
+      / Power Platform ELAs.
+    entries:
+      - label: Negotiated rate
+        name: ea_negotiated
+        type: subscription
+        metric: contract
+        limit: -1
+        timeFrame: month
+        geo: global
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Microsoft Copilot API
-      - name: Microsoft Graph API (Copilot Integration)
-      - name: Microsoft 365 Copilot APIs
-      - name: Microsoft 365 Copilot Connectors API
-      - name: Microsoft Copilot Studio API
+      - name: Volume discount
+      - name: Bundled with M365 ELA
+      - name: Dedicated technical account management
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://www.microsoft.com/microsoft-365-copilot
