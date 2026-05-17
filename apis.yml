@@ -8,7 +8,7 @@ url: https://copilot.microsoft.com
 created: '2024-01-15'
 modified: '2026-04-18'
 specificationVersion: '0.18'
-type: Contract
+kind: contract
 access: 3rd-Party
 tags:
   - Agents
