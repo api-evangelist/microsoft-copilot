@@ -1,0 +1,34 @@
+{
+  "operationId": "copilot.changeNotifications.createSubscription",
+  "method": "POST",
+  "path": "/subscriptions",
+  "summary": "Microsoft Copilot Create Subscription for Copilot Interaction Notifications",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "copilotInteractionSubscription",
+      "example": {
+        "changeType": "created",
+        "notificationUrl": "https://contoso.azurewebsites.net/api/notifications",
+        "resource": "/copilot/interactionHistory/getAllEnterpriseInteractions",
+        "expirationDateTime": "2025-04-01T11:00:00.0000000Z",
+        "clientState": "secretClientState"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "201",
+      "contentType": "application/json",
+      "name": "CopilotChangenotificationsCreatesubscription201Example",
+      "example": {
+        "id": "abc123",
+        "resource": "example_value",
+        "changeType": "example_value",
+        "notificationUrl": "https://www.example.com",
+        "expirationDateTime": "2026-01-15T10:30:00Z",
+        "clientState": "example_value"
+      }
+    }
+  ]
+}

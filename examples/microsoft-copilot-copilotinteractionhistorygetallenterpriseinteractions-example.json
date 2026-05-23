@@ -1,0 +1,35 @@
+{
+  "operationId": "copilot.interactionHistory.getAllEnterpriseInteractions",
+  "method": "GET",
+  "path": "/copilot/interactionHistory/getAllEnterpriseInteractions",
+  "summary": "Microsoft Copilot List All Enterprise Copilot Interactions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "CopilotInteractionhistoryGetallenterpriseinteractions200Example",
+      "example": {
+        "@odata.context": "example_value",
+        "@odata.nextLink": "https://www.example.com",
+        "value": [
+          {
+            "id": "abc123",
+            "appClass": "example_value",
+            "interactionType": "userPrompt",
+            "conversationType": "example_value",
+            "requestId": "500123",
+            "sessionId": "500123",
+            "createdDateTime": "2026-01-15T10:30:00Z",
+            "etag": "example_value",
+            "locale": "example_value",
+            "attachments": {},
+            "contexts": {},
+            "links": {},
+            "mentions": {}
+          }
+        ]
+      }
+    }
+  ]
+}

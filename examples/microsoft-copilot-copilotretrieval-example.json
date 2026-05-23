@@ -1,0 +1,95 @@
+{
+  "operationId": "copilot.retrieval",
+  "method": "POST",
+  "path": "/copilot/retrieval",
+  "summary": "Microsoft Copilot Retrieve Grounding Data",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "sharePointRetrieval",
+      "example": {
+        "queryString": "How to setup corporate VPN?",
+        "dataSource": "sharePoint",
+        "resourceMetadata": [
+          "title",
+          "author"
+        ],
+        "maximumNumberOfResults": 10
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "filteredRetrieval",
+      "example": {
+        "queryString": "How to setup corporate VPN?",
+        "dataSource": "sharePoint",
+        "filterExpression": "path:\"https://contoso.sharepoint.com/sites/HR1/\"",
+        "resourceMetadata": [
+          "title",
+          "author"
+        ],
+        "maximumNumberOfResults": 4
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "connectorRetrieval",
+      "example": {
+        "queryString": "How to setup corporate VPN?",
+        "dataSource": "externalItem",
+        "dataSourceConfiguration": {
+          "externalItem": {
+            "connections": [
+              {
+                "connectionId": "ContosoITServiceNowKB"
+              },
+              {
+                "connectionId": "ContosoHRServiceNowKB"
+              }
+            ]
+          }
+        },
+        "resourceMetadata": [
+          "title",
+          "author"
+        ],
+        "maximumNumberOfResults": 10
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "sharePointResults",
+      "example": {
+        "retrievalHits": [
+          {
+            "webUrl": "https://contoso.sharepoint.com/sites/HR/VPNAccess.docx",
+            "extracts": [
+              {
+                "text": "To configure the VPN, click the Wi-Fi icon on your corporate device and select the VPN option.",
+                "relevanceScore": 0.8374363553387588
+              },
+              {
+                "text": "You will need to sign in with 2FA to access the corporate VPN.",
+                "relevanceScore": 0.746547264249868
+              }
+            ],
+            "resourceType": "listItem",
+            "resourceMetadata": {
+              "title": "VPN Access",
+              "author": "John Doe"
+            },
+            "sensitivityLabel": {
+              "sensitivityLabelId": "f71f1f74-bf1f-4e6b-b266-c777ea76e2s8",
+              "displayName": "Confidential\\Any User (No Protection)",
+              "priority": 4,
+              "color": "#FF8C00"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

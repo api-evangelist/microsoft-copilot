@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AiInteractionCollectionResponse",
+  "title": "AiInteractionCollectionResponse",
+  "type": "object",
+  "properties": {
+    "@odata.context": {
+      "type": "string",
+      "description": "OData context URL.",
+      "example": "example_value"
+    },
+    "@odata.nextLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to retrieve the next page of results.",
+      "example": "https://www.example.com"
+    },
+    "value": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/AiInteraction"
+      },
+      "example": []
+    }
+  }
+}

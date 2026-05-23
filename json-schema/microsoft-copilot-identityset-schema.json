@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IdentitySet",
+  "title": "IdentitySet",
+  "type": "object",
+  "description": "The user, application, or device associated with the interaction.",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the user."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user."
+        }
+      },
+      "example": "example_value"
+    },
+    "application": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the application."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the application."
+        }
+      },
+      "example": "example_value"
+    },
+    "device": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the device."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the device."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

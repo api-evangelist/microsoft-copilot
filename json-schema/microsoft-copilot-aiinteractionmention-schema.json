@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AiInteractionMention",
+  "title": "AiInteractionMention",
+  "type": "object",
+  "description": "Represents a mention of an entity in an AI interaction.",
+  "properties": {
+    "mentioned": {
+      "type": "object",
+      "description": "The entity mentioned in the message.",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "example": "example_value"
+    },
+    "mentionId": {
+      "type": "integer",
+      "description": "The identifier for the mention.",
+      "example": "500123"
+    },
+    "mentionText": {
+      "type": "string",
+      "description": "The text mentioned in the message.",
+      "example": "example_value"
+    }
+  }
+}

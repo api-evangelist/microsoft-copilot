@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatConversationRequest",
+  "title": "ChatConversationRequest",
+  "type": "object",
+  "required": [
+    "prompt"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Natural language prompt to send to Microsoft 365 Copilot to start a conversation.",
+      "example": "example_value"
+    },
+    "enableWebSearch": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to enable web search grounding for this message. Defaults to true. Must be toggled off per message if not desired.",
+      "example": true
+    },
+    "fileReferences": {
+      "type": "array",
+      "description": "Optional OneDrive and SharePoint file references to provide as additional context.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the file to reference."
+          }
+        }
+      },
+      "example": []
+    }
+  }
+}

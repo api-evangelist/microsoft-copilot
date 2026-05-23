@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RetrievalHit",
+  "title": "RetrievalHit",
+  "type": "object",
+  "properties": {
+    "webUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the source document.",
+      "example": "https://www.example.com"
+    },
+    "extracts": {
+      "type": "array",
+      "description": "Collection of relevant text extracts from the document.",
+      "items": {
+        "$ref": "#/components/schemas/RetrievalExtract"
+      },
+      "example": []
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).",
+      "enum": [
+        "listItem",
+        "externalItem"
+      ],
+      "example": "listItem"
+    },
+    "resourceMetadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.",
+      "example": "example_value"
+    },
+    "sensitivityLabel": {
+      "$ref": "#/components/schemas/SensitivityLabel"
+    }
+  }
+}

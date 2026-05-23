@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ItemBody",
+  "title": "ItemBody",
+  "type": "object",
+  "description": "The body of a message.",
+  "properties": {
+    "contentType": {
+      "type": "string",
+      "enum": [
+        "text",
+        "html"
+      ],
+      "description": "The type of the content.",
+      "example": "text"
+    },
+    "content": {
+      "type": "string",
+      "description": "The content of the body.",
+      "example": "example_value"
+    }
+  }
+}

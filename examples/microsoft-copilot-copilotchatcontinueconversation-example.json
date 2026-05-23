@@ -1,0 +1,35 @@
+{
+  "operationId": "copilot.chat.continueConversation",
+  "method": "POST",
+  "path": "/copilot/chat/conversations/{conversationId}/messages",
+  "summary": "Microsoft Copilot Continue a Chat Conversation",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "followUp",
+      "example": {
+        "prompt": "Can you provide more details on the revenue figures?"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "CopilotChatContinueconversation200Example",
+      "example": {
+        "message": {
+          "id": "abc123",
+          "body": {
+            "contentType": "example_value",
+            "content": "example_value"
+          },
+          "citations": [
+            {}
+          ],
+          "createdDateTime": "2026-01-15T10:30:00Z"
+        }
+      }
+    }
+  ]
+}

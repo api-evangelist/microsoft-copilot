@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatMessageRequest",
+  "title": "ChatMessageRequest",
+  "type": "object",
+  "required": [
+    "prompt"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "Natural language prompt to continue the conversation.",
+      "example": "example_value"
+    },
+    "enableWebSearch": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to enable web search grounding for this message.",
+      "example": true
+    }
+  }
+}

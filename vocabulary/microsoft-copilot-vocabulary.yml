@@ -1,0 +1,18 @@
+name: Microsoft Copilot Domain Vocabulary
+provider: Microsoft Copilot
+providerId: microsoft-copilot
+description: Tag-derived vocabulary for the Microsoft Copilot API surface; sourced from openapi/ tags.
+terms:
+- term: Change Notifications
+  description: Subscribe to change notifications for Copilot interactions across Microsoft 365.
+- term: Chat
+  description: Programmatically start and continue conversations with Microsoft 365 Copilot using enterprise search and web
+    search grounding. Preview API.
+- term: Interaction Export
+  description: Export and archive user interactions with Copilot across Microsoft 365 applications for compliance and auditing.
+- term: Retrieval
+  description: Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot connectors content for Retrieval Augmented
+    Generation (RAG) scenarios.
+- term: Search
+  description: Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language
+    queries. Preview API.

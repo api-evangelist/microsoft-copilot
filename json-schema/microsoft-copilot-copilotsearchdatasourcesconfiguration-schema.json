@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CopilotSearchDataSourcesConfiguration",
+  "title": "CopilotSearchDataSourcesConfiguration",
+  "type": "object",
+  "description": "Configuration for data sources to include in the search.",
+  "properties": {
+    "oneDrive": {
+      "type": "object",
+      "description": "OneDrive data source configuration.",
+      "properties": {
+        "filterExpression": {
+          "type": "string",
+          "description": "KQL expression to scope the search to specific OneDrive paths or properties."
+        },
+        "resourceMetadataNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of metadata field names to return for each search result."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

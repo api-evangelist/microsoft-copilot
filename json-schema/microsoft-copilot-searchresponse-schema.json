@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchResponse",
+  "title": "SearchResponse",
+  "type": "object",
+  "properties": {
+    "@odata.nextLink": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to retrieve the next page of results, if available.",
+      "example": "https://www.example.com"
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of matching results.",
+      "example": 10
+    },
+    "searchHits": {
+      "type": "array",
+      "description": "Collection of search result items.",
+      "items": {
+        "$ref": "#/components/schemas/SearchHit"
+      },
+      "example": []
+    }
+  }
+}

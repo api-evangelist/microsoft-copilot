@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataSourceConfiguration",
+  "title": "DataSourceConfiguration",
+  "type": "object",
+  "description": "Additional configuration for applicable data sources.",
+  "properties": {
+    "externalItem": {
+      "type": "object",
+      "description": "Configuration for Copilot connectors retrieval.",
+      "properties": {
+        "connections": {
+          "type": "array",
+          "description": "List of specific Copilot connector connections to retrieve from.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "connectionId": {
+                "type": "string",
+                "description": "The identifier of the Copilot connector connection."
+              }
+            }
+          }
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

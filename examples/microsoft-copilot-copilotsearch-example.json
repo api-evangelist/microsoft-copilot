@@ -1,0 +1,54 @@
+{
+  "operationId": "copilot.search",
+  "method": "POST",
+  "path": "/copilot/search",
+  "summary": "Microsoft Copilot Perform Hybrid Search",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "basicSearch",
+      "example": {
+        "query": "How to setup corporate VPN?"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "filteredSearch",
+      "example": {
+        "query": "quarterly budget analysis",
+        "pageSize": 2,
+        "dataSources": {
+          "oneDrive": {
+            "filterExpression": "path:\"https://contoso-my.sharepoint.com/personal/megan_contoso_com/Documents/Finance/\"",
+            "resourceMetadataNames": [
+              "title",
+              "author"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "basicResults",
+      "example": {
+        "totalCount": 2,
+        "searchHits": [
+          {
+            "webUrl": "https://contoso.sharepoint.com/sites/IT/VPNAccess.docx",
+            "preview": "To configure the VPN, click the Wi-Fi icon on your corporate device and select the VPN option...",
+            "resourceType": "driveItem"
+          },
+          {
+            "webUrl": "https://contoso.sharepoint.com/sites/IT/Corporate_VPN.docx",
+            "preview": "Once you have selected Corporate VPN under the VPN options, log in with your corporate credentials...",
+            "resourceType": "driveItem"
+          }
+        ]
+      }
+    }
+  ]
+}

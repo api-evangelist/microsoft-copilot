@@ -1,0 +1,236 @@
+{
+  "provider": "Microsoft Copilot",
+  "providerId": "microsoft-copilot",
+  "kind": "json-structure",
+  "description": "Structural overview of the Microsoft Copilot API surface; extracted from openapi/.",
+  "schemaCount": 26,
+  "operationCount": 6,
+  "schemas": [
+    {
+      "name": "RetrievalRequest",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "queryString",
+        "dataSource"
+      ]
+    },
+    {
+      "name": "DataSourceConfiguration",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "RetrievalResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "RetrievalHit",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "RetrievalExtract",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SensitivityLabel",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "SearchRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "query"
+      ]
+    },
+    {
+      "name": "CopilotSearchDataSourcesConfiguration",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "SearchResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SearchHit",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ChatConversationRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "prompt"
+      ]
+    },
+    {
+      "name": "ChatConversationResponse",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ChatMessageRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "prompt"
+      ]
+    },
+    {
+      "name": "ChatMessageResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ChatMessage",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "AiInteraction",
+      "type": "object",
+      "propertyCount": 15,
+      "required": []
+    },
+    {
+      "name": "AiInteractionAttachment",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "AiInteractionContext",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AiInteractionLink",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AiInteractionMention",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AiInteractionCollectionResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ItemBody",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "IdentitySet",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SubscriptionRequest",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "changeType",
+        "notificationUrl",
+        "resource",
+        "expirationDateTime"
+      ]
+    },
+    {
+      "name": "Subscription",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ODataError",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "POST",
+      "path": "/copilot/retrieval",
+      "operationId": "copilot.retrieval",
+      "summary": "Microsoft Copilot Retrieve Grounding Data",
+      "tags": [
+        "Retrieval"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/copilot/search",
+      "operationId": "copilot.search",
+      "summary": "Microsoft Copilot Perform Hybrid Search",
+      "tags": [
+        "Search"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/copilot/chat/conversations",
+      "operationId": "copilot.chat.startConversation",
+      "summary": "Microsoft Copilot Start a Chat Conversation",
+      "tags": [
+        "Chat"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/copilot/chat/conversations/{conversationId}/messages",
+      "operationId": "copilot.chat.continueConversation",
+      "summary": "Microsoft Copilot Continue a Chat Conversation",
+      "tags": [
+        "Chat"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/copilot/interactionHistory/getAllEnterpriseInteractions",
+      "operationId": "copilot.interactionHistory.getAllEnterpriseInteractions",
+      "summary": "Microsoft Copilot List All Enterprise Copilot Interactions",
+      "tags": [
+        "Interaction Export"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions",
+      "operationId": "copilot.changeNotifications.createSubscription",
+      "summary": "Microsoft Copilot Create Subscription for Copilot Interaction Notifications",
+      "tags": [
+        "Change Notifications"
+      ]
+    }
+  ]
+}

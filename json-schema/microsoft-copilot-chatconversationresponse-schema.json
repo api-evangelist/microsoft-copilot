@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChatConversationResponse",
+  "title": "ChatConversationResponse",
+  "type": "object",
+  "properties": {
+    "conversationId": {
+      "type": "string",
+      "description": "The unique identifier for the conversation for multi-turn use.",
+      "example": "500123"
+    },
+    "message": {
+      "$ref": "#/components/schemas/ChatMessage"
+    }
+  }
+}

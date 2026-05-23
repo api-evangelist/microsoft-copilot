@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchHit",
+  "title": "SearchHit",
+  "type": "object",
+  "properties": {
+    "webUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the matching document.",
+      "example": "https://www.example.com"
+    },
+    "preview": {
+      "type": "string",
+      "description": "A preview snippet of the matching content.",
+      "example": "example_value"
+    },
+    "resourceType": {
+      "type": "string",
+      "description": "The type of resource (e.g., driveItem).",
+      "example": "example_value"
+    },
+    "resourceMetadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Metadata fields for the resource, if requested.",
+      "example": "example_value"
+    }
+  }
+}

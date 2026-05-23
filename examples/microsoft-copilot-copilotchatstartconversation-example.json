@@ -1,0 +1,44 @@
+{
+  "operationId": "copilot.chat.startConversation",
+  "method": "POST",
+  "path": "/copilot/chat/conversations",
+  "summary": "Microsoft Copilot Start a Chat Conversation",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "startConversation",
+      "example": {
+        "prompt": "What are the key highlights from last quarter's financial report?"
+      }
+    },
+    {
+      "contentType": "application/json",
+      "name": "conversationWithOptions",
+      "example": {
+        "prompt": "Summarize the latest HR policy changes",
+        "enableWebSearch": false
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "CopilotChatStartconversation200Example",
+      "example": {
+        "conversationId": "500123",
+        "message": {
+          "id": "abc123",
+          "body": {
+            "contentType": "example_value",
+            "content": "example_value"
+          },
+          "citations": [
+            {}
+          ],
+          "createdDateTime": "2026-01-15T10:30:00Z"
+        }
+      }
+    }
+  ]
+}

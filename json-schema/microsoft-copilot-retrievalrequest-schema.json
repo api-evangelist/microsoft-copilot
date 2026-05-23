@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RetrievalRequest",
+  "title": "RetrievalRequest",
+  "type": "object",
+  "required": [
+    "queryString",
+    "dataSource"
+  ],
+  "properties": {
+    "queryString": {
+      "type": "string",
+      "maxLength": 1500,
+      "description": "Natural language query string used to retrieve relevant text extracts. Should be a single sentence. Avoid spelling errors in context-rich keywords.",
+      "example": "example_value"
+    },
+    "dataSource": {
+      "type": "string",
+      "enum": [
+        "sharePoint",
+        "oneDriveBusiness",
+        "externalItem"
+      ],
+      "description": "Indicates whether extracts should be retrieved from SharePoint, OneDrive, or Copilot connectors.",
+      "example": "sharePoint"
+    },
+    "dataSourceConfiguration": {
+      "$ref": "#/components/schemas/DataSourceConfiguration"
+    },
+    "filterExpression": {
+      "type": "string",
+      "description": "Keyword Query Language (KQL) expression with queryable properties to scope retrieval. Supports AND, OR, NOT, and inequality operators. Supported SharePoint/OneDrive properties include Author, FileExtension, Filename, FileType, InformationProtectionLabelId, LastModifiedTime, ModifiedBy, Path, SiteID, and Title.",
+      "example": "example_value"
+    },
+    "resourceMetadata": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of metadata fields to return for each item. Only retrievable metadata properties can be included. By default, no metadata is returned.",
+      "example": []
+    },
+    "maximumNumberOfResults": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 25,
+      "default": 25,
+      "description": "Number of results to return. Must be between 1 and 25. Defaults to 25.",
+      "example": 10
+    }
+  }
+}
