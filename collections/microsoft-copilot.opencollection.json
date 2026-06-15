@@ -1,0 +1,272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieval",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Copilot Retrieve Grounding Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/copilot/retrieval",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve relevant text extracts from SharePoint, OneDrive, and Copilot connectors content that the calling user has access to, while respecting defined access controls within the tenant. Use this endpoint to ground generative AI solutions with Microsoft 365 data while optimizing for context recall. Results include text snippets with relevance scores, sensitivity labels, and optional resource metadata."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Copilot Perform Hybrid Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/copilot/search",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language queries with contextual understanding and intelligent results. Discover relevant documents and files while respecting defined access controls within the organization. This API is currently in preview."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Copilot Start a Chat Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/copilot/chat/conversations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Start a new multi-turn conversation with Microsoft 365 Copilot. The Chat API allows you to programmatically engage in conversations using enterprise search grounding and web search grounding. Responses are grounded in Microsoft 365 data and web content while respecting all existing permissions and compliance controls. This API is currently in preview."
+        },
+        {
+          "info": {
+            "name": "Microsoft Copilot Continue a Chat Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/copilot/chat/conversations/:conversationId/messages",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "conversationId",
+                "value": "500123",
+                "type": "path",
+                "description": "The unique identifier of the conversation to continue."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Send a follow-up message in an existing multi-turn conversation with Microsoft 365 Copilot. Uses the conversation context from prior turns to provide more relevant and contextual responses."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Interaction Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Copilot List All Enterprise Copilot Interactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://graph.microsoft.com/v1.0/copilot/interactionHistory/getAllEnterpriseInteractions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "$filter",
+                "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z",
+                "type": "query",
+                "description": "OData filter expression to filter interactions by date range, user, or application."
+              },
+              {
+                "name": "$top",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of interactions to return per page."
+              },
+              {
+                "name": "$skipToken",
+                "value": "example_value",
+                "type": "query",
+                "description": "Pagination token for retrieving the next page of results."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve all Copilot interactions across the organization for compliance and auditing purposes. Returns aiInteraction objects representing user prompts and Copilot responses across Microsoft 365 applications. Requires compliance administrator permissions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Change Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Microsoft Copilot Create Subscription for Copilot Interaction Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://graph.microsoft.com/v1.0/subscriptions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "accessTokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create a change notification subscription to monitor Copilot interactions across Microsoft 365 in real time. Enables proactive compliance checks, anomaly detection, and auditing of AI interactions. The resource path for Copilot interactions is /copilot/interactionHistory/getAllEnterpriseInteractions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
