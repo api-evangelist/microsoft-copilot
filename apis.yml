@@ -78,7 +78,7 @@ apis:
       - type: Documentation
         url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
         title: Chat API
-      - type: SDK
+      - type: SDKs
         url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
       - type: OpenAPI
         url: openapi/microsoft-copilot-openapi.yml
@@ -105,7 +105,7 @@ apis:
         title: Connectors API Reference
       - type: GettingStarted
         url: https://learn.microsoft.com/en-us/graph/custom-connector-sdk-sample-overview
-      - type: SDK
+      - type: SDKs
         url: https://learn.microsoft.com/en-us/graph/custom-connector-sdk-overview
   - name: Microsoft Copilot Studio API
     description: >-
@@ -154,7 +154,7 @@ common:
     url: https://status.microsoft.com
   - type: Portal
     url: https://developer.microsoft.com/en-us/microsoft-365/copilot
-  - type: SDK
+  - type: SDKs
     url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries
   - type: CodeExamples
     url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/samples
