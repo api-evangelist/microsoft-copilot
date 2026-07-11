@@ -134,6 +134,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/microsoft-copilot-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/microsoft-copilot-domain-security.yml
+  - type: Authentication
+    url: authentication/microsoft-copilot-authentication.yml
   - type: OAuthScopes
     url: scopes/microsoft-copilot-scopes.yml
   - type: LinkedIn
