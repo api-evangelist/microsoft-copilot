@@ -1,0 +1,43 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/microsoft-copilot-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/microsoft-copilot-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+    tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+  description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires
+    a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+scopes:
+- scope: AIInteraction.Read.All
+  description: Read all AI interactions for compliance
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-copilot-openapi.yml
+- scope: Chat.Read
+  description: Read user chat messages
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-copilot-openapi.yml
+- scope: ExternalItem.Read.All
+  description: Read external items from Copilot connectors
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-copilot-openapi.yml
+- scope: Files.Read.All
+  description: Read all files the user can access
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-copilot-openapi.yml
+- scope: Sites.Read.All
+  description: Read items in all site collections
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/microsoft-copilot-openapi.yml
