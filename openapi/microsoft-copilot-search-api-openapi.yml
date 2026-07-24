@@ -1,0 +1,244 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Search API
+  description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 (production)
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
+security:
+- oauth2: []
+tags:
+- name: Search
+  description: Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language queries. Preview API.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/overview
+paths:
+  /copilot/search:
+    post:
+      operationId: copilot.search
+      summary: Microsoft Copilot Perform Hybrid Search
+      description: Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language queries with contextual understanding and intelligent results. Discover relevant documents and files while respecting defined access controls within the organization. This API is currently in preview.
+      tags:
+      - Search
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/search/copilotroot-search
+      security:
+      - oauth2:
+        - Files.Read.All
+        - Sites.Read.All
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+            examples:
+              basicSearch:
+                summary: Basic search request
+                value:
+                  query: How to setup corporate VPN?
+              filteredSearch:
+                summary: Search with path filtering and metadata
+                value:
+                  query: quarterly budget analysis
+                  pageSize: 2
+                  dataSources:
+                    oneDrive:
+                      filterExpression: path:"https://contoso-my.sharepoint.com/personal/megan_contoso_com/Documents/Finance/"
+                      resourceMetadataNames:
+                      - title
+                      - author
+      responses:
+        '200':
+          description: Search results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+              examples:
+                basicResults:
+                  summary: Basic search results
+                  value:
+                    totalCount: 2
+                    searchHits:
+                    - webUrl: https://contoso.sharepoint.com/sites/IT/VPNAccess.docx
+                      preview: To configure the VPN, click the Wi-Fi icon on your corporate device and select the VPN option...
+                      resourceType: driveItem
+                    - webUrl: https://contoso.sharepoint.com/sites/IT/Corporate_VPN.docx
+                      preview: Once you have selected Corporate VPN under the VPN options, log in with your corporate credentials...
+                      resourceType: driveItem
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  schemas:
+    SearchResponse:
+      type: object
+      properties:
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results, if available.
+          example: https://www.example.com
+        totalCount:
+          type: integer
+          description: Total number of matching results.
+          example: 10
+        searchHits:
+          type: array
+          description: Collection of search result items.
+          items:
+            $ref: '#/components/schemas/SearchHit'
+          example: []
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+    CopilotSearchDataSourcesConfiguration:
+      type: object
+      description: Configuration for data sources to include in the search.
+      properties:
+        oneDrive:
+          type: object
+          description: OneDrive data source configuration.
+          properties:
+            filterExpression:
+              type: string
+              description: KQL expression to scope the search to specific OneDrive paths or properties.
+            resourceMetadataNames:
+              type: array
+              items:
+                type: string
+              description: List of metadata field names to return for each search result.
+          example: example_value
+    SearchRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          maxLength: 1500
+          description: Natural language query to search for relevant files.
+          example: example_value
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+          description: Number of results to return per page (1-100). Default is 25.
+          example: 10
+        dataSources:
+          $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
+    SearchHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the matching document.
+          example: https://www.example.com
+        preview:
+          type: string
+          description: A preview snippet of the matching content.
+          example: example_value
+        resourceType:
+          type: string
+          description: The type of resource (e.g., driveItem).
+          example: example_value
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, if requested.
+          example: example_value
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview

@@ -1,0 +1,326 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Retrieval API
+  description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 (production)
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
+security:
+- oauth2: []
+tags:
+- name: Retrieval
+  description: Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot connectors content for Retrieval Augmented Generation (RAG) scenarios.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview
+paths:
+  /copilot/retrieval:
+    post:
+      operationId: copilot.retrieval
+      summary: Microsoft Copilot Retrieve Grounding Data
+      description: Retrieve relevant text extracts from SharePoint, OneDrive, and Copilot connectors content that the calling user has access to, while respecting defined access controls within the tenant. Use this endpoint to ground generative AI solutions with Microsoft 365 data while optimizing for context recall. Results include text snippets with relevance scores, sensitivity labels, and optional resource metadata.
+      tags:
+      - Retrieval
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/copilotroot-retrieval
+      security:
+      - oauth2:
+        - Files.Read.All
+        - Sites.Read.All
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalRequest'
+            examples:
+              sharePointRetrieval:
+                summary: Retrieve from SharePoint with metadata
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: sharePoint
+                  resourceMetadata:
+                  - title
+                  - author
+                  maximumNumberOfResults: 10
+              filteredRetrieval:
+                summary: Retrieve from a specific SharePoint site
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: sharePoint
+                  filterExpression: path:"https://contoso.sharepoint.com/sites/HR1/"
+                  resourceMetadata:
+                  - title
+                  - author
+                  maximumNumberOfResults: 4
+              connectorRetrieval:
+                summary: Retrieve from Copilot connectors
+                value:
+                  queryString: How to setup corporate VPN?
+                  dataSource: externalItem
+                  dataSourceConfiguration:
+                    externalItem:
+                      connections:
+                      - connectionId: ContosoITServiceNowKB
+                      - connectionId: ContosoHRServiceNowKB
+                  resourceMetadata:
+                  - title
+                  - author
+                  maximumNumberOfResults: 10
+      responses:
+        '200':
+          description: Retrieval results returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+              examples:
+                sharePointResults:
+                  summary: SharePoint retrieval results
+                  value:
+                    retrievalHits:
+                    - webUrl: https://contoso.sharepoint.com/sites/HR/VPNAccess.docx
+                      extracts:
+                      - text: To configure the VPN, click the Wi-Fi icon on your corporate device and select the VPN option.
+                        relevanceScore: 0.8374363553387588
+                      - text: You will need to sign in with 2FA to access the corporate VPN.
+                        relevanceScore: 0.746547264249868
+                      resourceType: listItem
+                      resourceMetadata:
+                        title: VPN Access
+                        author: John Doe
+                      sensitivityLabel:
+                        sensitivityLabelId: f71f1f74-bf1f-4e6b-b266-c777ea76e2s8
+                        displayName: Confidential\Any User (No Protection)
+                        priority: 4
+                        color: '#FF8C00'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  schemas:
+    SensitivityLabel:
+      type: object
+      description: Information protection sensitivity label applied to the document.
+      properties:
+        sensitivityLabelId:
+          type: string
+          description: The unique identifier of the sensitivity label.
+          example: '500123'
+        displayName:
+          type: string
+          description: The display name of the sensitivity label.
+          example: example_value
+        toolTip:
+          type: string
+          description: Tooltip text describing the sensitivity label.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority of the sensitivity label.
+          example: 10
+        color:
+          type: string
+          description: The color code associated with the sensitivity label.
+          example: example_value
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+    RetrievalExtract:
+      type: object
+      properties:
+        text:
+          type: string
+          description: The relevant text extract from the document.
+          example: example_value
+        relevanceScore:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Cosine similarity between the queryString and the extract, normalized to the 0-1 range. May be absent for Copilot connectors results.
+          example: 42.5
+    RetrievalRequest:
+      type: object
+      required:
+      - queryString
+      - dataSource
+      properties:
+        queryString:
+          type: string
+          maxLength: 1500
+          description: Natural language query string used to retrieve relevant text extracts. Should be a single sentence. Avoid spelling errors in context-rich keywords.
+          example: example_value
+        dataSource:
+          type: string
+          enum:
+          - sharePoint
+          - oneDriveBusiness
+          - externalItem
+          description: Indicates whether extracts should be retrieved from SharePoint, OneDrive, or Copilot connectors.
+          example: sharePoint
+        dataSourceConfiguration:
+          $ref: '#/components/schemas/DataSourceConfiguration'
+        filterExpression:
+          type: string
+          description: Keyword Query Language (KQL) expression with queryable properties to scope retrieval. Supports AND, OR, NOT, and inequality operators. Supported SharePoint/OneDrive properties include Author, FileExtension, Filename, FileType, InformationProtectionLabelId, LastModifiedTime, ModifiedBy, Path, SiteID, and Title.
+          example: example_value
+        resourceMetadata:
+          type: array
+          items:
+            type: string
+          description: List of metadata fields to return for each item. Only retrievable metadata properties can be included. By default, no metadata is returned.
+          example: []
+        maximumNumberOfResults:
+          type: integer
+          minimum: 1
+          maximum: 25
+          default: 25
+          description: Number of results to return. Must be between 1 and 25. Defaults to 25.
+          example: 10
+    RetrievalHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the source document.
+          example: https://www.example.com
+        extracts:
+          type: array
+          description: Collection of relevant text extracts from the document.
+          items:
+            $ref: '#/components/schemas/RetrievalExtract'
+          example: []
+        resourceType:
+          type: string
+          description: The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).
+          enum:
+          - listItem
+          - externalItem
+          example: listItem
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.
+          example: example_value
+        sensitivityLabel:
+          $ref: '#/components/schemas/SensitivityLabel'
+    RetrievalResponse:
+      type: object
+      properties:
+        retrievalHits:
+          type: array
+          description: Collection of retrieval results with text extracts.
+          items:
+            $ref: '#/components/schemas/RetrievalHit'
+          example: []
+    DataSourceConfiguration:
+      type: object
+      description: Additional configuration for applicable data sources.
+      properties:
+        externalItem:
+          type: object
+          description: Configuration for Copilot connectors retrieval.
+          properties:
+            connections:
+              type: array
+              description: List of specific Copilot connector connections to retrieve from.
+              items:
+                type: object
+                properties:
+                  connectionId:
+                    type: string
+                    description: The identifier of the Copilot connector connection.
+          example: example_value
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview

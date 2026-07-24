@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications API
+  description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 (production)
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
+security:
+- oauth2: []
+tags:
+- name: Change Notifications
+  description: Subscribe to change notifications for Copilot interactions across Microsoft 365.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
+paths:
+  /subscriptions:
+    post:
+      operationId: copilot.changeNotifications.createSubscription
+      summary: Microsoft Copilot Create Subscription for Copilot Interaction Notifications
+      description: Create a change notification subscription to monitor Copilot interactions across Microsoft 365 in real time. Enables proactive compliance checks, anomaly detection, and auditing of AI interactions. The resource path for Copilot interactions is /copilot/interactionHistory/getAllEnterpriseInteractions.
+      tags:
+      - Change Notifications
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/change-notifications/aiinteraction-changenotifications
+      security:
+      - oauth2:
+        - AIInteraction.Read.All
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionRequest'
+            examples:
+              copilotInteractionSubscription:
+                summary: Subscribe to Copilot interaction changes
+                value:
+                  changeType: created
+                  notificationUrl: https://contoso.azurewebsites.net/api/notifications
+                  resource: /copilot/interactionHistory/getAllEnterpriseInteractions
+                  expirationDateTime: '2025-04-01T11:00:00.0000000Z'
+                  clientState: secretClientState
+      responses:
+        '201':
+          description: Subscription created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                CopilotChangenotificationsCreatesubscription201Example:
+                  summary: Default copilot.changeNotifications.createSubscription 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    resource: example_value
+                    changeType: example_value
+                    notificationUrl: https://www.example.com
+                    expirationDateTime: '2026-01-15T10:30:00Z'
+                    clientState: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the subscription.
+          example: abc123
+        resource:
+          type: string
+          description: The resource being monitored.
+          example: example_value
+        changeType:
+          type: string
+          description: The type of change being monitored.
+          example: example_value
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL receiving notifications.
+          example: https://www.example.com
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: When the subscription expires.
+          example: '2026-01-15T10:30:00Z'
+        clientState:
+          type: string
+          description: The client state value for validation.
+          example: example_value
+    SubscriptionRequest:
+      type: object
+      required:
+      - changeType
+      - notificationUrl
+      - resource
+      - expirationDateTime
+      properties:
+        changeType:
+          type: string
+          description: The type of change to subscribe to.
+          enum:
+          - created
+          - updated
+          - deleted
+          example: created
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL to receive change notifications.
+          example: https://www.example.com
+        resource:
+          type: string
+          description: The resource path to subscribe to. For Copilot interactions use /copilot/interactionHistory/getAllEnterpriseInteractions.
+          example: example_value
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the subscription expires.
+          example: '2026-01-15T10:30:00Z'
+        clientState:
+          type: string
+          description: Optional client state value included in each notification for validation.
+          example: example_value
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview

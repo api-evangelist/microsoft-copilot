@@ -1,0 +1,396 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API
+  description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 (production)
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
+security:
+- oauth2: []
+tags:
+- name: Interaction Export
+  description: Export and archive user interactions with Copilot across Microsoft 365 applications for compliance and auditing.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/microsoftteams/export-teams-content
+paths:
+  /copilot/interactionHistory/getAllEnterpriseInteractions:
+    get:
+      operationId: copilot.interactionHistory.getAllEnterpriseInteractions
+      summary: Microsoft Copilot List All Enterprise Copilot Interactions
+      description: Retrieve all Copilot interactions across the organization for compliance and auditing purposes. Returns aiInteraction objects representing user prompts and Copilot responses across Microsoft 365 applications. Requires compliance administrator permissions.
+      tags:
+      - Interaction Export
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoftteams/export-teams-content
+      security:
+      - oauth2:
+        - AIInteraction.Read.All
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      - name: $filter
+        in: query
+        description: OData filter expression to filter interactions by date range, user, or application.
+        schema:
+          type: string
+        example: createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z
+      - name: $top
+        in: query
+        description: Maximum number of interactions to return per page.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 999
+          default: 50
+        example: 10
+      - name: $skipToken
+        in: query
+        description: Pagination token for retrieving the next page of results.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: List of Copilot interactions returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiInteractionCollectionResponse'
+              examples:
+                CopilotInteractionhistoryGetallenterpriseinteractions200Example:
+                  summary: Default copilot.interactionHistory.getAllEnterpriseInteractions 200 response
+                  x-microcks-default: true
+                  value:
+                    '@odata.context': example_value
+                    '@odata.nextLink': https://www.example.com
+                    value:
+                    - id: abc123
+                      appClass: example_value
+                      interactionType: userPrompt
+                      conversationType: example_value
+                      requestId: '500123'
+                      sessionId: '500123'
+                      createdDateTime: '2026-01-15T10:30:00Z'
+                      etag: example_value
+                      locale: example_value
+                      attachments: {}
+                      contexts: {}
+                      links: {}
+                      mentions: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  schemas:
+    AiInteractionLink:
+      type: object
+      description: Represents a link that appears in an AI interaction.
+      properties:
+        displayName:
+          type: string
+          description: The name of the link.
+          example: example_value
+        linkType:
+          type: string
+          description: Information about a link in an app chat or Business Chat (BizChat) interaction.
+          example: example_value
+        linkUrl:
+          type: string
+          format: uri
+          description: The URL of the link.
+          example: https://www.example.com
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+    AiInteraction:
+      type: object
+      description: Represents an interaction between a user and Copilot across Microsoft 365 applications.
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the interaction message.
+          example: abc123
+        appClass:
+          type: string
+          description: The data source for Copilot data. For example, IPM.SkypeTeams.Message.Copilot.Excel or IPM.SkypeTeams.Message.Copilot.Loop.
+          example: example_value
+        body:
+          $ref: '#/components/schemas/ItemBody'
+        interactionType:
+          type: string
+          enum:
+          - userPrompt
+          - aiResponse
+          - unknownFutureValue
+          description: Indicates whether the interaction is a user prompt or a Copilot response.
+          example: userPrompt
+        conversationType:
+          type: string
+          description: The type of the conversation (e.g., appchat, bizchat).
+          example: example_value
+        requestId:
+          type: string
+          description: Identifier that groups a user prompt with its corresponding Copilot response.
+          example: '500123'
+        sessionId:
+          type: string
+          description: Thread ID or conversation identifier that maps to all Copilot sessions for the user.
+          example: '500123'
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The time when the interaction was created.
+          example: '2026-01-15T10:30:00Z'
+        etag:
+          type: string
+          description: Timestamp of when the interaction was last modified.
+          example: example_value
+        locale:
+          type: string
+          description: The locale of the sender.
+          example: example_value
+        from:
+          $ref: '#/components/schemas/IdentitySet'
+        attachments:
+          type: array
+          description: Collection of documents attached to the interaction, such as cards and images.
+          items:
+            $ref: '#/components/schemas/AiInteractionAttachment'
+          example: []
+        contexts:
+          type: array
+          description: Identifiers that map to all contexts associated with the interaction.
+          items:
+            $ref: '#/components/schemas/AiInteractionContext'
+          example: []
+        links:
+          type: array
+          description: Collection of links that appear in the interaction.
+          items:
+            $ref: '#/components/schemas/AiInteractionLink'
+          example: []
+        mentions:
+          type: array
+          description: Collection of entities mentioned in the interaction, including users and bots.
+          items:
+            $ref: '#/components/schemas/AiInteractionMention'
+          example: []
+    AiInteractionMention:
+      type: object
+      description: Represents a mention of an entity in an AI interaction.
+      properties:
+        mentioned:
+          type: object
+          description: The entity mentioned in the message.
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                displayName:
+                  type: string
+          example: example_value
+        mentionId:
+          type: integer
+          description: The identifier for the mention.
+          example: '500123'
+        mentionText:
+          type: string
+          description: The text mentioned in the message.
+          example: example_value
+    AiInteractionContext:
+      type: object
+      description: Represents context associated with an interaction.
+      properties:
+        contextReference:
+          type: string
+          description: The full file URL where the interaction happened.
+          example: example_value
+        contextType:
+          type: string
+          description: The type of the file.
+          example: example_value
+        displayName:
+          type: string
+          description: The name of the file.
+          example: example_value
+    AiInteractionCollectionResponse:
+      type: object
+      properties:
+        '@odata.context':
+          type: string
+          description: OData context URL.
+          example: example_value
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results.
+          example: https://www.example.com
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiInteraction'
+          example: []
+    IdentitySet:
+      type: object
+      description: The user, application, or device associated with the interaction.
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the user.
+            displayName:
+              type: string
+              description: The display name of the user.
+          example: example_value
+        application:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the application.
+            displayName:
+              type: string
+              description: The display name of the application.
+          example: example_value
+        device:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the device.
+            displayName:
+              type: string
+              description: The display name of the device.
+          example: example_value
+    ItemBody:
+      type: object
+      description: The body of a message.
+      properties:
+        contentType:
+          type: string
+          enum:
+          - text
+          - html
+          description: The type of the content.
+          example: text
+        content:
+          type: string
+          description: The content of the body.
+          example: example_value
+    AiInteractionAttachment:
+      type: object
+      description: Represents a message attachment such as cards and images.
+      properties:
+        attachmentId:
+          type: string
+          description: Identifier for the attachment, unique only within the message scope.
+          example: '500123'
+        content:
+          type: string
+          description: The content of the attachment.
+          example: example_value
+        contentType:
+          type: string
+          description: The type of the content (e.g., reference, file, image/imageType).
+          example: example_value
+        contentUrl:
+          type: string
+          format: uri
+          description: The URL of the content.
+          example: https://www.example.com
+        name:
+          type: string
+          description: The name of the attachment.
+          example: Example Title
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview

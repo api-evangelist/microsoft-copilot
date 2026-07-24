@@ -1,0 +1,316 @@
+openapi: 3.1.0
+info:
+  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Chat API
+  description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
+  version: 1.0.0
+  contact:
+    name: Microsoft Graph Support
+    url: https://learn.microsoft.com/en-us/graph/overview
+  license:
+    name: Microsoft API Terms of Use
+    url: https://learn.microsoft.com/en-us/legal/microsoft-apis/terms-of-use
+  termsOfService: https://learn.microsoft.com/en-us/legal/m365-copilot-apis/terms-of-use
+servers:
+- url: https://graph.microsoft.com/v1.0
+  description: Microsoft Graph v1.0 (production)
+- url: https://graph.microsoft.com/beta
+  description: Microsoft Graph beta (preview)
+security:
+- oauth2: []
+tags:
+- name: Chat
+  description: Programmatically start and continue conversations with Microsoft 365 Copilot using enterprise search and web search grounding. Preview API.
+  externalDocs:
+    url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
+paths:
+  /copilot/chat/conversations:
+    post:
+      operationId: copilot.chat.startConversation
+      summary: Microsoft Copilot Start a Chat Conversation
+      description: Start a new multi-turn conversation with Microsoft 365 Copilot. The Chat API allows you to programmatically engage in conversations using enterprise search grounding and web search grounding. Responses are grounded in Microsoft 365 data and web content while respecting all existing permissions and compliance controls. This API is currently in preview.
+      tags:
+      - Chat
+      externalDocs:
+        url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview
+      security:
+      - oauth2:
+        - Chat.Read
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatConversationRequest'
+            examples:
+              startConversation:
+                summary: Start a new conversation
+                value:
+                  prompt: What are the key highlights from last quarter's financial report?
+              conversationWithOptions:
+                summary: Start conversation with web search disabled
+                value:
+                  prompt: Summarize the latest HR policy changes
+                  enableWebSearch: false
+      responses:
+        '200':
+          description: Conversation started and response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatConversationResponse'
+              examples:
+                CopilotChatStartconversation200Example:
+                  summary: Default copilot.chat.startConversation 200 response
+                  x-microcks-default: true
+                  value:
+                    conversationId: '500123'
+                    message:
+                      id: abc123
+                      body:
+                        contentType: example_value
+                        content: example_value
+                      citations:
+                      - {}
+                      createdDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /copilot/chat/conversations/{conversationId}/messages:
+    post:
+      operationId: copilot.chat.continueConversation
+      summary: Microsoft Copilot Continue a Chat Conversation
+      description: Send a follow-up message in an existing multi-turn conversation with Microsoft 365 Copilot. Uses the conversation context from prior turns to provide more relevant and contextual responses.
+      tags:
+      - Chat
+      security:
+      - oauth2:
+        - Chat.Read
+      parameters:
+      - $ref: '#/components/parameters/authorizationHeader'
+      - name: conversationId
+        in: path
+        required: true
+        description: The unique identifier of the conversation to continue.
+        schema:
+          type: string
+        example: '500123'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessageRequest'
+            examples:
+              followUp:
+                summary: Send a follow-up message
+                value:
+                  prompt: Can you provide more details on the revenue figures?
+      responses:
+        '200':
+          description: Message sent and response returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessageResponse'
+              examples:
+                CopilotChatContinueconversation200Example:
+                  summary: Default copilot.chat.continueConversation 200 response
+                  x-microcks-default: true
+                  value:
+                    message:
+                      id: abc123
+                      body:
+                        contentType: example_value
+                        content: example_value
+                      citations:
+                      - {}
+                      createdDateTime: '2026-01-15T10:30:00Z'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+  schemas:
+    ChatMessageRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to continue the conversation.
+          example: example_value
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message.
+          example: true
+    ChatMessage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the message.
+          example: abc123
+        body:
+          type: object
+          properties:
+            contentType:
+              type: string
+              description: The content type of the body (e.g., text, html).
+            content:
+              type: string
+              description: The text content of the Copilot response.
+          example: example_value
+        citations:
+          type: array
+          description: Sources referenced in the Copilot response.
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The title of the cited source.
+              url:
+                type: string
+                format: uri
+                description: The URL of the cited source.
+              snippet:
+                type: string
+                description: A relevant snippet from the cited source.
+          example: []
+        createdDateTime:
+          type: string
+          format: date-time
+          description: The timestamp when the message was created.
+          example: '2026-01-15T10:30:00Z'
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+    ChatConversationResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          description: The unique identifier for the conversation for multi-turn use.
+          example: '500123'
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+    ChatMessageResponse:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+    ChatConversationRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to send to Microsoft 365 Copilot to start a conversation.
+          example: example_value
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message. Defaults to true. Must be toggled off per message if not desired.
+          example: true
+        fileReferences:
+          type: array
+          description: Optional OneDrive and SharePoint file references to provide as additional context.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: The URL of the file to reference.
+          example: []
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authorization using Microsoft identity platform (Azure AD). Requires a Microsoft 365 Copilot license for each user accessing Copilot API functionality.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+          tokenUrl: https://login.microsoftonline.com/common/oauth2/v2.0/token
+          scopes:
+            Files.Read.All: Read all files the user can access
+            Sites.Read.All: Read items in all site collections
+            ExternalItem.Read.All: Read external items from Copilot connectors
+            Chat.Read: Read user chat messages
+            AIInteraction.Read.All: Read all AI interactions for compliance
+externalDocs:
+  description: Microsoft 365 Copilot APIs Overview
+  url: https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview
