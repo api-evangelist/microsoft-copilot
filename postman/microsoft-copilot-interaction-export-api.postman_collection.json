@@ -1,0 +1,452 @@
+{
+  "info": {
+    "_postman_id": "f7116501-3cb8-4b65-bf2d-e87532f084ac",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API",
+    "description": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:54.000Z",
+    "updatedAt": "2026-07-28T02:10:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f7116501-3cb8-4b65-bf2d-e87532f084ac"
+  },
+  "item": [
+    {
+      "name": "copilot",
+      "item": [
+        {
+          "name": "interactionHistory",
+          "item": [
+            {
+              "name": "getAllEnterpriseInteractions",
+              "item": [
+                {
+                  "name": "Microsoft Copilot List All Enterprise Copilot Interactions",
+                  "id": "a8cb9d5a-635c-40ba-814c-6f88924b5688",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "interactionHistory",
+                        "getAllEnterpriseInteractions"
+                      ],
+                      "query": [
+                        {
+                          "description": "OData filter expression to filter interactions by date range, user, or application.",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Maximum number of interactions to return per page.",
+                          "key": "$top",
+                          "value": "50"
+                        },
+                        {
+                          "description": "Pagination token for retrieving the next page of results.",
+                          "key": "$skipToken",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all Copilot interactions across the organization for compliance and auditing purposes. Returns aiInteraction objects representing user prompts and Copilot responses across Microsoft 365 applications. Requires compliance administrator permissions."
+                  },
+                  "response": [
+                    {
+                      "id": "99d1758c-02cc-4d66-98b7-f8f2b9872e90",
+                      "name": "List of Copilot interactions returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "interactionHistory",
+                            "getAllEnterpriseInteractions"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter expression to filter interactions by date range, user, or application.",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of interactions to return per page.",
+                              "key": "$top",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Pagination token for retrieving the next page of results.",
+                              "key": "$skipToken",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"@odata.context\": \"<string>\",\n  \"@odata.nextLink\": \"<uri>\",\n  \"value\": [\n    {\n      \"id\": \"<string>\",\n      \"appClass\": \"<string>\",\n      \"body\": {\n        \"contentType\": \"text\",\n        \"content\": \"<string>\"\n      },\n      \"interactionType\": \"userPrompt\",\n      \"conversationType\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"sessionId\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"etag\": \"<string>\",\n      \"locale\": \"<string>\",\n      \"from\": {\n        \"user\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        \"application\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        \"device\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      },\n      \"attachments\": [\n        {\n          \"attachmentId\": \"<string>\",\n          \"content\": \"<string>\",\n          \"contentType\": \"<string>\",\n          \"contentUrl\": \"<uri>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"attachmentId\": \"<string>\",\n          \"content\": \"<string>\",\n          \"contentType\": \"<string>\",\n          \"contentUrl\": \"<uri>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"contexts\": [\n        {\n          \"contextReference\": \"<string>\",\n          \"contextType\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"contextReference\": \"<string>\",\n          \"contextType\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"links\": [\n        {\n          \"displayName\": \"<string>\",\n          \"linkType\": \"<string>\",\n          \"linkUrl\": \"<uri>\"\n        },\n        {\n          \"displayName\": \"<string>\",\n          \"linkType\": \"<string>\",\n          \"linkUrl\": \"<uri>\"\n        }\n      ],\n      \"mentions\": [\n        {\n          \"mentioned\": {\n            \"user\": {\n              \"id\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          },\n          \"mentionId\": \"<integer>\",\n          \"mentionText\": \"<string>\"\n        },\n        {\n          \"mentioned\": {\n            \"user\": {\n              \"id\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          },\n          \"mentionId\": \"<integer>\",\n          \"mentionText\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"appClass\": \"<string>\",\n      \"body\": {\n        \"contentType\": \"text\",\n        \"content\": \"<string>\"\n      },\n      \"interactionType\": \"userPrompt\",\n      \"conversationType\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"sessionId\": \"<string>\",\n      \"createdDateTime\": \"<dateTime>\",\n      \"etag\": \"<string>\",\n      \"locale\": \"<string>\",\n      \"from\": {\n        \"user\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        \"application\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        \"device\": {\n          \"id\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      },\n      \"attachments\": [\n        {\n          \"attachmentId\": \"<string>\",\n          \"content\": \"<string>\",\n          \"contentType\": \"<string>\",\n          \"contentUrl\": \"<uri>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"attachmentId\": \"<string>\",\n          \"content\": \"<string>\",\n          \"contentType\": \"<string>\",\n          \"contentUrl\": \"<uri>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"contexts\": [\n        {\n          \"contextReference\": \"<string>\",\n          \"contextType\": \"<string>\",\n          \"displayName\": \"<string>\"\n        },\n        {\n          \"contextReference\": \"<string>\",\n          \"contextType\": \"<string>\",\n          \"displayName\": \"<string>\"\n        }\n      ],\n      \"links\": [\n        {\n          \"displayName\": \"<string>\",\n          \"linkType\": \"<string>\",\n          \"linkUrl\": \"<uri>\"\n        },\n        {\n          \"displayName\": \"<string>\",\n          \"linkType\": \"<string>\",\n          \"linkUrl\": \"<uri>\"\n        }\n      ],\n      \"mentions\": [\n        {\n          \"mentioned\": {\n            \"user\": {\n              \"id\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          },\n          \"mentionId\": \"<integer>\",\n          \"mentionText\": \"<string>\"\n        },\n        {\n          \"mentioned\": {\n            \"user\": {\n              \"id\": \"<string>\",\n              \"displayName\": \"<string>\"\n            }\n          },\n          \"mentionId\": \"<integer>\",\n          \"mentionText\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-99d1758c-02cc-4d66-98b7-f8f2b9872e90"
+                    },
+                    {
+                      "id": "021dbb2d-fad8-4dea-b99c-77ec103af044",
+                      "name": "Bad request. The request body or parameters are invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "interactionHistory",
+                            "getAllEnterpriseInteractions"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter expression to filter interactions by date range, user, or application.",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of interactions to return per page.",
+                              "key": "$top",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Pagination token for retrieving the next page of results.",
+                              "key": "$skipToken",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-021dbb2d-fad8-4dea-b99c-77ec103af044"
+                    },
+                    {
+                      "id": "a6f891f9-6de1-4825-b916-aedc8a063b1b",
+                      "name": "Unauthorized. A valid bearer token is required.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "interactionHistory",
+                            "getAllEnterpriseInteractions"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter expression to filter interactions by date range, user, or application.",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of interactions to return per page.",
+                              "key": "$top",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Pagination token for retrieving the next page of results.",
+                              "key": "$skipToken",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-a6f891f9-6de1-4825-b916-aedc8a063b1b"
+                    },
+                    {
+                      "id": "f04ed1ec-3701-4ed6-8e67-bd0aa0167f25",
+                      "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "interactionHistory",
+                            "getAllEnterpriseInteractions"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter expression to filter interactions by date range, user, or application.",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of interactions to return per page.",
+                              "key": "$top",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Pagination token for retrieving the next page of results.",
+                              "key": "$skipToken",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-f04ed1ec-3701-4ed6-8e67-bd0aa0167f25"
+                    },
+                    {
+                      "id": "21cb7909-84b8-4aa8-8ad8-68c1ad639978",
+                      "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/interactionHistory/getAllEnterpriseInteractions?$filter=<string>&$top=50&$skipToken=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "interactionHistory",
+                            "getAllEnterpriseInteractions"
+                          ],
+                          "query": [
+                            {
+                              "description": "OData filter expression to filter interactions by date range, user, or application.",
+                              "key": "$filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Maximum number of interactions to return per page.",
+                              "key": "$top",
+                              "value": "50"
+                            },
+                            {
+                              "description": "Pagination token for retrieving the next page of results.",
+                              "key": "$skipToken",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-21cb7909-84b8-4aa8-8ad8-68c1ad639978"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:54.000Z",
+                  "updatedAt": "2026-07-28T02:10:54.000Z",
+                  "uid": "35240-a8cb9d5a-635c-40ba-814c-6f88924b5688"
+                }
+              ],
+              "id": "3f7ee293-a397-4e0b-a6f0-64ba25a8d1b8",
+              "createdAt": "2026-07-28T02:10:54.000Z",
+              "updatedAt": "2026-07-28T02:10:54.000Z",
+              "uid": "35240-3f7ee293-a397-4e0b-a6f0-64ba25a8d1b8"
+            }
+          ],
+          "id": "df4f6bb8-f8db-4001-90cb-cd88d96bdc5f",
+          "createdAt": "2026-07-28T02:10:54.000Z",
+          "updatedAt": "2026-07-28T02:10:54.000Z",
+          "uid": "35240-df4f6bb8-f8db-4001-90cb-cd88d96bdc5f"
+        }
+      ],
+      "id": "1b3d0c4e-a17c-4297-bbcd-e3d7616c811a",
+      "createdAt": "2026-07-28T02:10:54.000Z",
+      "updatedAt": "2026-07-28T02:10:54.000Z",
+      "uid": "35240-1b3d0c4e-a17c-4297-bbcd-e3d7616c811a"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

@@ -1,0 +1,859 @@
+{
+  "info": {
+    "_postman_id": "9bb55211-f134-4eb9-9dfa-a7a26a21047e",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Chat API",
+    "description": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:48.000Z",
+    "updatedAt": "2026-07-28T02:10:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9bb55211-f134-4eb9-9dfa-a7a26a21047e"
+  },
+  "item": [
+    {
+      "name": "copilot",
+      "item": [
+        {
+          "name": "chat",
+          "item": [
+            {
+              "name": "conversations",
+              "item": [
+                {
+                  "name": "{conversationId}",
+                  "item": [
+                    {
+                      "name": "messages",
+                      "item": [
+                        {
+                          "name": "Microsoft Copilot Continue a Chat Conversation",
+                          "id": "3151a6f9-03c3-499e-ac00-491e90852eb4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "oauth2",
+                              "oauth2": [
+                                {
+                                  "key": "scope",
+                                  "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "accessTokenUrl",
+                                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "authUrl",
+                                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                                  "type": "string"
+                                },
+                                {
+                                  "key": "grant_type",
+                                  "value": "authorization_code",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "copilot",
+                                "chat",
+                                "conversations",
+                                ":conversationId",
+                                "messages"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b718e548-1c48-4063-aed4-f0dd386f52ce",
+                                  "key": "conversationId",
+                                  "value": "<string>",
+                                  "description": "(Required) The unique identifier of the conversation to continue."
+                                }
+                              ]
+                            },
+                            "description": "Send a follow-up message in an existing multi-turn conversation with Microsoft 365 Copilot. Uses the conversation context from prior turns to provide more relevant and contextual responses."
+                          },
+                          "response": [
+                            {
+                              "id": "bf933e0d-6966-4698-9ce1-aa342f620ec7",
+                              "name": "Message sent and response returned successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "copilot",
+                                    "chat",
+                                    "conversations",
+                                    ":conversationId",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"message\": {\n    \"id\": \"<string>\",\n    \"body\": {\n      \"contentType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    \"citations\": [\n      {\n        \"title\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"snippet\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"snippet\": \"<string>\"\n      }\n    ],\n    \"createdDateTime\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:49.000Z",
+                              "updatedAt": "2026-07-28T02:10:49.000Z",
+                              "uid": "35240-bf933e0d-6966-4698-9ce1-aa342f620ec7"
+                            },
+                            {
+                              "id": "c1ccc228-ca3d-4cae-b3fa-7194af6b66a1",
+                              "name": "Bad request. The request body or parameters are invalid.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "copilot",
+                                    "chat",
+                                    "conversations",
+                                    ":conversationId",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:49.000Z",
+                              "updatedAt": "2026-07-28T02:10:49.000Z",
+                              "uid": "35240-c1ccc228-ca3d-4cae-b3fa-7194af6b66a1"
+                            },
+                            {
+                              "id": "48da1525-6f16-4208-ac80-234fc7fa94f4",
+                              "name": "Unauthorized. A valid bearer token is required.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "copilot",
+                                    "chat",
+                                    "conversations",
+                                    ":conversationId",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:49.000Z",
+                              "updatedAt": "2026-07-28T02:10:49.000Z",
+                              "uid": "35240-48da1525-6f16-4208-ac80-234fc7fa94f4"
+                            },
+                            {
+                              "id": "2f363d82-1b5c-4302-bc2a-6f75298d8c7c",
+                              "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "copilot",
+                                    "chat",
+                                    "conversations",
+                                    ":conversationId",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:49.000Z",
+                              "updatedAt": "2026-07-28T02:10:49.000Z",
+                              "uid": "35240-2f363d82-1b5c-4302-bc2a-6f75298d8c7c"
+                            },
+                            {
+                              "id": "138cc216-c680-4276-b394-09680d53ba69",
+                              "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/copilot/chat/conversations/:conversationId/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "copilot",
+                                    "chat",
+                                    "conversations",
+                                    ":conversationId",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "conversationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:49.000Z",
+                              "updatedAt": "2026-07-28T02:10:49.000Z",
+                              "uid": "35240-138cc216-c680-4276-b394-09680d53ba69"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:49.000Z",
+                          "updatedAt": "2026-07-28T02:10:49.000Z",
+                          "uid": "35240-3151a6f9-03c3-499e-ac00-491e90852eb4"
+                        }
+                      ],
+                      "id": "f038486b-e12c-4966-a06d-23d299966948",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-f038486b-e12c-4966-a06d-23d299966948"
+                    }
+                  ],
+                  "id": "21884a3e-ed2d-46b5-b5eb-1d4beb09e963",
+                  "createdAt": "2026-07-28T02:10:49.000Z",
+                  "updatedAt": "2026-07-28T02:10:49.000Z",
+                  "uid": "35240-21884a3e-ed2d-46b5-b5eb-1d4beb09e963"
+                },
+                {
+                  "name": "Microsoft Copilot Start a Chat Conversation",
+                  "id": "0442c416-38b9-4127-96a9-e1a2d54ef5df",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "oauth2",
+                      "oauth2": [
+                        {
+                          "key": "scope",
+                          "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                          "type": "string"
+                        },
+                        {
+                          "key": "accessTokenUrl",
+                          "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                          "type": "string"
+                        },
+                        {
+                          "key": "authUrl",
+                          "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                          "type": "string"
+                        },
+                        {
+                          "key": "grant_type",
+                          "value": "authorization_code",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/chat/conversations",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "chat",
+                        "conversations"
+                      ]
+                    },
+                    "description": "Start a new multi-turn conversation with Microsoft 365 Copilot. The Chat API allows you to programmatically engage in conversations using enterprise search grounding and web search grounding. Responses are grounded in Microsoft 365 data and web content while respecting all existing permissions and compliance controls. This API is currently in preview."
+                  },
+                  "response": [
+                    {
+                      "id": "86937d42-3a6f-4b6f-a124-59da36363478",
+                      "name": "Conversation started and response returned successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/chat/conversations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "chat",
+                            "conversations"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"conversationId\": \"<string>\",\n  \"message\": {\n    \"id\": \"<string>\",\n    \"body\": {\n      \"contentType\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    \"citations\": [\n      {\n        \"title\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"snippet\": \"<string>\"\n      },\n      {\n        \"title\": \"<string>\",\n        \"url\": \"<uri>\",\n        \"snippet\": \"<string>\"\n      }\n    ],\n    \"createdDateTime\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-86937d42-3a6f-4b6f-a124-59da36363478"
+                    },
+                    {
+                      "id": "b971e6cd-eed3-43e0-ba89-e334c94c7674",
+                      "name": "Bad request. The request body or parameters are invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/chat/conversations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "chat",
+                            "conversations"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-b971e6cd-eed3-43e0-ba89-e334c94c7674"
+                    },
+                    {
+                      "id": "f95250b1-0dba-4ea9-973b-70808d5fecb2",
+                      "name": "Unauthorized. A valid bearer token is required.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/chat/conversations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "chat",
+                            "conversations"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-f95250b1-0dba-4ea9-973b-70808d5fecb2"
+                    },
+                    {
+                      "id": "af4679f7-f227-4552-9717-c436a22fc838",
+                      "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/chat/conversations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "chat",
+                            "conversations"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-af4679f7-f227-4552-9717-c436a22fc838"
+                    },
+                    {
+                      "id": "955981ad-3490-4434-ade4-75d1eede9168",
+                      "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"prompt\": \"<string>\",\n  \"enableWebSearch\": true,\n  \"fileReferences\": [\n    {\n      \"url\": \"<uri>\"\n    },\n    {\n      \"url\": \"<uri>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/copilot/chat/conversations",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "copilot",
+                            "chat",
+                            "conversations"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T02:10:49.000Z",
+                      "updatedAt": "2026-07-28T02:10:49.000Z",
+                      "uid": "35240-955981ad-3490-4434-ade4-75d1eede9168"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:10:49.000Z",
+                  "updatedAt": "2026-07-28T02:10:49.000Z",
+                  "uid": "35240-0442c416-38b9-4127-96a9-e1a2d54ef5df"
+                }
+              ],
+              "id": "cd1d01d3-92f5-4949-910f-1dfae604ce54",
+              "createdAt": "2026-07-28T02:10:49.000Z",
+              "updatedAt": "2026-07-28T02:10:49.000Z",
+              "uid": "35240-cd1d01d3-92f5-4949-910f-1dfae604ce54"
+            }
+          ],
+          "id": "3c1eda90-54bd-404f-ab9c-08b30d3398f4",
+          "createdAt": "2026-07-28T02:10:49.000Z",
+          "updatedAt": "2026-07-28T02:10:49.000Z",
+          "uid": "35240-3c1eda90-54bd-404f-ab9c-08b30d3398f4"
+        }
+      ],
+      "id": "3a3d9ef0-8ac0-40b3-b14f-f36a85c0d265",
+      "createdAt": "2026-07-28T02:10:49.000Z",
+      "updatedAt": "2026-07-28T02:10:49.000Z",
+      "uid": "35240-3a3d9ef0-8ac0-40b3-b14f-f36a85c0d265"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

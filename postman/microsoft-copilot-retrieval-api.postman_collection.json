@@ -1,0 +1,419 @@
+{
+  "info": {
+    "_postman_id": "a69b0a0c-eec7-4abd-8b1a-c4779eb3a278",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Retrieval API",
+    "description": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:55.000Z",
+    "updatedAt": "2026-07-28T02:10:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a69b0a0c-eec7-4abd-8b1a-c4779eb3a278"
+  },
+  "item": [
+    {
+      "name": "copilot",
+      "item": [
+        {
+          "name": "retrieval",
+          "item": [
+            {
+              "name": "Microsoft Copilot Retrieve Grounding Data",
+              "id": "a6da6398-02f1-428d-9a6b-1afad4f51a76",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/copilot/retrieval",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "copilot",
+                    "retrieval"
+                  ]
+                },
+                "description": "Retrieve relevant text extracts from SharePoint, OneDrive, and Copilot connectors content that the calling user has access to, while respecting defined access controls within the tenant. Use this endpoint to ground generative AI solutions with Microsoft 365 data while optimizing for context recall. Results include text snippets with relevance scores, sensitivity labels, and optional resource metadata."
+              },
+              "response": [
+                {
+                  "id": "558bbf0d-6a4c-485c-921b-9a2fc7368a5a",
+                  "name": "Retrieval results returned successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/retrieval",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "retrieval"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"retrievalHits\": [\n    {\n      \"webUrl\": \"<uri>\",\n      \"extracts\": [\n        {\n          \"text\": \"<string>\",\n          \"relevanceScore\": \"<double>\"\n        },\n        {\n          \"text\": \"<string>\",\n          \"relevanceScore\": \"<double>\"\n        }\n      ],\n      \"resourceType\": \"listItem\",\n      \"resourceMetadata\": {\n        \"aliquafa4\": \"<string>\",\n        \"voluptate57b\": \"<string>\"\n      },\n      \"sensitivityLabel\": {\n        \"sensitivityLabelId\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"toolTip\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"color\": \"<string>\"\n      }\n    },\n    {\n      \"webUrl\": \"<uri>\",\n      \"extracts\": [\n        {\n          \"text\": \"<string>\",\n          \"relevanceScore\": \"<double>\"\n        },\n        {\n          \"text\": \"<string>\",\n          \"relevanceScore\": \"<double>\"\n        }\n      ],\n      \"resourceType\": \"externalItem\",\n      \"resourceMetadata\": {\n        \"nulla_1\": \"<string>\",\n        \"adipisicing_46\": \"<string>\"\n      },\n      \"sensitivityLabel\": {\n        \"sensitivityLabelId\": \"<string>\",\n        \"displayName\": \"<string>\",\n        \"toolTip\": \"<string>\",\n        \"priority\": \"<integer>\",\n        \"color\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:10:55.000Z",
+                  "updatedAt": "2026-07-28T02:10:55.000Z",
+                  "uid": "35240-558bbf0d-6a4c-485c-921b-9a2fc7368a5a"
+                },
+                {
+                  "id": "c833b8c6-f9cc-421d-9199-b83df337b411",
+                  "name": "Bad request. The request body or parameters are invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/retrieval",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "retrieval"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:55.000Z",
+                  "updatedAt": "2026-07-28T02:10:55.000Z",
+                  "uid": "35240-c833b8c6-f9cc-421d-9199-b83df337b411"
+                },
+                {
+                  "id": "6bdfc3af-7b14-49a2-82ea-04e13bc9c432",
+                  "name": "Unauthorized. A valid bearer token is required.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/retrieval",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "retrieval"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:55.000Z",
+                  "updatedAt": "2026-07-28T02:10:55.000Z",
+                  "uid": "35240-6bdfc3af-7b14-49a2-82ea-04e13bc9c432"
+                },
+                {
+                  "id": "482102f9-b02b-46c4-aad2-7426017f10fb",
+                  "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/retrieval",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "retrieval"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:55.000Z",
+                  "updatedAt": "2026-07-28T02:10:55.000Z",
+                  "uid": "35240-482102f9-b02b-46c4-aad2-7426017f10fb"
+                },
+                {
+                  "id": "30bde88b-f6f3-4c97-aa10-4f775dd21198",
+                  "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"queryString\": \"<string>\",\n  \"dataSource\": \"externalItem\",\n  \"dataSourceConfiguration\": {\n    \"externalItem\": {\n      \"connections\": [\n        {\n          \"connectionId\": \"<string>\"\n        },\n        {\n          \"connectionId\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"filterExpression\": \"<string>\",\n  \"resourceMetadata\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"maximumNumberOfResults\": 25\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/retrieval",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "retrieval"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:55.000Z",
+                  "updatedAt": "2026-07-28T02:10:55.000Z",
+                  "uid": "35240-30bde88b-f6f3-4c97-aa10-4f775dd21198"
+                }
+              ],
+              "createdAt": "2026-07-28T02:10:55.000Z",
+              "updatedAt": "2026-07-28T02:10:55.000Z",
+              "uid": "35240-a6da6398-02f1-428d-9a6b-1afad4f51a76"
+            }
+          ],
+          "id": "fd38708f-636a-436b-b221-14a038b4c814",
+          "createdAt": "2026-07-28T02:10:55.000Z",
+          "updatedAt": "2026-07-28T02:10:55.000Z",
+          "uid": "35240-fd38708f-636a-436b-b221-14a038b4c814"
+        }
+      ],
+      "id": "5d3bb4db-2a9d-4718-8d9e-ceed8d5bff5c",
+      "createdAt": "2026-07-28T02:10:55.000Z",
+      "updatedAt": "2026-07-28T02:10:55.000Z",
+      "uid": "35240-5d3bb4db-2a9d-4718-8d9e-ceed8d5bff5c"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "info": {
+    "_postman_id": "01fd39a4-8047-4840-adb3-dd5690bf6ff2",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications API",
+    "description": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:47.000Z",
+    "updatedAt": "2026-07-28T02:10:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-01fd39a4-8047-4840-adb3-dd5690bf6ff2"
+  },
+  "item": [
+    {
+      "name": "subscriptions",
+      "item": [
+        {
+          "name": "Microsoft Copilot Create Subscription for Copilot Interaction Notifications",
+          "id": "362c3a14-bc5c-4499-bd16-bf29e8f816b8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                  "type": "string"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                  "type": "string"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                  "type": "string"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"changeType\": \"created\",\n  \"notificationUrl\": \"<uri>\",\n  \"resource\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "Create a change notification subscription to monitor Copilot interactions across Microsoft 365 in real time. Enables proactive compliance checks, anomaly detection, and auditing of AI interactions. The resource path for Copilot interactions is /copilot/interactionHistory/getAllEnterpriseInteractions."
+          },
+          "response": [
+            {
+              "id": "48772959-7f51-4149-b309-04e4129ba7f2",
+              "name": "Subscription created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"changeType\": \"created\",\n  \"notificationUrl\": \"<uri>\",\n  \"resource\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"resource\": \"<string>\",\n  \"changeType\": \"<string>\",\n  \"notificationUrl\": \"<uri>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:10:47.000Z",
+              "updatedAt": "2026-07-28T02:10:47.000Z",
+              "uid": "35240-48772959-7f51-4149-b309-04e4129ba7f2"
+            },
+            {
+              "id": "a90daea0-adfd-4478-a89f-5e8af3dd82ba",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"changeType\": \"created\",\n  \"notificationUrl\": \"<uri>\",\n  \"resource\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:10:47.000Z",
+              "updatedAt": "2026-07-28T02:10:47.000Z",
+              "uid": "35240-a90daea0-adfd-4478-a89f-5e8af3dd82ba"
+            },
+            {
+              "id": "64fe01a9-3c58-47ea-92ea-495cf16f3d4b",
+              "name": "Unauthorized. A valid bearer token is required.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"changeType\": \"created\",\n  \"notificationUrl\": \"<uri>\",\n  \"resource\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:10:47.000Z",
+              "updatedAt": "2026-07-28T02:10:47.000Z",
+              "uid": "35240-64fe01a9-3c58-47ea-92ea-495cf16f3d4b"
+            },
+            {
+              "id": "a175388f-c052-4916-8a39-bfed98e775b5",
+              "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"changeType\": \"created\",\n  \"notificationUrl\": \"<uri>\",\n  \"resource\": \"<string>\",\n  \"expirationDateTime\": \"<dateTime>\",\n  \"clientState\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:10:47.000Z",
+              "updatedAt": "2026-07-28T02:10:47.000Z",
+              "uid": "35240-a175388f-c052-4916-8a39-bfed98e775b5"
+            }
+          ],
+          "createdAt": "2026-07-28T02:10:47.000Z",
+          "updatedAt": "2026-07-28T02:10:47.000Z",
+          "uid": "35240-362c3a14-bc5c-4499-bd16-bf29e8f816b8"
+        }
+      ],
+      "id": "62c6b77c-e769-43d6-8693-df026aaf918c",
+      "createdAt": "2026-07-28T02:10:47.000Z",
+      "updatedAt": "2026-07-28T02:10:47.000Z",
+      "uid": "35240-62c6b77c-e769-43d6-8693-df026aaf918c"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

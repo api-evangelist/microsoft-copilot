@@ -1,0 +1,419 @@
+{
+  "info": {
+    "_postman_id": "f3539b93-92ed-498d-8507-0096f7c7c9a9",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Search API",
+    "description": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:56.000Z",
+    "updatedAt": "2026-07-28T02:10:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f3539b93-92ed-498d-8507-0096f7c7c9a9"
+  },
+  "item": [
+    {
+      "name": "copilot",
+      "item": [
+        {
+          "name": "search",
+          "item": [
+            {
+              "name": "Microsoft Copilot Perform Hybrid Search",
+              "id": "ecdc9fe8-28e3-496d-a8f0-365b7955d0db",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "oauth2",
+                  "oauth2": [
+                    {
+                      "key": "scope",
+                      "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+                      "type": "string"
+                    },
+                    {
+                      "key": "accessTokenUrl",
+                      "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                      "type": "string"
+                    },
+                    {
+                      "key": "authUrl",
+                      "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+                      "type": "string"
+                    },
+                    {
+                      "key": "grant_type",
+                      "value": "authorization_code",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/copilot/search",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "copilot",
+                    "search"
+                  ]
+                },
+                "description": "Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language queries with contextual understanding and intelligent results. Discover relevant documents and files while respecting defined access controls within the organization. This API is currently in preview."
+              },
+              "response": [
+                {
+                  "id": "a36857c7-813b-4365-a025-73acced5464f",
+                  "name": "Search results returned successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"@odata.nextLink\": \"<uri>\",\n  \"totalCount\": \"<integer>\",\n  \"searchHits\": [\n    {\n      \"webUrl\": \"<uri>\",\n      \"preview\": \"<string>\",\n      \"resourceType\": \"<string>\",\n      \"resourceMetadata\": {\n        \"in_6a\": \"<string>\",\n        \"ullamco6\": \"<string>\",\n        \"commodo_272\": \"<string>\"\n      }\n    },\n    {\n      \"webUrl\": \"<uri>\",\n      \"preview\": \"<string>\",\n      \"resourceType\": \"<string>\",\n      \"resourceMetadata\": {\n        \"aute__\": \"<string>\",\n        \"eiusmod_23\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:10:56.000Z",
+                  "updatedAt": "2026-07-28T02:10:56.000Z",
+                  "uid": "35240-a36857c7-813b-4365-a025-73acced5464f"
+                },
+                {
+                  "id": "65f9e734-ae3c-4c50-94fe-877251880171",
+                  "name": "Bad request. The request body or parameters are invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:56.000Z",
+                  "updatedAt": "2026-07-28T02:10:56.000Z",
+                  "uid": "35240-65f9e734-ae3c-4c50-94fe-877251880171"
+                },
+                {
+                  "id": "34c24c37-6a87-4bd9-8fc1-adc49e77c46d",
+                  "name": "Unauthorized. A valid bearer token is required.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:56.000Z",
+                  "updatedAt": "2026-07-28T02:10:56.000Z",
+                  "uid": "35240-34c24c37-6a87-4bd9-8fc1-adc49e77c46d"
+                },
+                {
+                  "id": "e99da06e-bafc-4b68-84f7-96af456eae73",
+                  "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:56.000Z",
+                  "updatedAt": "2026-07-28T02:10:56.000Z",
+                  "uid": "35240-e99da06e-bafc-4b68-84f7-96af456eae73"
+                },
+                {
+                  "id": "0b87a3e5-7535-4c44-9364-ecad2dafecae",
+                  "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"query\": \"<string>\",\n  \"pageSize\": 25,\n  \"dataSources\": {\n    \"oneDrive\": {\n      \"filterExpression\": \"<string>\",\n      \"resourceMetadataNames\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/copilot/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "copilot",
+                        "search"
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"innerError\": {\n      \"date\": \"<dateTime>\",\n      \"request-id\": \"<string>\",\n      \"client-request-id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:10:56.000Z",
+                  "updatedAt": "2026-07-28T02:10:56.000Z",
+                  "uid": "35240-0b87a3e5-7535-4c44-9364-ecad2dafecae"
+                }
+              ],
+              "createdAt": "2026-07-28T02:10:56.000Z",
+              "updatedAt": "2026-07-28T02:10:56.000Z",
+              "uid": "35240-ecdc9fe8-28e3-496d-a8f0-365b7955d0db"
+            }
+          ],
+          "id": "7bf5bf64-5d0f-4b05-b824-2cb30ac88c67",
+          "createdAt": "2026-07-28T02:10:56.000Z",
+          "updatedAt": "2026-07-28T02:10:56.000Z",
+          "uid": "35240-7bf5bf64-5d0f-4b05-b824-2cb30ac88c67"
+        }
+      ],
+      "id": "f4341d27-063b-4a0b-9ef2-9f2f90239b1d",
+      "createdAt": "2026-07-28T02:10:56.000Z",
+      "updatedAt": "2026-07-28T02:10:56.000Z",
+      "uid": "35240-f4341d27-063b-4a0b-9ef2-9f2f90239b1d"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://graph.microsoft.com/v1.0"
+    }
+  ]
+}

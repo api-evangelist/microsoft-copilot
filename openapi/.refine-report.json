@@ -1,0 +1,22 @@
+{
+  "provider": "microsoft-copilot",
+  "sources": [
+    "microsoft-copilot-change-notifications-api-openapi.yml",
+    "microsoft-copilot-chat-api-openapi.yml",
+    "microsoft-copilot-interaction-export-api-openapi.yml",
+    "microsoft-copilot-retrieval-api-openapi.yml",
+    "microsoft-copilot-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "microsoft-copilot-change-notifications-api-openapi.yml",
+    "microsoft-copilot-chat-api-openapi.yml",
+    "microsoft-copilot-interaction-export-api-openapi.yml",
+    "microsoft-copilot-retrieval-api-openapi.yml",
+    "microsoft-copilot-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
