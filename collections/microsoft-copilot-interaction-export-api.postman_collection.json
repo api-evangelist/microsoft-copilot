@@ -1,0 +1,449 @@
+{
+  "item": [
+    {
+      "id": "624a8882-41a8-43c5-af21-da5d4dca5b79",
+      "name": "Interaction Export",
+      "description": {
+        "content": "Export and archive user interactions with Copilot across Microsoft 365 applications for compliance and auditing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "943a8140-226d-48d5-9358-e59c6ebdf2fe",
+          "name": "Microsoft Copilot List All Enterprise Copilot Interactions",
+          "request": {
+            "name": "Microsoft Copilot List All Enterprise Copilot Interactions",
+            "description": {
+              "content": "Retrieve all Copilot interactions across the organization for compliance and auditing purposes. Returns aiInteraction objects representing user prompts and Copilot responses across Microsoft 365 applications. Requires compliance administrator permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "copilot",
+                "interactionHistory",
+                "getAllEnterpriseInteractions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression to filter interactions by date range, user, or application."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "50",
+                  "description": "Maximum number of interactions to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skipToken",
+                  "value": "<string>",
+                  "description": "Pagination token for retrieving the next page of results."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a68ebd45-0a3e-4f76-a794-cc7862886127",
+              "name": "List of Copilot interactions returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "copilot",
+                    "interactionHistory",
+                    "getAllEnterpriseInteractions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "10"
+                    },
+                    {
+                      "key": "$skipToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token obtained via OAuth 2.0. Format: Bearer {token}",
+                    "key": "Authorization",
+                    "value": "Bearer\nq#:"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"@odata.context\": \"example_value\",\n  \"@odata.nextLink\": \"https://www.example.com\",\n  \"value\": [\n    {\n      \"id\": \"abc123\",\n      \"appClass\": \"example_value\",\n      \"interactionType\": \"userPrompt\",\n      \"conversationType\": \"example_value\",\n      \"requestId\": \"500123\",\n      \"sessionId\": \"500123\",\n      \"createdDateTime\": \"2026-01-15T10:30:00Z\",\n      \"etag\": \"example_value\",\n      \"locale\": \"example_value\",\n      \"attachments\": {},\n      \"contexts\": {},\n      \"links\": {},\n      \"mentions\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6da0d32-d9e9-435a-a2f1-e0b2206ab6e7",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "copilot",
+                    "interactionHistory",
+                    "getAllEnterpriseInteractions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "10"
+                    },
+                    {
+                      "key": "$skipToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token obtained via OAuth 2.0. Format: Bearer {token}",
+                    "key": "Authorization",
+                    "value": "Bearer\nq#:"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1998-07-31T18:21:03.382Z\",\n      \"request-id\": \"string\",\n      \"client-request-id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47d8bb7e-43fb-4f42-a65c-5d73fe659c9f",
+              "name": "Unauthorized. A valid bearer token is required.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "copilot",
+                    "interactionHistory",
+                    "getAllEnterpriseInteractions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "10"
+                    },
+                    {
+                      "key": "$skipToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token obtained via OAuth 2.0. Format: Bearer {token}",
+                    "key": "Authorization",
+                    "value": "Bearer\nq#:"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1998-07-31T18:21:03.382Z\",\n      \"request-id\": \"string\",\n      \"client-request-id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c267d007-d83c-4fef-888d-169dba9970db",
+              "name": "Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "copilot",
+                    "interactionHistory",
+                    "getAllEnterpriseInteractions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "10"
+                    },
+                    {
+                      "key": "$skipToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token obtained via OAuth 2.0. Format: Bearer {token}",
+                    "key": "Authorization",
+                    "value": "Bearer\nq#:"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1998-07-31T18:21:03.382Z\",\n      \"request-id\": \"string\",\n      \"client-request-id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f902ec4e-cb74-4e3d-919b-42a79bb577b1",
+              "name": "Too many requests. The Retrieval API supports up to 200 requests per user per hour.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "copilot",
+                    "interactionHistory",
+                    "getAllEnterpriseInteractions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "createdDateTime ge 2025-01-01T00:00:00Z and createdDateTime le 2025-03-31T23:59:59Z"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "10"
+                    },
+                    {
+                      "key": "$skipToken",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer token obtained via OAuth 2.0. Format: Bearer {token}",
+                    "key": "Authorization",
+                    "value": "Bearer\nq#:"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"innerError\": {\n      \"date\": \"1998-07-31T18:21:03.382Z\",\n      \"request-id\": \"string\",\n      \"client-request-id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://graph.microsoft.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "Files.Read.All Sites.Read.All ExternalItem.Read.All Chat.Read AIInteraction.Read.All"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4bf83053-e7e0-47ba-9418-a2021250ab1a",
+    "name": "Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.\n\nContact Support:\n Name: Microsoft Graph Support",
+      "type": "text/plain"
+    }
+  }
+}
