@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Chat API
   description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
@@ -147,46 +147,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. A valid bearer token is required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   schemas:
-    ChatMessageRequest:
-      type: object
-      required:
-      - prompt
-      properties:
-        prompt:
-          type: string
-          description: Natural language prompt to continue the conversation.
-          example: example_value
-        enableWebSearch:
-          type: boolean
-          default: true
-          description: Whether to enable web search grounding for this message.
-          example: true
     ChatMessage:
       type: object
       properties:
@@ -226,43 +187,6 @@ components:
           format: date-time
           description: The timestamp when the message was created.
           example: '2026-01-15T10:30:00Z'
-    ODataError:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                client-request-id:
-                  type: string
-          example: example_value
-    ChatConversationResponse:
-      type: object
-      properties:
-        conversationId:
-          type: string
-          description: The unique identifier for the conversation for multi-turn use.
-          example: '500123'
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-    ChatMessageResponse:
-      type: object
-      properties:
-        message:
-          $ref: '#/components/schemas/ChatMessage'
     ChatConversationRequest:
       type: object
       required:
@@ -288,6 +212,82 @@ components:
                 format: uri
                 description: The URL of the file to reference.
           example: []
+    ChatMessageRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to continue the conversation.
+          example: example_value
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message.
+          example: true
+    ChatConversationResponse:
+      type: object
+      properties:
+        conversationId:
+          type: string
+          description: The unique identifier for the conversation for multi-turn use.
+          example: '500123'
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+    ChatMessageResponse:
+      type: object
+      properties:
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+  responses:
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   parameters:
     authorizationHeader:
       name: Authorization

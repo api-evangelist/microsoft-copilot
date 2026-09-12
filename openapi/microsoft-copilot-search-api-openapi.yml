@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Search API
   description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
@@ -92,26 +92,26 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     Unauthorized:
       description: Unauthorized. A valid bearer token is required.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
       content:
         application/json:
           schema:
@@ -158,23 +158,6 @@ components:
                 client-request-id:
                   type: string
           example: example_value
-    CopilotSearchDataSourcesConfiguration:
-      type: object
-      description: Configuration for data sources to include in the search.
-      properties:
-        oneDrive:
-          type: object
-          description: OneDrive data source configuration.
-          properties:
-            filterExpression:
-              type: string
-              description: KQL expression to scope the search to specific OneDrive paths or properties.
-            resourceMetadataNames:
-              type: array
-              items:
-                type: string
-              description: List of metadata field names to return for each search result.
-          example: example_value
     SearchRequest:
       type: object
       required:
@@ -194,6 +177,23 @@ components:
           example: 10
         dataSources:
           $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
+    CopilotSearchDataSourcesConfiguration:
+      type: object
+      description: Configuration for data sources to include in the search.
+      properties:
+        oneDrive:
+          type: object
+          description: OneDrive data source configuration.
+          properties:
+            filterExpression:
+              type: string
+              description: KQL expression to scope the search to specific OneDrive paths or properties.
+            resourceMetadataNames:
+              type: array
+              items:
+                type: string
+              description: List of metadata field names to return for each search result.
+          example: example_value
     SearchHit:
       type: object
       properties:

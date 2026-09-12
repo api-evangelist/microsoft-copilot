@@ -290,6 +290,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Website
+    url: https://www.microsoft.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/microsoft-copilot/overview
   - type: AgenticAccess
@@ -386,3 +388,5 @@ common:
         description: Enterprise authentication and authorization using Azure AD with OAuth 2.0 and OIDC.
       - name: Power Platform
         description: Connect Copilot with Power Automate, Power Apps, and Power BI for end-to-end workflow automation.
+x-parent: microsoft
+x-relationship: product
