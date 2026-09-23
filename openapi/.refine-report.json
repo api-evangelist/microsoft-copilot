@@ -1,11 +1,7 @@
 {
   "provider": "microsoft-copilot",
   "sources": [
-    "microsoft-copilot-change-notifications-api-openapi.yml",
-    "microsoft-copilot-chat-api-openapi.yml",
-    "microsoft-copilot-interaction-export-api-openapi.yml",
-    "microsoft-copilot-retrieval-api-openapi.yml",
-    "microsoft-copilot-search-api-openapi.yml"
+    "_original/microsoft-copilot-openapi.yml"
   ],
   "outputs": [
     "microsoft-copilot-change-notifications-api-openapi.yml",
@@ -18,12 +14,15 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "microsoft-copilot-change-notifications-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-copilot-chat-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-copilot-interaction-export-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-copilot-retrieval-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "microsoft-copilot-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "microsoft-copilot-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "microsoft-copilot-change-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-copilot-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-copilot-interaction-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-copilot-retrieval-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "microsoft-copilot-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

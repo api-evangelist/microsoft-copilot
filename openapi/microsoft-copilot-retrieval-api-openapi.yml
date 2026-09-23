@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Retrieval API
+  title: Microsoft Copilot Microsoft 365 Copilot Retrieval API
   description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
   version: 1.0.0
   contact:
@@ -117,31 +117,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. A valid bearer token is required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   schemas:
     RetrievalResponse:
       type: object
@@ -152,89 +127,29 @@ components:
           items:
             $ref: '#/components/schemas/RetrievalHit'
           example: []
-    RetrievalExtract:
+    SensitivityLabel:
       type: object
+      description: Information protection sensitivity label applied to the document.
       properties:
-        text:
+        sensitivityLabelId:
           type: string
-          description: The relevant text extract from the document.
-          example: example_value
-        relevanceScore:
-          type: number
-          format: double
-          minimum: 0
-          maximum: 1
-          description: Cosine similarity between the queryString and the extract, normalized to the 0-1 range. May be absent for Copilot connectors results.
-          example: 42.5
-    DataSourceConfiguration:
-      type: object
-      description: Additional configuration for applicable data sources.
-      properties:
-        externalItem:
-          type: object
-          description: Configuration for Copilot connectors retrieval.
-          properties:
-            connections:
-              type: array
-              description: List of specific Copilot connector connections to retrieve from.
-              items:
-                type: object
-                properties:
-                  connectionId:
-                    type: string
-                    description: The identifier of the Copilot connector connection.
-          example: example_value
-    RetrievalHit:
-      type: object
-      properties:
-        webUrl:
+          description: The unique identifier of the sensitivity label.
+          example: '500123'
+        displayName:
           type: string
-          format: uri
-          description: The URL of the source document.
-          example: https://www.example.com
-        extracts:
-          type: array
-          description: Collection of relevant text extracts from the document.
-          items:
-            $ref: '#/components/schemas/RetrievalExtract'
-          example: []
-        resourceType:
-          type: string
-          description: The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).
-          enum:
-          - listItem
-          - externalItem
-          example: listItem
-        resourceMetadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.
+          description: The display name of the sensitivity label.
           example: example_value
-        sensitivityLabel:
-          $ref: '#/components/schemas/SensitivityLabel'
-    ODataError:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                client-request-id:
-                  type: string
+        toolTip:
+          type: string
+          description: Tooltip text describing the sensitivity label.
+          example: example_value
+        priority:
+          type: integer
+          description: The priority of the sensitivity label.
+          example: 10
+        color:
+          type: string
+          description: The color code associated with the sensitivity label.
           example: example_value
     RetrievalRequest:
       type: object
@@ -274,30 +189,115 @@ components:
           default: 25
           description: Number of results to return. Must be between 1 and 25. Defaults to 25.
           example: 10
-    SensitivityLabel:
+    RetrievalExtract:
       type: object
-      description: Information protection sensitivity label applied to the document.
       properties:
-        sensitivityLabelId:
+        text:
           type: string
-          description: The unique identifier of the sensitivity label.
-          example: '500123'
-        displayName:
-          type: string
-          description: The display name of the sensitivity label.
+          description: The relevant text extract from the document.
           example: example_value
-        toolTip:
+        relevanceScore:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Cosine similarity between the queryString and the extract, normalized to the 0-1 range. May be absent for Copilot connectors results.
+          example: 42.5
+    RetrievalHit:
+      type: object
+      properties:
+        webUrl:
           type: string
-          description: Tooltip text describing the sensitivity label.
-          example: example_value
-        priority:
-          type: integer
-          description: The priority of the sensitivity label.
-          example: 10
-        color:
+          format: uri
+          description: The URL of the source document.
+          example: https://www.example.com
+        extracts:
+          type: array
+          description: Collection of relevant text extracts from the document.
+          items:
+            $ref: '#/components/schemas/RetrievalExtract'
+          example: []
+        resourceType:
           type: string
-          description: The color code associated with the sensitivity label.
+          description: The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).
+          enum:
+          - listItem
+          - externalItem
+          example: listItem
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.
           example: example_value
+        sensitivityLabel:
+          $ref: '#/components/schemas/SensitivityLabel'
+    DataSourceConfiguration:
+      type: object
+      description: Additional configuration for applicable data sources.
+      properties:
+        externalItem:
+          type: object
+          description: Configuration for Copilot connectors retrieval.
+          properties:
+            connections:
+              type: array
+              description: List of specific Copilot connector connections to retrieve from.
+              items:
+                type: object
+                properties:
+                  connectionId:
+                    type: string
+                    description: The identifier of the Copilot connector connection.
+          example: example_value
+    ODataError:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date-time
+                request-id:
+                  type: string
+                client-request-id:
+                  type: string
+          example: example_value
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   parameters:
     authorizationHeader:
       name: Authorization

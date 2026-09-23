@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API
+  title: Microsoft Copilot Microsoft 365 Copilot Interaction Export…
   description: REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, search, chat, interaction export, and change notifications. These APIs provide production-ready AI capabilities that work directly with Microsoft 365 data while respecting existing permissions, sensitivity labels, compliance controls, and policy enforcement.
   version: 1.0.0
   contact:
@@ -99,6 +99,45 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AiInteractionMention:
+      type: object
+      description: Represents a mention of an entity in an AI interaction.
+      properties:
+        mentioned:
+          type: object
+          description: The entity mentioned in the message.
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                displayName:
+                  type: string
+          example: example_value
+        mentionId:
+          type: integer
+          description: The identifier for the mention.
+          example: '500123'
+        mentionText:
+          type: string
+          description: The text mentioned in the message.
+          example: example_value
+    ItemBody:
+      type: object
+      description: The body of a message.
+      properties:
+        contentType:
+          type: string
+          enum:
+          - text
+          - html
+          description: The type of the content.
+          example: text
+        content:
+          type: string
+          description: The content of the body.
+          example: example_value
     AiInteractionAttachment:
       type: object
       description: Represents a message attachment such as cards and images.
@@ -124,112 +163,6 @@ components:
           type: string
           description: The name of the attachment.
           example: Example Title
-    AiInteractionLink:
-      type: object
-      description: Represents a link that appears in an AI interaction.
-      properties:
-        displayName:
-          type: string
-          description: The name of the link.
-          example: example_value
-        linkType:
-          type: string
-          description: Information about a link in an app chat or Business Chat (BizChat) interaction.
-          example: example_value
-        linkUrl:
-          type: string
-          format: uri
-          description: The URL of the link.
-          example: https://www.example.com
-    IdentitySet:
-      type: object
-      description: The user, application, or device associated with the interaction.
-      properties:
-        user:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique identifier of the user.
-            displayName:
-              type: string
-              description: The display name of the user.
-          example: example_value
-        application:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique identifier of the application.
-            displayName:
-              type: string
-              description: The display name of the application.
-          example: example_value
-        device:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The unique identifier of the device.
-            displayName:
-              type: string
-              description: The display name of the device.
-          example: example_value
-    AiInteractionCollectionResponse:
-      type: object
-      properties:
-        '@odata.context':
-          type: string
-          description: OData context URL.
-          example: example_value
-        '@odata.nextLink':
-          type: string
-          format: uri
-          description: URL to retrieve the next page of results.
-          example: https://www.example.com
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/AiInteraction'
-          example: []
-    ODataError:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: The error code.
-            message:
-              type: string
-              description: The error message.
-            innerError:
-              type: object
-              properties:
-                date:
-                  type: string
-                  format: date-time
-                request-id:
-                  type: string
-                client-request-id:
-                  type: string
-          example: example_value
-    ItemBody:
-      type: object
-      description: The body of a message.
-      properties:
-        contentType:
-          type: string
-          enum:
-          - text
-          - html
-          description: The type of the content.
-          example: text
-        content:
-          type: string
-          description: The content of the body.
-          example: example_value
     AiInteraction:
       type: object
       description: Represents an interaction between a user and Copilot across Microsoft 365 applications.
@@ -303,29 +236,45 @@ components:
           items:
             $ref: '#/components/schemas/AiInteractionMention'
           example: []
-    AiInteractionMention:
+    AiInteractionCollectionResponse:
       type: object
-      description: Represents a mention of an entity in an AI interaction.
       properties:
-        mentioned:
+        '@odata.context':
+          type: string
+          description: OData context URL.
+          example: example_value
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results.
+          example: https://www.example.com
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AiInteraction'
+          example: []
+    ODataError:
+      type: object
+      properties:
+        error:
           type: object
-          description: The entity mentioned in the message.
           properties:
-            user:
+            code:
+              type: string
+              description: The error code.
+            message:
+              type: string
+              description: The error message.
+            innerError:
               type: object
               properties:
-                id:
+                date:
                   type: string
-                displayName:
+                  format: date-time
+                request-id:
                   type: string
-          example: example_value
-        mentionId:
-          type: integer
-          description: The identifier for the mention.
-          example: '500123'
-        mentionText:
-          type: string
-          description: The text mentioned in the message.
+                client-request-id:
+                  type: string
           example: example_value
     AiInteractionContext:
       type: object
@@ -343,19 +292,58 @@ components:
           type: string
           description: The name of the file.
           example: example_value
+    IdentitySet:
+      type: object
+      description: The user, application, or device associated with the interaction.
+      properties:
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the user.
+            displayName:
+              type: string
+              description: The display name of the user.
+          example: example_value
+        application:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the application.
+            displayName:
+              type: string
+              description: The display name of the application.
+          example: example_value
+        device:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The unique identifier of the device.
+            displayName:
+              type: string
+              description: The display name of the device.
+          example: example_value
+    AiInteractionLink:
+      type: object
+      description: Represents a link that appears in an AI interaction.
+      properties:
+        displayName:
+          type: string
+          description: The name of the link.
+          example: example_value
+        linkType:
+          type: string
+          description: Information about a link in an app chat or Business Chat (BizChat) interaction.
+          example: example_value
+        linkUrl:
+          type: string
+          format: uri
+          description: The URL of the link.
+          example: https://www.example.com
   responses:
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     Forbidden:
       description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
@@ -364,6 +352,18 @@ components:
             $ref: '#/components/schemas/ODataError'
     Unauthorized:
       description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
       content:
         application/json:
           schema:
