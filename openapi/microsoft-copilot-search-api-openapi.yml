@@ -92,8 +92,8 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
       content:
         application/json:
           schema:
@@ -110,8 +110,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
         application/json:
           schema:
@@ -136,6 +136,46 @@ components:
           example: 10
         dataSources:
           $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
+    SearchHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the matching document.
+          example: https://www.example.com
+        preview:
+          type: string
+          description: A preview snippet of the matching content.
+          example: example_value
+        resourceType:
+          type: string
+          description: The type of resource (e.g., driveItem).
+          example: example_value
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, if requested.
+          example: example_value
+    SearchResponse:
+      type: object
+      properties:
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results, if available.
+          example: https://www.example.com
+        totalCount:
+          type: integer
+          description: Total number of matching results.
+          example: 10
+        searchHits:
+          type: array
+          description: Collection of search result items.
+          items:
+            $ref: '#/components/schemas/SearchHit'
+          example: []
     ODataError:
       type: object
       properties:
@@ -159,28 +199,6 @@ components:
                 client-request-id:
                   type: string
           example: example_value
-    SearchHit:
-      type: object
-      properties:
-        webUrl:
-          type: string
-          format: uri
-          description: The URL of the matching document.
-          example: https://www.example.com
-        preview:
-          type: string
-          description: A preview snippet of the matching content.
-          example: example_value
-        resourceType:
-          type: string
-          description: The type of resource (e.g., driveItem).
-          example: example_value
-        resourceMetadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Metadata fields for the resource, if requested.
-          example: example_value
     CopilotSearchDataSourcesConfiguration:
       type: object
       description: Configuration for data sources to include in the search.
@@ -198,24 +216,6 @@ components:
                 type: string
               description: List of metadata field names to return for each search result.
           example: example_value
-    SearchResponse:
-      type: object
-      properties:
-        '@odata.nextLink':
-          type: string
-          format: uri
-          description: URL to retrieve the next page of results, if available.
-          example: https://www.example.com
-        totalCount:
-          type: integer
-          description: Total number of matching results.
-          example: 10
-        searchHits:
-          type: array
-          description: Collection of search result items.
-          items:
-            $ref: '#/components/schemas/SearchHit'
-          example: []
   parameters:
     authorizationHeader:
       name: Authorization
