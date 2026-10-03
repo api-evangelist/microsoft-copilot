@@ -91,51 +91,24 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. A valid bearer token is required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   schemas:
-    SearchRequest:
+    CopilotSearchDataSourcesConfiguration:
       type: object
-      required:
-      - query
+      description: Configuration for data sources to include in the search.
       properties:
-        query:
-          type: string
-          maxLength: 1500
-          description: Natural language query to search for relevant files.
+        oneDrive:
+          type: object
+          description: OneDrive data source configuration.
+          properties:
+            filterExpression:
+              type: string
+              description: KQL expression to scope the search to specific OneDrive paths or properties.
+            resourceMetadataNames:
+              type: array
+              items:
+                type: string
+              description: List of metadata field names to return for each search result.
           example: example_value
-        pageSize:
-          type: integer
-          minimum: 1
-          maximum: 100
-          default: 25
-          description: Number of results to return per page (1-100). Default is 25.
-          example: 10
-        dataSources:
-          $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
     SearchHit:
       type: object
       properties:
@@ -158,24 +131,6 @@ components:
             type: string
           description: Metadata fields for the resource, if requested.
           example: example_value
-    SearchResponse:
-      type: object
-      properties:
-        '@odata.nextLink':
-          type: string
-          format: uri
-          description: URL to retrieve the next page of results, if available.
-          example: https://www.example.com
-        totalCount:
-          type: integer
-          description: Total number of matching results.
-          example: 10
-        searchHits:
-          type: array
-          description: Collection of search result items.
-          items:
-            $ref: '#/components/schemas/SearchHit'
-          example: []
     ODataError:
       type: object
       properties:
@@ -199,23 +154,68 @@ components:
                 client-request-id:
                   type: string
           example: example_value
-    CopilotSearchDataSourcesConfiguration:
+    SearchRequest:
       type: object
-      description: Configuration for data sources to include in the search.
+      required:
+      - query
       properties:
-        oneDrive:
-          type: object
-          description: OneDrive data source configuration.
-          properties:
-            filterExpression:
-              type: string
-              description: KQL expression to scope the search to specific OneDrive paths or properties.
-            resourceMetadataNames:
-              type: array
-              items:
-                type: string
-              description: List of metadata field names to return for each search result.
+        query:
+          type: string
+          maxLength: 1500
+          description: Natural language query to search for relevant files.
           example: example_value
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+          description: Number of results to return per page (1-100). Default is 25.
+          example: 10
+        dataSources:
+          $ref: '#/components/schemas/CopilotSearchDataSourcesConfiguration'
+    SearchResponse:
+      type: object
+      properties:
+        '@odata.nextLink':
+          type: string
+          format: uri
+          description: URL to retrieve the next page of results, if available.
+          example: https://www.example.com
+        totalCount:
+          type: integer
+          description: Total number of matching results.
+          example: 10
+        searchHits:
+          type: array
+          description: Collection of search result items.
+          items:
+            $ref: '#/components/schemas/SearchHit'
+          example: []
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   parameters:
     authorizationHeader:
       name: Authorization

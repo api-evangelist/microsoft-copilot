@@ -80,25 +80,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Unauthorized:
-      description: Unauthorized. A valid bearer token is required.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
   schemas:
     ODataError:
       type: object
@@ -186,6 +167,25 @@ components:
           type: string
           description: The client state value for validation.
           example: example_value
+  responses:
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Unauthorized:
+      description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
   parameters:
     authorizationHeader:
       name: Authorization
