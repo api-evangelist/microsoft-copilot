@@ -148,40 +148,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ChatConversationResponse:
-      type: object
-      properties:
-        conversationId:
-          type: string
-          description: The unique identifier for the conversation for multi-turn use.
-          example: '500123'
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-    ChatConversationRequest:
-      type: object
-      required:
-      - prompt
-      properties:
-        prompt:
-          type: string
-          description: Natural language prompt to send to Microsoft 365 Copilot to start a conversation.
-          example: example_value
-        enableWebSearch:
-          type: boolean
-          default: true
-          description: Whether to enable web search grounding for this message. Defaults to true. Must be toggled off per message if not desired.
-          example: true
-        fileReferences:
-          type: array
-          description: Optional OneDrive and SharePoint file references to provide as additional context.
-          items:
-            type: object
-            properties:
-              url:
-                type: string
-                format: uri
-                description: The URL of the file to reference.
-          example: []
     ODataError:
       type: object
       properties:
@@ -210,6 +176,45 @@ components:
       properties:
         message:
           $ref: '#/components/schemas/ChatMessage'
+    ChatConversationRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to send to Microsoft 365 Copilot to start a conversation.
+          example: example_value
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message. Defaults to true. Must be toggled off per message if not desired.
+          example: true
+        fileReferences:
+          type: array
+          description: Optional OneDrive and SharePoint file references to provide as additional context.
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                format: uri
+                description: The URL of the file to reference.
+          example: []
+    ChatMessageRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        prompt:
+          type: string
+          description: Natural language prompt to continue the conversation.
+          example: example_value
+        enableWebSearch:
+          type: boolean
+          default: true
+          description: Whether to enable web search grounding for this message.
+          example: true
     ChatMessage:
       type: object
       properties:
@@ -249,23 +254,24 @@ components:
           format: date-time
           description: The timestamp when the message was created.
           example: '2026-01-15T10:30:00Z'
-    ChatMessageRequest:
+    ChatConversationResponse:
       type: object
-      required:
-      - prompt
       properties:
-        prompt:
+        conversationId:
           type: string
-          description: Natural language prompt to continue the conversation.
-          example: example_value
-        enableWebSearch:
-          type: boolean
-          default: true
-          description: Whether to enable web search grounding for this message.
-          example: true
+          description: The unique identifier for the conversation for multi-turn use.
+          example: '500123'
+        message:
+          $ref: '#/components/schemas/ChatMessage'
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    TooManyRequests:
+      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
       content:
         application/json:
           schema:
@@ -276,14 +282,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
-    TooManyRequests:
-      description: Too many requests. The Retrieval API supports up to 200 requests per user per hour.
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
         application/json:
           schema:

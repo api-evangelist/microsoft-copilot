@@ -81,6 +81,35 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the subscription.
+          example: abc123
+        resource:
+          type: string
+          description: The resource being monitored.
+          example: example_value
+        changeType:
+          type: string
+          description: The type of change being monitored.
+          example: example_value
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL receiving notifications.
+          example: https://www.example.com
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: When the subscription expires.
+          example: '2026-01-15T10:30:00Z'
+        clientState:
+          type: string
+          description: The client state value for validation.
+          example: example_value
     ODataError:
       type: object
       properties:
@@ -138,42 +167,7 @@ components:
           type: string
           description: Optional client state value included in each notification for validation.
           example: example_value
-    Subscription:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the subscription.
-          example: abc123
-        resource:
-          type: string
-          description: The resource being monitored.
-          example: example_value
-        changeType:
-          type: string
-          description: The type of change being monitored.
-          example: example_value
-        notificationUrl:
-          type: string
-          format: uri
-          description: The URL receiving notifications.
-          example: https://www.example.com
-        expirationDateTime:
-          type: string
-          format: date-time
-          description: When the subscription expires.
-          example: '2026-01-15T10:30:00Z'
-        clientState:
-          type: string
-          description: The client state value for validation.
-          example: example_value
   responses:
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ODataError'
     BadRequest:
       description: Bad request. The request body or parameters are invalid.
       content:
@@ -182,6 +176,12 @@ components:
             $ref: '#/components/schemas/ODataError'
     Unauthorized:
       description: Unauthorized. A valid bearer token is required.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ODataError'
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
         application/json:
           schema:
