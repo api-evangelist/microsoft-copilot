@@ -211,3 +211,74 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
     url: https://www.microsoft.com/microsoft-365-copilot
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - subscription
+  units:
+  - message
+  - negotiated
+  - period
+  - seat
+  plans:
+  - name: Copilot Chat (Free, Web-Grounded)
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Copilot Pro (Consumer)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft 365 Copilot Business
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Microsoft 365 Copilot (Enterprise Add-On)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Copilot Studio (Pay-As-You-Go Messages)
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - message
+    - period
+    periods:
+    - month
+    - per-use
+  - name: GitHub Copilot (Developer Coding)
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise Agreement / Volume
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - month
