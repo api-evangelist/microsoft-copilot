@@ -81,6 +81,40 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SubscriptionRequest:
+      type: object
+      required:
+      - changeType
+      - notificationUrl
+      - resource
+      - expirationDateTime
+      properties:
+        changeType:
+          type: string
+          description: The type of change to subscribe to.
+          enum:
+          - created
+          - updated
+          - deleted
+          example: created
+        notificationUrl:
+          type: string
+          format: uri
+          description: The URL to receive change notifications.
+          example: https://www.example.com
+        resource:
+          type: string
+          description: The resource path to subscribe to. For Copilot interactions use /copilot/interactionHistory/getAllEnterpriseInteractions.
+          example: example_value
+        expirationDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the subscription expires.
+          example: '2026-01-15T10:30:00Z'
+        clientState:
+          type: string
+          description: Optional client state value included in each notification for validation.
+          example: example_value
     Subscription:
       type: object
       properties:
@@ -133,43 +167,18 @@ components:
                 client-request-id:
                   type: string
           example: example_value
-    SubscriptionRequest:
-      type: object
-      required:
-      - changeType
-      - notificationUrl
-      - resource
-      - expirationDateTime
-      properties:
-        changeType:
-          type: string
-          description: The type of change to subscribe to.
-          enum:
-          - created
-          - updated
-          - deleted
-          example: created
-        notificationUrl:
-          type: string
-          format: uri
-          description: The URL to receive change notifications.
-          example: https://www.example.com
-        resource:
-          type: string
-          description: The resource path to subscribe to. For Copilot interactions use /copilot/interactionHistory/getAllEnterpriseInteractions.
-          example: example_value
-        expirationDateTime:
-          type: string
-          format: date-time
-          description: The date and time when the subscription expires.
-          example: '2026-01-15T10:30:00Z'
-        clientState:
-          type: string
-          description: Optional client state value included in each notification for validation.
-          example: example_value
+  parameters:
+    authorizationHeader:
+      name: Authorization
+      in: header
+      required: true
+      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
+      schema:
+        type: string
+        pattern: ^Bearer\s.+$
   responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
         application/json:
           schema:
@@ -180,21 +189,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-  parameters:
-    authorizationHeader:
-      name: Authorization
-      in: header
-      required: true
-      description: 'Bearer token obtained via OAuth 2.0. Format: Bearer {token}'
-      schema:
-        type: string
-        pattern: ^Bearer\s.+$
   securitySchemes:
     oauth2:
       type: oauth2

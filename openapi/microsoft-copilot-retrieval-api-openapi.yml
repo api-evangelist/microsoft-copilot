@@ -118,35 +118,33 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RetrievalHit:
+    DataSourceConfiguration:
+      type: object
+      description: Additional configuration for applicable data sources.
+      properties:
+        externalItem:
+          type: object
+          description: Configuration for Copilot connectors retrieval.
+          properties:
+            connections:
+              type: array
+              description: List of specific Copilot connector connections to retrieve from.
+              items:
+                type: object
+                properties:
+                  connectionId:
+                    type: string
+                    description: The identifier of the Copilot connector connection.
+          example: example_value
+    RetrievalResponse:
       type: object
       properties:
-        webUrl:
-          type: string
-          format: uri
-          description: The URL of the source document.
-          example: https://www.example.com
-        extracts:
+        retrievalHits:
           type: array
-          description: Collection of relevant text extracts from the document.
+          description: Collection of retrieval results with text extracts.
           items:
-            $ref: '#/components/schemas/RetrievalExtract'
+            $ref: '#/components/schemas/RetrievalHit'
           example: []
-        resourceType:
-          type: string
-          description: The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).
-          enum:
-          - listItem
-          - externalItem
-          example: listItem
-        resourceMetadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.
-          example: example_value
-        sensitivityLabel:
-          $ref: '#/components/schemas/SensitivityLabel'
     SensitivityLabel:
       type: object
       description: Information protection sensitivity label applied to the document.
@@ -171,15 +169,6 @@ components:
           type: string
           description: The color code associated with the sensitivity label.
           example: example_value
-    RetrievalResponse:
-      type: object
-      properties:
-        retrievalHits:
-          type: array
-          description: Collection of retrieval results with text extracts.
-          items:
-            $ref: '#/components/schemas/RetrievalHit'
-          example: []
     ODataError:
       type: object
       properties:
@@ -217,24 +206,6 @@ components:
           maximum: 1
           description: Cosine similarity between the queryString and the extract, normalized to the 0-1 range. May be absent for Copilot connectors results.
           example: 42.5
-    DataSourceConfiguration:
-      type: object
-      description: Additional configuration for applicable data sources.
-      properties:
-        externalItem:
-          type: object
-          description: Configuration for Copilot connectors retrieval.
-          properties:
-            connections:
-              type: array
-              description: List of specific Copilot connector connections to retrieve from.
-              items:
-                type: object
-                properties:
-                  connectionId:
-                    type: string
-                    description: The identifier of the Copilot connector connection.
-          example: example_value
     RetrievalRequest:
       type: object
       required:
@@ -273,9 +244,38 @@ components:
           default: 25
           description: Number of results to return. Must be between 1 and 25. Defaults to 25.
           example: 10
+    RetrievalHit:
+      type: object
+      properties:
+        webUrl:
+          type: string
+          format: uri
+          description: The URL of the source document.
+          example: https://www.example.com
+        extracts:
+          type: array
+          description: Collection of relevant text extracts from the document.
+          items:
+            $ref: '#/components/schemas/RetrievalExtract'
+          example: []
+        resourceType:
+          type: string
+          description: The type of resource. Values include listItem (for SharePoint/OneDrive) and externalItem (for Copilot connectors).
+          enum:
+          - listItem
+          - externalItem
+          example: listItem
+        resourceMetadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Metadata fields for the resource, as requested via the resourceMetadata parameter. Keys and values depend on the requested fields.
+          example: example_value
+        sensitivityLabel:
+          $ref: '#/components/schemas/SensitivityLabel'
   responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
+    Forbidden:
+      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
       content:
         application/json:
           schema:
@@ -292,8 +292,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ODataError'
-    Forbidden:
-      description: Forbidden. The caller does not have the required permissions or the user does not have a Microsoft 365 Copilot license.
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
       content:
         application/json:
           schema:
