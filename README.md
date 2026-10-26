@@ -1,0 +1,238 @@
+# Microsoft Copilot (microsoft-copilot)
+
+<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
+> ### About this repository
+>
+> **This is not our API.** This repository is an independent, third-party profile of a company's
+> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
+> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
+> affiliated with or endorsed by the company unless stated on the profile.
+>
+> **Where the information came from.** Everything here is assembled from material a member of the
+> public can reach with a browser and no credentials — the company's own website, developer portal
+> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
+> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
+> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
+> using credentials of any kind.**
+>
+> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
+> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
+> against a published rubric. They are not certifications, endorsements, security assessments, or
+> audits, and they score published artifacts — not the quality, safety, or security of the software.
+>
+> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
+> required, and you do not need to justify the request.
+>
+> - **Something wrong?** Open an issue on this repository, or email
+>   [info@apievangelist.com](mailto:info@apievangelist.com).
+> - **Published something new?** Ask for a re-score and we will re-run the rating.
+> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
+>   company name, a factual description, and a link to your own site, and the company is recorded as
+>   **unrated** — never scored zero for having asked.
+>
+> **Response times.** Acknowledgement within **one business day**; removal or restriction within
+> **two business days**; corrections and re-scores within **five business days**.
+>
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
+> **On a security or compliance team?** Email
+> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
+> you will get a person, not a form. We will tell you exactly which public URLs this profile was
+> built from so your team can see the same surface we did, and we will take the listing down on
+> request while you work through it.
+>
+> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
+<!-- API-EVANGELIST-PROVENANCE:END -->
+
+Microsoft Copilot is an AI-powered assistant that helps users with productivity tasks, content generation, and information retrieval across Microsoft 365 applications and services.
+
+**APIs.json:** [https://copilot.microsoft.com](https://copilot.microsoft.com)
+
+## Scope
+
+- **Access:** 3rd-Party
+
+## Tags
+
+- Agents
+- AI Assistant
+- Artificial Intelligence
+- Chatbot
+- Copilot
+- Extensibility
+- Generative AI
+- Microsoft 365
+- Productivity
+
+## Timestamps
+
+- **Created:** 2024-01-15
+- **Modified:** 2026-05-19
+
+## APIs
+
+### Microsoft Copilot API
+
+API for integrating Microsoft Copilot capabilities into applications.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/copilot/](https://learn.microsoft.com/en-us/copilot/)
+- **Base URL:** `https://api.copilot.microsoft.com`
+
+#### Tags
+
+- AI
+- Chat
+- Completion
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/copilot/overview)
+- [OpenAPI](https://api.copilot.microsoft.com/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Authentication](https://learn.microsoft.com/en-us/copilot/authentication)
+- [Getting Started](https://learn.microsoft.com/en-us/copilot/get-started)
+- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Microsoft Graph API (Copilot Integration)
+
+Microsoft Graph API endpoints for accessing Copilot features within Microsoft 365, including the Copilot namespace with retrieval, chat, search, and meeting insights capabilities.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/graph/overview](https://learn.microsoft.com/en-us/graph/overview)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
+
+#### Tags
+
+- Integration
+- Microsoft 365
+- Microsoft Graph
+- Productivity
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/graph/api/overview)
+- [OpenAPI](https://graph.microsoft.com/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Getting Started](https://learn.microsoft.com/en-us/graph/use-the-api)
+- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Microsoft 365 Copilot APIs
+
+REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, chat, and search, for use in custom applications and agents.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview)
+- **Base URL:** `https://graph.microsoft.com/v1.0/copilot`
+
+#### Tags
+
+- AI
+- Chat
+- Microsoft 365
+- RAG
+- Retrieval
+- Search
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview)
+- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview)
+- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview)
+- [SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries)
+- [OpenAPI](openapi/microsoft-copilot-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/microsoft-copilot-interaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON-LD](json-ld/microsoft-copilot-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+
+### Microsoft 365 Copilot Connectors API
+
+API for building custom connectors that bring external data into Microsoft Graph to enhance Microsoft 365 Copilot experiences including search and retrieval augmented generation.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector)
+- **Base URL:** `https://graph.microsoft.com/v1.0`
+
+#### Tags
+
+- Connectors
+- External Data
+- Indexing
+- Microsoft Graph
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview)
+- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/connectors-api-overview?view=graph-rest-1.0)
+- [Getting Started](https://learn.microsoft.com/en-us/graph/custom-connector-sdk-sample-overview)
+- [SDK](https://learn.microsoft.com/en-us/graph/custom-connector-sdk-overview)
+- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Microsoft Copilot Studio API
+
+APIs for building, publishing, and integrating custom agents and copilots using Microsoft Copilot Studio, including Direct Line API for connecting web and custom applications.
+
+- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-copilot-studio/](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
+- **Base URL:** `https://directline.botframework.com`
+
+#### Tags
+
+- Agents
+- Bots
+- Copilot Studio
+- Direct Line
+- Low-Code
+
+#### Properties
+
+- [Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
+- [Documentation](https://learn.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-api-reference?view=azure-bot-service-4.0)
+- [Authentication](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security)
+- [Getting Started](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-connect-bot-to-custom-application)
+- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/showcase/microsoftcopilot)
+- [Getting Started](https://learn.microsoft.com/en-us/copilot/get-started)
+- [Authentication](https://learn.microsoft.com/en-us/azure/active-directory/develop/)
+- [Terms of Service](https://www.microsoft.com/en-us/legal/terms-of-use)
+- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [Pricing](https://www.microsoft.com/en-us/microsoft-copilot/pricing)
+- [Support](https://support.microsoft.com/copilot)
+- [Blog](https://blogs.microsoft.com/blog/tag/copilot/)
+- [Status Page](https://status.microsoft.com)
+- [Portal](https://developer.microsoft.com/en-us/microsoft-365/copilot)
+- [SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries)
+- [Code Examples](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/samples)
+- [Changelog](https://learn.microsoft.com/en-us/copilot/microsoft-365/release-notes)
+- [Release Notes](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/whats-new)
+- [Security](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy)
+- [GitHub Repository](https://github.com/microsoft/CopilotStudioSamples)
+- [Features](undefined)
+- [Use Cases](undefined)
+- [Integrations](undefined)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
