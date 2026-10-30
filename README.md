@@ -1,4 +1,4 @@
-# Microsoft Copilot (microsoft-copilot)
+# Microsoft Copilot
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,173 +66,258 @@
 
 Microsoft Copilot is an AI-powered assistant that helps users with productivity tasks, content generation, and information retrieval across Microsoft 365 applications and services.
 
-**APIs.json:** [https://copilot.microsoft.com](https://copilot.microsoft.com)
+**Areas:** Agents · AI Assistant · Artificial Intelligence · Chatbots · Copilot · Extensibility · Generative AI · Microsoft 365 · Productivity
 
-## Scope
+## Microsoft Copilot on APIs.io
 
-- **Access:** 3rd-Party
+Everything profiled for Microsoft Copilot is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/microsoft-copilot/](https://apis.io/providers/microsoft-copilot/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-- Agents
-- AI Assistant
-- Artificial Intelligence
-- Chatbot
-- Copilot
-- Extensibility
-- Generative AI
-- Microsoft 365
-- Productivity
+- [Microsoft 365 Copilot Connectors API](https://apis.io/apis/microsoft-copilot/microsoft-365-copilot-connectors-api/) — API for building custom connectors that bring external data into Microsoft Graph to enhance Microsoft 365 Copilot experiences including search and retrieval…
+- [Microsoft Copilot Studio API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-studio-api/) — APIs for building, publishing, and integrating custom agents and copilots using Microsoft Copilot Studio, including Direct Line API for connecting web and…
+- [Microsoft Copilot Change Notifications API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-change-notifications-api/) — Subscribe to change notifications for Copilot interactions across Microsoft 365.
+- [Microsoft Copilot Chat API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-chat-api/) — Programmatically start and continue conversations with Microsoft 365 Copilot using enterprise search and web search grounding. Preview API.
+- [Microsoft Copilot Interaction Export API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-interaction-export-api/) — Export and archive user interactions with Copilot across Microsoft 365 applications for compliance and auditing.
+- [Microsoft Copilot Retrieval API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-retrieval-api/) — Retrieve relevant text chunks from SharePoint, OneDrive, and Copilot connectors content for Retrieval Augmented Generation (RAG) scenarios.
+- [Microsoft Copilot Search API](https://apis.io/apis/microsoft-copilot/microsoft-copilot-search-api/) — Perform hybrid search (semantic and lexical) across OneDrive for work or school content using natural language queries. Preview API.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Microsoft Copilot API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-API for integrating Microsoft Copilot capabilities into applications.
+- [Microsoft Copilot Agentic Access](https://apis.io/agentic-access/microsoft-copilot/microsoft-copilot-agentic-access/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/copilot/](https://learn.microsoft.com/en-us/copilot/)
-- **Base URL:** `https://api.copilot.microsoft.com`
+#### JSON Schema (52)
 
-#### Tags
+The data models the API reads and writes.
 
-- AI
-- Chat
-- Completion
+- [AiInteraction](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction/)
+- [AiInteractionAttachment](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction-attachment/)
+- [AiInteractionCollectionResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction-collection-response/)
+- [AiInteractionContext](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction-context/)
+- [AiInteractionLink](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction-link/)
+- [AiInteractionMention](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-ai-interaction-mention/)
+- [AiInteraction](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteraction/)
+- [AiInteractionAttachment](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteractionattachment/)
+- [AiInteractionCollectionResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteractioncollectionresponse/)
+- [AiInteractionContext](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteractioncontext/)
+- [AiInteractionLink](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteractionlink/)
+- [AiInteractionMention](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-aiinteractionmention/)
+- [ChatConversationRequest](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chat-conversation-request/)
+- [ChatConversationResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chat-conversation-response/)
+- [ChatMessage](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chat-message/)
+- [ChatMessageRequest](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chat-message-request/)
+- [ChatMessageResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chat-message-response/)
+- [ChatConversationRequest](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chatconversationrequest/)
+- [ChatConversationResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chatconversationresponse/)
+- [ChatMessage](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chatmessage/)
+- [ChatMessageRequest](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chatmessagerequest/)
+- [ChatMessageResponse](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-chatmessageresponse/)
+- [CopilotSearchDataSourcesConfiguration](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-copilot-search-data-sources-configuration/)
+- [CopilotSearchDataSourcesConfiguration](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-copilotsearchdatasourcesconfiguration/)
+- [DataSourceConfiguration](https://apis.io/schemas/microsoft-copilot/microsoft-copilot-data-source-configuration/)
+- …and 27 more published on APIs.io
 
-#### Properties
+#### JSON Structure (27)
 
-- [Documentation](https://learn.microsoft.com/en-us/copilot/overview)
-- [OpenAPI](https://api.copilot.microsoft.com/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Authentication](https://learn.microsoft.com/en-us/copilot/authentication)
-- [Getting Started](https://learn.microsoft.com/en-us/copilot/get-started)
-- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Microsoft Graph API (Copilot Integration)
+- [Microsoft Copilot Ai Interaction Attachment Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-attachment-structure/)
+- [Microsoft Copilot Ai Interaction Collection Response Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-collection-response-structure/)
+- [Microsoft Copilot Ai Interaction Context Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-context-structure/)
+- [Microsoft Copilot Ai Interaction Link Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-link-structure/)
+- [Microsoft Copilot Ai Interaction Mention Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-mention-structure/)
+- [Microsoft Copilot Ai Interaction Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-ai-interaction-structure/)
+- [Microsoft Copilot Chat Conversation Request Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-chat-conversation-request-structure/)
+- [Microsoft Copilot Chat Conversation Response Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-chat-conversation-response-structure/)
+- [Microsoft Copilot Chat Message Request Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-chat-message-request-structure/)
+- [Microsoft Copilot Chat Message Response Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-chat-message-response-structure/)
+- [Microsoft Copilot Chat Message Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-chat-message-structure/)
+- [Microsoft Copilot Copilot Search Data Sources Configuration Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-copilot-search-data-sources-configuration-structure/)
+- [Microsoft Copilot Data Source Configuration Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-data-source-configuration-structure/)
+- [Microsoft Copilot Identity Set Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-identity-set-structure/)
+- [Microsoft Copilot Item Body Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-item-body-structure/)
+- [Microsoft Copilot O Data Error Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-o-data-error-structure/)
+- [Microsoft Copilot Retrieval Extract Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-retrieval-extract-structure/)
+- [Microsoft Copilot Retrieval Hit Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-retrieval-hit-structure/)
+- [Microsoft Copilot Retrieval Request Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-retrieval-request-structure/)
+- [Microsoft Copilot Retrieval Response Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-retrieval-response-structure/)
+- [Microsoft Copilot Search Hit Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-search-hit-structure/)
+- [Microsoft Copilot Search Request Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-search-request-structure/)
+- [Microsoft Copilot Search Response Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-search-response-structure/)
+- [Microsoft Copilot Sensitivity Label Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-sensitivity-label-structure/)
+- [Microsoft Copilot Structure](https://apis.io/json-structure/microsoft-copilot/microsoft-copilot-structure/)
+- …and 2 more published on APIs.io
 
-Microsoft Graph API endpoints for accessing Copilot features within Microsoft 365, including the Copilot namespace with retrieval, chat, search, and meeting insights capabilities.
+#### JSON-LD (1)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/graph/overview](https://learn.microsoft.com/en-us/graph/overview)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Microsoft Copilot Context](https://apis.io/jsonld/microsoft-copilot/microsoft-copilot-context/)
 
-- Integration
-- Microsoft 365
-- Microsoft Graph
-- Productivity
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/overview)
-- [OpenAPI](https://graph.microsoft.com/openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://learn.microsoft.com/en-us/graph/use-the-api)
-- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Microsoft Copilot Domain Vocabulary](https://apis.io/vocabularies/microsoft-copilot/microsoft-copilot-vocabulary/)
 
-### Microsoft 365 Copilot APIs
+#### Examples (32)
 
-REST APIs under the Microsoft Graph /copilot/ namespace that enable secure access to Microsoft 365 Copilot capabilities including retrieval, chat, and search, for use in custom applications and agents.
+Example requests and responses.
 
-- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview)
-- **Base URL:** `https://graph.microsoft.com/v1.0/copilot`
+- [Microsoft Copilot Ai Interaction Attachment Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-attachment-example/)
+- [Microsoft Copilot Ai Interaction Collection Response Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-collection-response-example/)
+- [Microsoft Copilot Ai Interaction Context Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-context-example/)
+- [Microsoft Copilot Ai Interaction Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-example/)
+- [Microsoft Copilot Ai Interaction Link Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-link-example/)
+- [Microsoft Copilot Ai Interaction Mention Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-ai-interaction-mention-example/)
+- [Microsoft Copilot Chat Conversation Request Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-chat-conversation-request-example/)
+- [Microsoft Copilot Chat Conversation Response Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-chat-conversation-response-example/)
+- [Microsoft Copilot Chat Message Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-chat-message-example/)
+- [Microsoft Copilot Chat Message Request Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-chat-message-request-example/)
+- [Microsoft Copilot Chat Message Response Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-chat-message-response-example/)
+- [Microsoft Copilot Copilot Search Data Sources Configuration Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilot-search-data-sources-configuration-example/)
+- [Microsoft Copilot Copilotchangenotificationscreatesubscription Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotchangenotificationscreatesubscription-example/)
+- [Microsoft Copilot Copilotchatcontinueconversation Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotchatcontinueconversation-example/)
+- [Microsoft Copilot Copilotchatstartconversation Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotchatstartconversation-example/)
+- [Microsoft Copilot Copilotinteractionhistorygetallenterpriseinteractions Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotinteractionhistorygetallenterpriseinteractions-example/)
+- [Microsoft Copilot Copilotretrieval Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotretrieval-example/)
+- [Microsoft Copilot Copilotsearch Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-copilotsearch-example/)
+- [Microsoft Copilot Data Source Configuration Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-data-source-configuration-example/)
+- [Microsoft Copilot Identity Set Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-identity-set-example/)
+- [Microsoft Copilot Item Body Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-item-body-example/)
+- [Microsoft Copilot O Data Error Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-o-data-error-example/)
+- [Microsoft Copilot Retrieval Extract Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-retrieval-extract-example/)
+- [Microsoft Copilot Retrieval Hit Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-retrieval-hit-example/)
+- [Microsoft Copilot Retrieval Request Example](https://apis.io/examples/microsoft-copilot/microsoft-copilot-retrieval-request-example/)
+- …and 7 more published on APIs.io
 
-#### Tags
+#### Collections (11)
 
-- AI
-- Chat
-- Microsoft 365
-- RAG
-- Retrieval
-- Search
+Postman and Open Collection request collections.
 
-#### Properties
+- [Microsoft Copilot Microsoft 365 Copilot APIs](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications API](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot-change-notifications-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Chat API](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot-chat-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot-interaction-export-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Retrieval API](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot-retrieval-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Search API](https://apis.io/collections/microsoft-copilot/open-microsoft-copilot-search-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications API](https://apis.io/collections/microsoft-copilot/postman-microsoft-copilot-change-notifications-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Chat API](https://apis.io/collections/microsoft-copilot/postman-microsoft-copilot-chat-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Interaction Export API](https://apis.io/collections/microsoft-copilot/postman-microsoft-copilot-interaction-export-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Retrieval API](https://apis.io/collections/microsoft-copilot/postman-microsoft-copilot-retrieval-api/)
+- [Microsoft Copilot Microsoft 365 Copilot APIs Change Notifications Search API](https://apis.io/collections/microsoft-copilot/postman-microsoft-copilot-search-api/)
 
-- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-apis-overview)
-- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/retrieval/overview)
-- [Documentation](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/api/ai-services/chat/overview)
-- [SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries)
-- [OpenAPI](openapi/microsoft-copilot-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/microsoft-copilot-interaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/microsoft-copilot-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+#### Governance rules (2)
 
-### Microsoft 365 Copilot Connectors API
+Spectral rulesets for the provider's contracts.
 
-API for building custom connectors that bring external data into Microsoft Graph to enhance Microsoft 365 Copilot experiences including search and retrieval augmented generation.
+- [Microsoft Copilot — jsonschema rules](https://apis.io/rules/microsoft-copilot/microsoft-copilot-jsonschema-spectral-rules/)
+- [Microsoft Copilot API Rules](https://apis.io/rules/microsoft-copilot/microsoft-copilot-spectral-rules/)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-copilot-connector)
-- **Base URL:** `https://graph.microsoft.com/v1.0`
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Connectors
-- External Data
-- Indexing
-- Microsoft Graph
+- [Microsoft Copilot Authentication](https://apis.io/security/microsoft-copilot/microsoft-copilot-authentication/)
+- [Microsoft Copilot Domain Security](https://apis.io/security/microsoft-copilot/microsoft-copilot-domain-security/)
+- [Microsoft Copilot Vulnerability Disclosure](https://apis.io/security/microsoft-copilot/microsoft-copilot-vulnerability-disclosure/)
 
-#### Properties
+#### OAuth scopes (1)
 
-- [Documentation](https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview)
-- [Documentation](https://learn.microsoft.com/en-us/graph/api/resources/connectors-api-overview?view=graph-rest-1.0)
-- [Getting Started](https://learn.microsoft.com/en-us/graph/custom-connector-sdk-sample-overview)
-- [SDK](https://learn.microsoft.com/en-us/graph/custom-connector-sdk-overview)
-- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The permissions the API asks for.
 
-### Microsoft Copilot Studio API
+- [Microsoft Copilot Scopes](https://apis.io/scopes/microsoft-copilot/microsoft-copilot-scopes/)
 
-APIs for building, publishing, and integrating custom agents and copilots using Microsoft Copilot Studio, including Direct Line API for connecting web and custom applications.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://learn.microsoft.com/en-us/microsoft-copilot-studio/](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
-- **Base URL:** `https://directline.botframework.com`
+Published plans, tiers and prices.
 
-#### Tags
+- [Microsoft Copilot Plans Pricing](https://apis.io/plans/microsoft-copilot/microsoft-copilot-plans-pricing/)
 
-- Agents
-- Bots
-- Copilot Studio
-- Direct Line
-- Low-Code
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
-- [Documentation](https://learn.microsoft.com/en-us/azure/bot-service/rest-api/bot-framework-rest-direct-line-3-0-api-reference?view=azure-bot-service-4.0)
-- [Authentication](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security)
-- [Getting Started](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-connect-bot-to-custom-application)
-- [Postman Collection](collections/microsoft-copilot.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/microsoft-copilot.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Microsoft Copilot Rate Limits](https://apis.io/rate-limits/microsoft-copilot/microsoft-copilot-rate-limits/)
 
-## Common Properties
+#### FinOps (1)
 
-- [LinkedIn](https://www.linkedin.com/showcase/microsoftcopilot)
-- [Getting Started](https://learn.microsoft.com/en-us/copilot/get-started)
-- [Authentication](https://learn.microsoft.com/en-us/azure/active-directory/develop/)
-- [Terms of Service](https://www.microsoft.com/en-us/legal/terms-of-use)
-- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
+What the API costs to run, by operation.
+
+- [Microsoft Copilot Finops](https://apis.io/finops/microsoft-copilot/microsoft-copilot-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.microsoft.com/)
+- [Getting started](https://learn.microsoft.com/en-us/copilot/get-started)
 - [Pricing](https://www.microsoft.com/en-us/microsoft-copilot/pricing)
 - [Support](https://support.microsoft.com/copilot)
-- [Blog](https://blogs.microsoft.com/blog/tag/copilot/)
-- [Status Page](https://status.microsoft.com)
-- [Portal](https://developer.microsoft.com/en-us/microsoft-365/copilot)
-- [SDK](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/sdks/api-libraries)
-- [Code Examples](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/samples)
 - [Changelog](https://learn.microsoft.com/en-us/copilot/microsoft-365/release-notes)
-- [Release Notes](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/whats-new)
+- [Blog](https://blogs.microsoft.com/blog/tag/copilot/)
 - [Security](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy)
-- [GitHub Repository](https://github.com/microsoft/CopilotStudioSamples)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
+- [Terms of service](https://www.microsoft.com/en-us/legal/terms-of-use)
+- [Privacy policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [Status](https://status.microsoft.com)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 50.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 67.9 |
+| Contract governance | 13.6 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 58.3 |
+| Access clarity | 28.9 |
+
+**Agent readiness 29.5** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 37.3** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/microsoft-copilot/](https://apis.io/providers/microsoft-copilot/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Microsoft Copilot: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/microsoft-copilot/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
